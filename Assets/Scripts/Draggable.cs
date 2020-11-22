@@ -21,7 +21,7 @@ public class Draggable : MonoBehaviour
     {
         if (isTriggerWhileDrag && !p_collider.isTrigger) p_collider.isTrigger = true; 
         Vector2 mousePos = p_camera.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector2(mousePos.x, mousePos.y);
+        transform.position = new Vector3(mousePos.x, mousePos.y, transform.position.z);
     }
 
     private void OnMouseUp()
