@@ -6,7 +6,8 @@ public enum PlayerTool
 {
 	None,
 	Hammer,
-	Brush
+	Brush,
+	Static
 }
 
 public class GameManager : Singleton<GameManager>
