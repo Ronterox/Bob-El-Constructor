@@ -10,11 +10,11 @@ public class Draggable : MonoBehaviour
     private bool isTriggerWhileDrag = false;
 
     private Camera p_camera;
-    private Collider2D p_collider;
+    protected Collider2D p_collider;
 
     protected bool pb_isBeingDrag = false;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         p_camera = Camera.main;
         p_collider = GetComponent<Collider2D>();
