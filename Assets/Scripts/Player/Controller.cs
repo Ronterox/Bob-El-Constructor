@@ -16,12 +16,12 @@ public class Controller : MonoBehaviour
     [SerializeField] private LayerMask ground;
     [SerializeField] private float feetRadius;
 
-    [SerializeField] private float pressedJump = 0.3f;
-    [SerializeField] private float wasGrounded = 0.3f;
+    [SerializeField] private float pressedJumpTime = 0.3f;
+    [SerializeField] private float wasGroundedTime = 0.3f;
     private float pf_timer;
     private float pf_pressedJumpTimer;
 
-    private void Start()
+    private void Awake()
     {
         p_rb = gameObject.GetComponent<Rigidbody2D>();
     }
@@ -44,17 +44,17 @@ public class Controller : MonoBehaviour
     {
         if (pf_timer > 0) pf_timer -= Time.deltaTime;
 
-        if (pb_isGrounded) pf_timer = wasGrounded;
+        if (pb_isGrounded) pf_timer = wasGroundedTime;
 
         if (pf_pressedJumpTimer > 0) pf_pressedJumpTimer -= Time.deltaTime;
 
-        if (Input.GetButtonDown("Jump") && pf_timer >= 0) pf_pressedJumpTimer = pressedJump;
+        if (Input.GetButtonDown("Jump") && pf_timer >= 0) pf_pressedJumpTimer = pressedJumpTime;
 
         if (pf_pressedJumpTimer > 0 && pf_timer > 0) p_rb.velocity = new Vector2(p_rb.velocity.x, jumpForce);
 
         if (Input.GetButtonUp("Jump"))
         {
-            if (p_rb.velocity.y > 0) p_rb.velocity = new Vector2(p_rb.velocity.x, p_rb.velocity.y * jumpDamping);
+            p_rb.velocity = new Vector2(p_rb.velocity.x, p_rb.velocity.y * jumpDamping);
         }
     }
 

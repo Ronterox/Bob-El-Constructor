@@ -2,27 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct PaintedBlock
+{
+    [Tooltip("Material of new collider 2D")]
+    public PhysicsMaterial2D material2D;
+    [Tooltip("New color of the block")]
+    public Color color;
+    public BlockEffect blockEffect;
+}
+
+public enum BlockEffect
+{
+    None,
+    Bouncy,
+    Slider
+}
+
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Block : Draggable
 {
     [Header("Hammer Options")]
-    [SerializeField]
-    private Vector3 rotation = new Vector3(0, 0, 90);
+    [SerializeField] private Vector3 rotation = new Vector3(0, 0, 90);
     private Rigidbody2D p_rigidbody;
 
     private SpriteRenderer p_spriteRenderer;
 
     [Header("Brush Options")]
-    [SerializeField]
-    private PaintedBlock[] paintedVariations;
+    [SerializeField] private PaintedBlock[] paintedVariations;
     private int pi_pointer = 0;
 
-    [Space]
-    [SerializeField]
-    private float bouncinessMultiplier = 3f;
-    [SerializeField][Tooltip("The limit velocity for the player")]
-    private float velocityLimit = 50f;
+    [Header("Painted Bouncy Options")]
+    [SerializeField] private float bouncinessMultiplier = 3f;
+    [Tooltip("The limit velocity for the player per bounce")]
+    [SerializeField] private float velocityOnBounceLimit = 50f;
+
+    [Header("Painted Slider Options")]
+    [SerializeField] private float sliderMultiplier = 3f;
+    [Tooltip("The limit velocity for the player while sliding")]
+    [SerializeField] private float velocityOnSlideLimit = 50f;
 
     protected override void Awake()
     {
@@ -74,21 +93,12 @@ public class Block : Draggable
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (paintedVariations[pi_pointer].material2D.bounciness > 0)
+            if (paintedVariations[pi_pointer].blockEffect.Equals(BlockEffect.Bouncy))
             {
                 Vector2 velocity = collision.collider.attachedRigidbody.velocity;
-                collision.collider.attachedRigidbody.velocity = new Vector2(0, velocity.y * bouncinessMultiplier % velocityLimit);
+                collision.collider.attachedRigidbody.velocity = new Vector2(0, velocity.y * bouncinessMultiplier % velocityOnBounceLimit);
             }
         }
     }
 
-}
-
-[System.Serializable]
-public struct PaintedBlock
-{
-    [Tooltip("Material of new collider 2D")]
-    public PhysicsMaterial2D material2D;
-    [Tooltip("New color of the block")]
-    public Color color;
 }
