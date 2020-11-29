@@ -18,7 +18,7 @@ public class Controller : MonoBehaviour
 
     [SerializeField] private float pressedJumpTime = 0.3f;
     [SerializeField] private float wasGroundedTime = 0.3f;
-    private float pf_timer;
+    private float pf_groundedTimer;
     private float pf_pressedJumpTimer;
 
     private void Awake()
@@ -42,20 +42,22 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
-        if (pf_timer > 0) pf_timer -= Time.deltaTime;
+        if (pf_groundedTimer > 0) pf_groundedTimer -= Time.deltaTime;
 
-        if (pb_isGrounded) pf_timer = wasGroundedTime;
+        if (pb_isGrounded) pf_groundedTimer = wasGroundedTime;
 
         if (pf_pressedJumpTimer > 0) pf_pressedJumpTimer -= Time.deltaTime;
 
-        if (Input.GetButtonDown("Jump") && pf_timer >= 0) pf_pressedJumpTimer = pressedJumpTime;
+        if (Input.GetButtonDown("Jump") && pf_groundedTimer >= 0) pf_pressedJumpTimer = pressedJumpTime;
 
-        if (pf_pressedJumpTimer > 0 && pf_timer > 0) p_rb.velocity = new Vector2(p_rb.velocity.x, jumpForce);
-
-        if (Input.GetButtonUp("Jump"))
+        if (pf_pressedJumpTimer > 0 && pf_groundedTimer > 0)
         {
-            p_rb.velocity = new Vector2(p_rb.velocity.x, p_rb.velocity.y * jumpDamping);
+            p_rb.velocity = new Vector2(p_rb.velocity.x, jumpForce);
+            pf_pressedJumpTimer = 0;
+            pf_groundedTimer = 0;
         }
+
+        if (Input.GetButtonUp("Jump")) p_rb.velocity = new Vector2(p_rb.velocity.x, p_rb.velocity.y * jumpDamping);
     }
 
     private void OnDrawGizmos()
