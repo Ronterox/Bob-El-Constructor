@@ -93,10 +93,16 @@ public class Block : Draggable
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (paintedVariations[pi_pointer].blockEffect.Equals(BlockEffect.Bouncy))
+            Vector2 velocity = collision.collider.attachedRigidbody.velocity;
+            switch (paintedVariations[pi_pointer].blockEffect)
             {
-                Vector2 velocity = collision.collider.attachedRigidbody.velocity;
-                collision.collider.attachedRigidbody.velocity = new Vector2(0, velocity.y * bouncinessMultiplier % velocityOnBounceLimit);
+                case BlockEffect.None: break;
+                case BlockEffect.Bouncy:
+                    collision.collider.attachedRigidbody.velocity = new Vector2(0, velocity.y * bouncinessMultiplier % velocityOnBounceLimit);
+                    break;
+                case BlockEffect.Slider:
+                    collision.collider.attachedRigidbody.velocity = new Vector2(velocity.x * sliderMultiplier %velocityOnSlideLimit, 0);
+                    break;
             }
         }
     }
