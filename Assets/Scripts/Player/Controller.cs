@@ -21,19 +21,39 @@ public class Controller : MonoBehaviour
     private float pf_groundedTimer;
     private float pf_pressedJumpTimer;
 
+    [SerializeField]private SpriteRenderer p_spriterender;
+    private Animator p_animator;
+
     private void Awake()
     {
         p_rb = gameObject.GetComponent<Rigidbody2D>();
+        p_animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
+        float directionInput= Input.GetAxisRaw("Horizontal");
         pb_isGrounded = Physics2D.OverlapCircle(groundPoint.position, feetRadius, ground);
 
         // We assign the rigidbody speed
         pf_inputHorizontalVelocity = p_rb.velocity.x;
         // We increment it in its direction
-        pf_inputHorizontalVelocity += Input.GetAxisRaw("Horizontal");
+        pf_inputHorizontalVelocity += directionInput;
+        if (directionInput > 0)
+        {
+            p_spriterender.flipX = false;
+            p_animator.SetBool("moving", true);
+
+        }else if (directionInput < 0)
+        {
+            p_spriterender.flipX = true;
+            p_animator.SetBool("moving", true);
+        }
+        else if (directionInput == 0) 
+        {
+            p_animator.SetBool("moving", false);
+
+        }
         // Add some damping to reduce the gaining of speed
         pf_inputHorizontalVelocity *= Mathf.Pow(1f - pf_dampingHorizontal, Time.deltaTime * 10f);
 
