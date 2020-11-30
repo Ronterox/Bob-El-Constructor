@@ -38,6 +38,14 @@ public class Controller : MonoBehaviour
         pf_inputHorizontalVelocity *= Mathf.Pow(1f - pf_dampingHorizontal, Time.deltaTime * 10f);
 
         p_rb.velocity = new Vector2(pf_inputHorizontalVelocity, p_rb.velocity.y);
+
+        if (pf_pressedJumpTimer > 0 && pf_groundedTimer > 0)
+        {
+            p_rb.velocity = new Vector2(p_rb.velocity.x, jumpForce);
+            pf_pressedJumpTimer = 0f; pf_groundedTimer = 0f;
+        }
+
+        if (Input.GetButtonUp("Jump")) p_rb.velocity = new Vector2(p_rb.velocity.x, p_rb.velocity.y * jumpDamping);
     }
 
     private void Update()
@@ -47,17 +55,8 @@ public class Controller : MonoBehaviour
         if (pb_isGrounded) pf_groundedTimer = wasGroundedTime;
 
         if (pf_pressedJumpTimer > 0) pf_pressedJumpTimer -= Time.deltaTime;
-
-        if (Input.GetButtonDown("Jump") && pf_groundedTimer >= 0) pf_pressedJumpTimer = pressedJumpTime;
-
-        if (pf_pressedJumpTimer > 0 && pf_groundedTimer > 0)
-        {
-            p_rb.velocity = new Vector2(p_rb.velocity.x, jumpForce);
-            pf_pressedJumpTimer = 0;
-            pf_groundedTimer = 0;
-        }
-
-        if (Input.GetButtonUp("Jump")) p_rb.velocity = new Vector2(p_rb.velocity.x, p_rb.velocity.y * jumpDamping);
+        
+        if (Input.GetButtonDown("Jump") && pf_groundedTimer > 0) pf_pressedJumpTimer = pressedJumpTime;
     }
 
     private void OnDrawGizmos()

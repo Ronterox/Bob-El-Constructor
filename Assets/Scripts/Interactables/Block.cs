@@ -11,7 +11,6 @@ public struct PaintedBlock
     public Color color;
     public BlockEffect blockEffect;
 }
-
 public enum BlockEffect
 {
     None,
@@ -53,7 +52,7 @@ public class Block : Draggable
     private void Update()
     {
         if (pb_isBeingDrag) 
-            if (Input.GetKeyDown(KeyCode.LeftControl)) CheckToolApplyAction();
+            if (Input.GetKeyDown(KeyCode.Space)) CheckToolApplyAction();
     }
 
     /// <summary>
