@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelLoadManager : MonoBehaviour 
+public class LevelLoadManager : Singleton<LevelLoadManager>
 {
-    [SerializeField] private Scene[] additiveScenes;
+    [Header("Scenes")]
+    [SerializeField][Scene] private string[] additiveScenes;
 
     //Add on SceneLoad Event
-    public void loadNextScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
-    }
-    public void loadAdditiveScenes()
-    {
-        //Check if is load
-        foreach(Scene scene in additiveScenes)
-        {
-            SceneManager.LoadSceneAsync(scene.buildIndex, LoadSceneMode.Additive);
-        }
-    }
+    public void loadScene(string scene) { SceneManager.LoadScene(scene, LoadSceneMode.Single); }
+    public void loadNextScene() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single); }
+    public void loadAdditiveAsyncScenes() { foreach(string scene in additiveScenes) SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive); }
 }

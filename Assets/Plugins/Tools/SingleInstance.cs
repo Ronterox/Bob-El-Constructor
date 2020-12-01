@@ -6,6 +6,7 @@
 public class Singleton<T> : MonoBehaviour where T : Component
 {
     protected static T _instance;
+    [SerializeField] private bool dontDestroyOnLoad = true;
 
     /// <summary>
     /// Singleton design pattern
@@ -28,12 +29,10 @@ public class Singleton<T> : MonoBehaviour where T : Component
     /// </summary>
     protected virtual void Awake()
     {
-        if (!Application.isPlaying)
-        {
-            return;
-        }
+        if (!Application.isPlaying) return;
 
         _instance = this as T;
-        DontDestroyOnLoad(gameObject);
+
+        if(dontDestroyOnLoad) DontDestroyOnLoad(gameObject);
     }
 }
