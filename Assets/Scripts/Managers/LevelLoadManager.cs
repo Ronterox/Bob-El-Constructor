@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
-public class LevelLoadManager : Singleton<LevelLoadManager>
+[System.Serializable]
+public class OnLoadEvent : UnityEvent {}
+public class LevelLoadManager : PersistentSingleton<LevelLoadManager>
 {
     [Header("Scenes")]
-    [SerializeField][Scene] private string[] additiveScenes;
+    [SerializeField] [Scene] private string[] additiveScenes;
 
-    //Add on SceneLoad Event
-    public void loadScene(string scene) { SceneManager.LoadScene(scene, LoadSceneMode.Single); }
-    public void loadNextScene() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single); }
+    [Header("Events")]
+    [SerializeField] private OnLoadEvent onLoadEvent;
+
+    public void loadScene(string scene) 
+    {
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        onLoadEvent.Invoke();
+    }
+
+    public void loadNextScene() { loadScene(SceneManager.GetActiveScene().name); }
     public void loadAdditiveAsyncScenes() { foreach(string scene in additiveScenes) SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive); }
 }

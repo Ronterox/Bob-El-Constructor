@@ -10,7 +10,7 @@ public enum PlayerTool
 	Static
 }
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : PersistentSingleton<GameManager>
 {
     public PlayerTool currentPlayerTool = PlayerTool.None;
 
