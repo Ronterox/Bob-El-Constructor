@@ -20,12 +20,12 @@ public class GroundDetector : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundPoint.position, feetRadius, ground);
+        if (isGrounded) groundedTimer = wasGroundedTime;
     }
 
     private void Update()
     {
         if (groundedTimer > 0) groundedTimer -= Time.deltaTime;
-        if (isGrounded) groundedTimer = wasGroundedTime;
     }
 
     private void OnDrawGizmos()
