@@ -14,6 +14,8 @@ public class GameManager : PersistentSingleton<GameManager>
 {
     public PlayerTool currentPlayerTool = PlayerTool.None;
 
+	public Transform checkpoint;
+
 	public int gemsCount;
 	[SerializeField] public PickableCounterGUI pickableCounterGUI;
 
