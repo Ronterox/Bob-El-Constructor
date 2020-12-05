@@ -16,6 +16,9 @@ public class Button : MonoBehaviour
     {
         p_CollisionCounter++;
         onButtonEventEnter.Invoke();
+#if UNITY_EDITOR
+        Debug.Log("Button Pressed");
+#endif
     }
 
     private void OnTriggerExit2D(Collider2D collision)
