@@ -60,7 +60,7 @@ public class Movable : MonoBehaviour
         {
             if (loop) CheckDirection();
             else if (pb_reachedDestination) { Stop(); return; }
-            transform.position = GetNextMovement();
+            transform.localPosition = GetNextMovement();
         }
     }
 
@@ -74,11 +74,11 @@ public class Movable : MonoBehaviour
         {
             case MovementType.Lerp:
                 return Vector2.Lerp
-                    (transform.position, p_direction == Direction.Forward ? targetPosition : p_initialPosition, velocity * Time.deltaTime);
+                    (transform.localPosition, p_direction == Direction.Forward ? targetPosition : p_initialPosition, velocity * Time.deltaTime);
             case MovementType.MoveTowards:
                 return Vector2.MoveTowards
-                    (transform.position, p_direction == Direction.Forward ? targetPosition : p_initialPosition, velocity * Time.deltaTime);
-            default: return transform.position;
+                    (transform.localPosition, p_direction == Direction.Forward ? targetPosition : p_initialPosition, velocity * Time.deltaTime);
+            default: return transform.localPosition;
         }
     }
 
