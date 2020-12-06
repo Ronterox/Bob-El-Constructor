@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
+
 [System.Serializable]
 public class OnLoadEvent : UnityEvent {}
 public class LevelLoadManager : PersistentSingleton<LevelLoadManager>
@@ -22,4 +23,13 @@ public class LevelLoadManager : PersistentSingleton<LevelLoadManager>
 
     public void loadNextScene() { loadScene(SceneManager.GetActiveScene().name); }
     public void loadAdditiveAsyncScenes() { foreach(string scene in additiveScenes) SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive); }
+
+    public void OptionQuit()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
+       
+    }
 }
+
+
