@@ -23,8 +23,8 @@ public class Movable : MonoBehaviour
     }
 
     [SerializeField] private PositionRelativeTo positionRelativeTo;
-    public Vector2 targetPosition;
-    public float velocity = 3f;
+    [SerializeField] private Vector2 targetPosition;
+    [SerializeField] private float velocity = 3f;
 
     [Header("Movement Config")]
     [SerializeField] private MovementType movementType;
@@ -60,7 +60,7 @@ public class Movable : MonoBehaviour
         {
             if (loop) CheckDirection();
             else if (pb_reachedDestination) { Stop(); return; }
-            transform.position = GetNextMovement();
+            transform.localPosition = GetNextMovement();
         }
     }
 
@@ -74,11 +74,11 @@ public class Movable : MonoBehaviour
         {
             case MovementType.Lerp:
                 return Vector2.Lerp
-                    (transform.position, p_direction == Direction.Forward ? targetPosition : p_initialPosition, velocity * Time.deltaTime);
+                    (transform.localPosition, p_direction == Direction.Forward ? targetPosition : p_initialPosition, velocity * Time.deltaTime);
             case MovementType.MoveTowards:
                 return Vector2.MoveTowards
-                    (transform.position, p_direction == Direction.Forward ? targetPosition : p_initialPosition, velocity * Time.deltaTime);
-            default: return transform.position;
+                    (transform.localPosition, p_direction == Direction.Forward ? targetPosition : p_initialPosition, velocity * Time.deltaTime);
+            default: return transform.localPosition;
         }
     }
 
@@ -103,7 +103,7 @@ public class Movable : MonoBehaviour
     /// <summary>
     /// Teleports the object to the XY position
     /// </summary>
-    public void Teleport() { transform.position = targetPosition; }
+    public void Teleport() { transform.localPosition = targetPosition; }
 
     /// <summary>
     /// Permits the procediment of moving the object
@@ -131,5 +131,14 @@ public class Movable : MonoBehaviour
     {
         p_direction = Direction.Backwards;
         Move();
+    }
+
+    /// <summary>
+    /// Changes the velocity to whic the object moves
+    /// </summary>
+    /// <param name="speed">New velocity to set</param>
+    public void SetMovableSpeed(int speed)
+    {
+        velocity = speed;
     }
 }
