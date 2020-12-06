@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
     public void SpawnObject()
     {
         if (limitSpawns && totalObjectsSpawned >= spawnLimit) return;
-        Instantiate(gameObject, transform.position, Quaternion.identity);
+        Instantiate(toSpawnObject, transform.position, Quaternion.identity);
         totalObjectsSpawned++;
     }
 
