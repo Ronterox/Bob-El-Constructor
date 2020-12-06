@@ -21,7 +21,11 @@ public class LevelLoadManager : PersistentSingleton<LevelLoadManager>
         onLoadEvent.Invoke();
     }
 
-    public void loadNextScene() { loadScene(SceneManager.GetActiveScene().name); }
+    public void loadNextScene() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+        onLoadEvent.Invoke();
+    }
     public void loadAdditiveAsyncScenes() { foreach(string scene in additiveScenes) SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive); }
 
     public void OptionQuit()
