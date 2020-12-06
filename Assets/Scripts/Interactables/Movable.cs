@@ -16,12 +16,21 @@ public class Movable : MonoBehaviour
         Backwards = -1
     }
 
-    [SerializeField] private Vector2 targetPosition;
-    [SerializeField] private float velocity = 3f;
+    private enum PositionRelativeTo
+    {
+        Parent,
+        Itself
+    }
 
+    [SerializeField] private PositionRelativeTo positionRelativeTo;
+    public Vector2 targetPosition;
+    public float velocity = 3f;
+
+    [Header("Movement Config")]
     [SerializeField] private MovementType movementType;
+    [Tooltip("Goes back to main position after reaching destination")]
     [SerializeField] private bool loop;
-
+    [Tooltip("If checked starts to move on awake")]
     [SerializeField] private bool startOnAwake;
 
     private Vector2 p_initialPosition;
@@ -35,7 +44,7 @@ public class Movable : MonoBehaviour
         get
         {
             return p_direction == Direction.Forward ?
-                (Vector2)transform.position == targetPosition : (Vector2)transform.position == p_initialPosition;
+                (Vector2)transform.localPosition == targetPosition : (Vector2)transform.localPosition == p_initialPosition;
         }
     }
 
@@ -78,14 +87,18 @@ public class Movable : MonoBehaviour
     /// </summary>
     private void CheckDirection()
     {
-        if(pb_reachedDestination) 
+        if (pb_reachedDestination)
             p_direction = p_direction == Direction.Forward ? Direction.Backwards : Direction.Forward;
     }
 
     /// <summary>
-    /// Sets the object actual position as initial position
+    /// Sets the object actual position as initial position, also sets the relative destination if needed
     /// </summary>
-    public void SetInitialPosition() { p_initialPosition = transform.position; }
+    public void SetInitialPosition()
+    {
+        p_initialPosition = transform.localPosition;
+        if (positionRelativeTo == PositionRelativeTo.Itself) targetPosition = new Vector2(p_initialPosition.x + targetPosition.x, p_initialPosition.y + targetPosition.y);
+    }
 
     /// <summary>
     /// Teleports the object to the XY position
