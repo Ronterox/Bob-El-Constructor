@@ -20,6 +20,18 @@ public class CameraManager : Singleton<CameraManager>
 
     [SerializeField] private CMCamera[] cinemachineVirtualCamera;
 
+    public string currentCameraID
+    {
+        get 
+        {
+            foreach (CMCamera camera in cinemachineVirtualCamera)
+            {
+                if (camera.virtualCamera.Priority >= 20) return camera.id;
+            }
+            return "";
+        }
+    }
+
     /// <summary>
     /// Sets the priority of a camera to 'maximum'. So it changes to that camera
     /// </summary>
