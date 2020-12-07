@@ -1,68 +1,67 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[RequireComponent(typeof(GroundDetector))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Controller : MonoBehaviour
 {
+    [Header("Jump Config")]
     [SerializeField] private float jumpForce;
     [Range(0, 1f)] [SerializeField] private float jumpDamping;
-    [Range(0, 101f)] [SerializeField] private float pf_dampingHorizontal;
+
+    [Header("Horizontal Movement Config")]
+    [Range(0, 1f)] [SerializeField] private float dampingHorizontal;
 
     private float pf_inputHorizontalVelocity;
+    [HideInInspector] public float directionInput;
     private Rigidbody2D p_rb;
 
-    private bool pb_isGrounded;
-    [SerializeField] private Transform groundPoint;
-    [SerializeField] private LayerMask ground;
-    [SerializeField] private float feetRadius;
-
-    [SerializeField] private float pressedJump = 0.3f;
-    [SerializeField] private float wasGrounded = 0.3f;
-    private float pf_timer;
+    [SerializeField] private float pressedJumpTime = 0.3f;
     private float pf_pressedJumpTimer;
+    private bool pb_pressedJump;
 
-    private void Start()
+    private GroundDetector p_groundDetector;
+
+    private void Awake()
     {
-        p_rb = gameObject.GetComponent<Rigidbody2D>();
+        p_rb = GetComponent<Rigidbody2D>();
+        p_groundDetector = GetComponent<GroundDetector>();
     }
 
     private void FixedUpdate()
     {
-        pb_isGrounded = Physics2D.OverlapCircle(groundPoint.position, feetRadius, ground);
+        directionInput = Input.GetAxisRaw("Horizontal");
 
         // We assign the rigidbody speed
         pf_inputHorizontalVelocity = p_rb.velocity.x;
         // We increment it in its direction
-        pf_inputHorizontalVelocity += Input.GetAxisRaw("Horizontal");
+        pf_inputHorizontalVelocity += directionInput;
+
         // Add some damping to reduce the gaining of speed
-        pf_inputHorizontalVelocity *= Mathf.Pow(1f - pf_dampingHorizontal, Time.deltaTime * 10f);
+        pf_inputHorizontalVelocity *= Mathf.Pow(1f - dampingHorizontal, Time.deltaTime * 10f);
 
         p_rb.velocity = new Vector2(pf_inputHorizontalVelocity, p_rb.velocity.y);
+
+        if (p_groundDetector.isGrounded) pb_pressedJump = false;
+
+        if (pf_pressedJumpTimer > 0 && p_groundDetector.groundedTimer > 0 && !pb_pressedJump)
+        {
+            p_rb.velocity = new Vector2(p_rb.velocity.x, jumpForce);
+            pf_pressedJumpTimer = 0f; p_groundDetector.groundedTimer = 0f;
+        }
+
+        if (Input.GetButtonUp("Jump")) p_rb.velocity = new Vector2(p_rb.velocity.x, p_rb.velocity.y * jumpDamping);
     }
 
     private void Update()
     {
-        if (pf_timer > 0) pf_timer -= Time.deltaTime;
-
-        if (pb_isGrounded) pf_timer = wasGrounded;
-
         if (pf_pressedJumpTimer > 0) pf_pressedJumpTimer -= Time.deltaTime;
 
-        if (Input.GetButtonDown("Jump") && pf_timer >= 0) pf_pressedJumpTimer = pressedJump;
-
-        if (pf_pressedJumpTimer > 0 && pf_timer > 0) p_rb.velocity = new Vector2(p_rb.velocity.x, jumpForce);
-
-        if (Input.GetButtonUp("Jump"))
+        if (Input.GetButtonDown("Jump") && p_groundDetector.groundedTimer > 0)
         {
-            if (p_rb.velocity.y > 0) p_rb.velocity = new Vector2(p_rb.velocity.x, p_rb.velocity.y * jumpDamping);
+            pf_pressedJumpTimer = pressedJumpTime;
+            pb_pressedJump = true;
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        if (pb_isGrounded) Gizmos.color = Color.green;
-        else Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(groundPoint.position, feetRadius);
-    }
-
 }

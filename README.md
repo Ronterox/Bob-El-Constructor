@@ -1,6 +1,6 @@
 # Bob-El-Constructor
 First friendly project to teach my developer friend!
-### Minigame Jam para aprender Unity
+
 #### Genero
 ---
 
@@ -12,19 +12,18 @@ First friendly project to teach my developer friend!
 ---
 
 - Movimiento Fluido
-- Arrastre de objetos para construir
-- Recoger Materiales
+- Arrastre de objetos del ambiente
+- Alteracion de objetos en el ambiente
 
 #### Objetivo
 ---
 
-- Recolectar Gemas
-- Liberal Princesa
+- Descubrimiento de la historia
+- Recoleccion de gemas ocultas
 
 #### Extras
 ---
 
-- Comprar Materiales
 - Gemas Opcionales
 - Enemigos
 - Boss
