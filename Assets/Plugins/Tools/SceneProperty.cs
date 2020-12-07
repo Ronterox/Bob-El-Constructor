@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 public class SceneAttribute : PropertyAttribute { }
+
+#if UNITY_EDITOR
 public class SceneProperty : MonoBehaviour {
 
     [CustomPropertyDrawer(typeof(SceneAttribute))]
     public class SceneDrawer : PropertyDrawer
     {
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-
             if (property.propertyType == SerializedPropertyType.String)
             {
                 var sceneObject = GetSceneObject(property.stringValue);
@@ -55,3 +57,4 @@ public class SceneProperty : MonoBehaviour {
         }
     }
 }
+#endif

@@ -21,6 +21,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
 	[Header("Game Events")]
 	public OnPickableEvent onPickableEvent;
+	public OnLoadEvent onLoadEvent;
+
 	public void IncrementPickableGUI(int score)
 	{
 		gemsCount += score;
