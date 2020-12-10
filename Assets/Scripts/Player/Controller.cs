@@ -10,16 +10,17 @@ public class Controller : MonoBehaviour
     [SerializeField] private float jumpForce;
     [Range(0, 1f)] [SerializeField] private float jumpDamping;
 
+    [SerializeField] private float pressedJumpTime = 0.3f;
+    private float pf_pressedJumpTimer;
+    private bool pb_pressedJump;
+
     [Header("Horizontal Movement Config")]
     [Range(0, 1f)] [SerializeField] private float dampingHorizontal;
+    [SerializeField] private float acceleration;
 
     private float pf_inputHorizontalVelocity;
     [HideInInspector] public float directionInput;
     private Rigidbody2D p_rb;
-
-    [SerializeField] private float pressedJumpTime = 0.3f;
-    private float pf_pressedJumpTimer;
-    private bool pb_pressedJump;
 
     private GroundDetector p_groundDetector;
 
@@ -36,7 +37,7 @@ public class Controller : MonoBehaviour
         // We assign the rigidbody speed
         pf_inputHorizontalVelocity = p_rb.velocity.x;
         // We increment it in its direction
-        pf_inputHorizontalVelocity += directionInput;
+        pf_inputHorizontalVelocity += directionInput * acceleration;
 
         // Add some damping to reduce the gaining of speed
         pf_inputHorizontalVelocity *= Mathf.Pow(1f - dampingHorizontal, Time.deltaTime * 10f);
