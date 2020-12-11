@@ -28,7 +28,7 @@ public class LevelGenerator : MonoBehaviour
     {
         #region Organize_On_Groups
         (tempParent = new GameObject()).transform.name = "New Area";
-        if (tempGroups.Count > 0) tempGroups.Clear();
+        tempGroups = new List<GameObject>();
         foreach (ColorLevelTile tile in tiles)
         {
             GameObject group = new GameObject();
