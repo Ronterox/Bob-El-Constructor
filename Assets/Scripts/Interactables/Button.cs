@@ -15,23 +15,26 @@ public class Button : MonoBehaviour
 
     private void Awake()
     {
-        p_SpriteAnimator = gameObject.GetComponentInChildren<Animator>();
+        p_SpriteAnimator = gameObject.GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        p_SpriteAnimator.SetBool("IsPressed", true);
+        if(p_CollisionCounter == 0)
+        {
+            p_SpriteAnimator.SetBool("IsPressed", true);
+            onButtonEventEnter.Invoke();
+        }
         p_CollisionCounter++;
-        onButtonEventEnter.Invoke();
-#if UNITY_EDITOR
-        Debug.Log("Button Pressed");
-#endif
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        p_SpriteAnimator.SetBool("IsPressed", false);
         p_CollisionCounter--;
-        if (p_CollisionCounter == 0) { onButtonEventExit.Invoke(); }
+        if (p_CollisionCounter == 0)
+        {
+            p_SpriteAnimator.SetBool("IsPressed", false);
+            onButtonEventExit.Invoke(); 
+        }
     }
 }
