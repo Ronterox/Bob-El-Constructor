@@ -11,9 +11,16 @@ public class Button : MonoBehaviour
     [SerializeField] private OnButtonEvent onButtonEventEnter;
     [SerializeField] private OnButtonEvent onButtonEventExit;
     private int p_CollisionCounter;
+    private Animator p_SpriteAnimator;
+
+    private void Awake()
+    {
+        p_SpriteAnimator = gameObject.GetComponentInChildren<Animator>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        p_SpriteAnimator.SetBool("IsPressed", true);
         p_CollisionCounter++;
         onButtonEventEnter.Invoke();
 #if UNITY_EDITOR
@@ -23,6 +30,7 @@ public class Button : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        p_SpriteAnimator.SetBool("IsPressed", false);
         p_CollisionCounter--;
         if (p_CollisionCounter == 0) { onButtonEventExit.Invoke(); }
     }
