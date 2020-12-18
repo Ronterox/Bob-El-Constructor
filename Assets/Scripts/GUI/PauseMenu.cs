@@ -2,29 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : PersistentSingleton<PauseMenu>
 {
-    public static bool GameIsPaused = false;
-    public GameObject pauseMenuUI;
+    [HideInInspector]
+    public bool GameIsPaused = false;
+    [SerializeField] 
+    private GameObject pauseMenuUI;
    
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            if (GameIsPaused) Resume();
+            else Pause();
         }
-        
     }
 
+    /// <summary>
+    /// Resumes the game
+    /// </summary>
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
@@ -33,13 +29,23 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-    void Pause()
+    /// <summary>
+    /// Pauses the ingame time
+    /// </summary>
+    public void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
 
+    /// <summary>
+    /// Takes you to main menu
+    /// </summary>
+    public void MainMenu() { LevelLoadManager.instance.LoadScene("MAIN MENU"); }
 
-
+    /// <summary>
+    /// Quits The Game
+    /// </summary>
+    public void QuitGame() { LevelLoadManager.instance.QuitGame(); }
 }
