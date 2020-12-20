@@ -18,8 +18,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Texture2D map;
     [SerializeField] private ColorLevelTile[] tiles;
 
-    private GameObject tempParent;
-    private List<GameObject> tempGroups;
+    private GameObject p_TempParent;
+    private List<GameObject> p_TempGroups;
 
     /// <summary>
     /// Iterates through the whole map and instantiates objects depending the ColorLevelTiles set
@@ -27,14 +27,14 @@ public class LevelGenerator : MonoBehaviour
     public void GenerateLevel()
     {
         #region Organize_On_Groups
-        (tempParent = new GameObject()).transform.name = "New Area";
-        tempGroups = new List<GameObject>();
+        (p_TempParent = new GameObject()).transform.name = "New Area";
+        p_TempGroups = new List<GameObject>();
         foreach (ColorLevelTile tile in tiles)
         {
             GameObject group = new GameObject();
             group.transform.name = tile.gameObject.name + " Group";
-            group.transform.parent = tempParent.transform;
-            tempGroups.Add(group);
+            group.transform.parent = p_TempParent.transform;
+            p_TempGroups.Add(group);
         }
         #endregion
         for (int x = 0; x < map.width; x++) { for (int y = 0; y < map.width; y++) GenerateTile(x, y); }
@@ -52,8 +52,8 @@ public class LevelGenerator : MonoBehaviour
         foreach (ColorLevelTile tile in tiles)
         {
             if (tile.color.Equals(pixelColor)) 
-                InstantiatePrefab(tile.gameObject, new Vector2(x, y), Quaternion.identity, tempParent.transform)
-                    .transform.parent = tempGroups
+                InstantiatePrefab(tile.gameObject, new Vector2(x, y), Quaternion.identity, p_TempParent.transform)
+                    .transform.parent = p_TempGroups
                     .Find(g => g.transform.name.Contains(tile.gameObject.transform.name)).transform;
         }
     }
