@@ -50,8 +50,24 @@ public class SoundManager : PersistentSingleton<SoundManager>
     {
         base.Awake();
 
+        UpdateVolumeValues();
+
+        p_SoundEffects = new Dictionary<string, SoundItem>();
+        p_Songs = new Dictionary<string, SoundItem>();
+
         Initialize(p_Songs, songs);
         Initialize(p_SoundEffects, soundEffects);
+    }
+
+    /// <summary>
+    /// Updates all volume values on the mixer
+    /// </summary>
+    private void UpdateVolumeValues()
+    {
+        SetVolume(generalVolume);
+        SetMusicVolume(musicVolume);
+        SetSFXVolume(sfxVolume);
+        SetUIVolume(uiVolume);
     }
 
     /// <summary>
@@ -70,6 +86,7 @@ public class SoundManager : PersistentSingleton<SoundManager>
             sound.source.loop = sound.loop;
             sound.source.pitch = sound.pitch;
             sound.source.volume = sound.volume;
+            sound.source.playOnAwake = false;
         }
     }
 

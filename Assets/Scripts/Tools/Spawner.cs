@@ -12,8 +12,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int spawnLimit;
     [SerializeField] private bool limitSpawns;
 
-    [Header("For Other Methods")]
     /*
+    [Header("For Other Methods")]
     [SerializeField] readonly int spawnedObjects
     {
         get
@@ -29,6 +29,7 @@ public class Spawner : MonoBehaviour
     /// </summary>
     public void SpawnObject()
     {
+        SoundManager.instance.Play("Spawn", true);
         if (limitSpawns && totalObjectsSpawned >= spawnLimit) return;
         Instantiate(toSpawnObject, transform.position, Quaternion.identity);
         totalObjectsSpawned++;
