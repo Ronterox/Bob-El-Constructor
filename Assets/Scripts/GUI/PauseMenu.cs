@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : PersistentSingleton<PauseMenu>
 {
+    public GameObject resumegame, quitgame, mainmenu;
     [HideInInspector]
     public bool GameIsPaused = false;
     [SerializeField] 
@@ -27,6 +29,7 @@ public class PauseMenu : PersistentSingleton<PauseMenu>
         Time.timeScale = 1f;
         GameIsPaused = false;
 
+
     }
 
     /// <summary>
@@ -37,15 +40,28 @@ public class PauseMenu : PersistentSingleton<PauseMenu>
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(resumegame);
     }
 
     /// <summary>
     /// Takes you to main menu
     /// </summary>
-    public void MainMenu() { LevelLoadManager.instance.LoadScene("MAIN MENU"); }
+    public void MainMenu()
+    {
+        LevelLoadManager.instance.LoadScene("MAIN MENU");
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(mainmenu);
+    }
 
     /// <summary>
     /// Quits The Game
     /// </summary>
-    public void QuitGame() { LevelLoadManager.instance.QuitGame(); }
+    public void QuitGame()
+    {
+        LevelLoadManager.instance.QuitGame();
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(quitgame);
+    }
 }
+
