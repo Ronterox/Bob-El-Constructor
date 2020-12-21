@@ -22,6 +22,7 @@ public class Button : MonoBehaviour
     {
         if(p_CollisionCounter == 0)
         {
+            SoundManager.instance.Play("Button", true);
             p_SpriteAnimator.SetBool("IsPressed", true);
             onButtonEventEnter.Invoke();
         }

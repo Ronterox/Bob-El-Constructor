@@ -23,9 +23,9 @@ public class SoundItem
 
 public class SoundManager : PersistentSingleton<SoundManager>
 {
-    public AudioClip menuAudioClip;
-
     [Header("Values")]
+    [Range(0, 1)]
+    public float generalVolume = 1f;
     [Range(0, 1)]
     public float musicVolume = 0.3f;
     [Range(0, 1)]
@@ -35,8 +35,6 @@ public class SoundManager : PersistentSingleton<SoundManager>
 
     [Header("Mixer")]
     public AudioMixer audioMixer;
-    public AudioMixerGroup inGameAudioMixer;
-    public AudioMixerGroup uiAudioMixer;
 
     [Header("Sound Effects")]
     [SerializeField] private SoundItem[] soundEffects;
@@ -52,8 +50,24 @@ public class SoundManager : PersistentSingleton<SoundManager>
     {
         base.Awake();
 
+        UpdateVolumeValues();
+
+        p_SoundEffects = new Dictionary<string, SoundItem>();
+        p_Songs = new Dictionary<string, SoundItem>();
+
         Initialize(p_Songs, songs);
         Initialize(p_SoundEffects, soundEffects);
+    }
+
+    /// <summary>
+    /// Updates all volume values on the mixer
+    /// </summary>
+    private void UpdateVolumeValues()
+    {
+        SetVolume(generalVolume);
+        SetMusicVolume(musicVolume);
+        SetSFXVolume(sfxVolume);
+        SetUIVolume(uiVolume);
     }
 
     /// <summary>
@@ -67,18 +81,26 @@ public class SoundManager : PersistentSingleton<SoundManager>
         {
             sound.source = gameObject.AddComponent<AudioSource>();
 
+            sound.source.outputAudioMixerGroup = sound.audioMixerGroup;
             sound.source.clip = sound.clip;
             sound.source.loop = sound.loop;
             sound.source.pitch = sound.pitch;
             sound.source.volume = sound.volume;
+            sound.source.playOnAwake = false;
         }
     }
+
+    /// <summary>
+    /// Sets the general volume of the game Sounds and Music
+    /// </summary>
+    /// <param name="volume"></param>
+    public void SetVolume(float volume) { audioMixer.SetFloat("General", VolumeToDecibels(generalVolume)); }
 
     /// <summary>
     /// Plays a background music.
     /// Only one background music can be active at a time.
     /// </summary>
-    /// <param name="Clip">Your audio clip.</param>
+    /// <param name="id">Audio clip id.</param>
     public IEnumerator _PlayBackgroundMusic(string id, float fadeDuration = 1f)
     {
         if (p_CurrentBackgroundMusic == id) yield break;
@@ -129,7 +151,7 @@ public class SoundManager : PersistentSingleton<SoundManager>
     /// Set music volume
     /// </summary>
     /// <param name="volume"></param>
-    public void SetmusicVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
         musicVolume = volume;
         audioMixer.SetFloat("BackgroundMusic_Volume", VolumeToDecibels(volume));
@@ -155,7 +177,7 @@ public class SoundManager : PersistentSingleton<SoundManager>
     /// </summary>
     public void UnMuteSFX() { audioMixer.SetFloat("SFX_Volume", VolumeToDecibels(sfxVolume)); }
 
-    public void SetuiVolume(float volume)
+    public void SetUIVolume(float volume)
     {
         uiVolume = volume;
         audioMixer.SetFloat("UI_SFX_Volume", VolumeToDecibels(volume));
@@ -180,17 +202,6 @@ public class SoundManager : PersistentSingleton<SoundManager>
     /// Resume background music
     /// </summary>
     public void UnPauseBackgroundMusic() { p_Songs[p_CurrentBackgroundMusic].source.UnPause(); }
-
-    /// <summary>
-    /// Apply sound/music modification values
-    /// </summary>
-    /// <param name="musicValue"></param>
-    /// <param name="sfxValue"></param>
-    public void ApplySoundValues(float musicValue, float sfxValue)
-    {
-        SetmusicVolume(musicValue);
-        SetSFXVolume(sfxValue);
-    }
 
     /// <summary>
     /// Returns a decibel value as a volume value between 0 and 1

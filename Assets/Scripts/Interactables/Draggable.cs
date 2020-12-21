@@ -25,8 +25,9 @@ public class Draggable : MonoBehaviour
     /// </summary>
     void OnMouseDown()
     {
-        if (isTriggerWhileDrag && !p_collider.isTrigger) p_collider.isTrigger = true;
+        SoundManager.instance.Play("Block Pick");
         pb_isBeingDrag = true;
+        if (isTriggerWhileDrag && !p_collider.isTrigger) p_collider.isTrigger = true;
         if (blockRotationWhileDrag) p_collider.attachedRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
@@ -44,8 +45,9 @@ public class Draggable : MonoBehaviour
     /// </summary>
     private void OnMouseUp()
     {
-        if (isTriggerWhileDrag && p_collider.isTrigger) p_collider.isTrigger = false;
+        SoundManager.instance.Play("Block Place");
         pb_isBeingDrag = false;
+        if (isTriggerWhileDrag && p_collider.isTrigger) p_collider.isTrigger = false;
         if (blockRotationWhileDrag) p_collider.attachedRigidbody.constraints &= ~RigidbodyConstraints2D.FreezeRotation;
     }
 }

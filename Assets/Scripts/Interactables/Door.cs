@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour 
+public class Door : Movable 
 {
-    private Animator p_animator;
-    private void Awake() { p_animator = GetComponent<Animator>(); }
-    public void OpenDoor() { p_animator.SetBool("open", true); }
-    public void CloseDoor() { p_animator.SetBool("open", false); }
+    public override void MoveForward()
+    {
+        base.MoveForward();
+        SoundManager.instance.Play("Door Open");
+    }
+
+    public override void MoveBackwards()
+    {
+        base.MoveBackwards();
+        SoundManager.instance.Play("Door Close");
+    }
 }

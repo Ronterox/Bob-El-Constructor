@@ -108,17 +108,17 @@ public class Movable : MonoBehaviour
     /// <summary>
     /// Permits the procediment of moving the object
     /// </summary>
-    public void Move() { pb_isMoving = true; }
+    public virtual void Move() { pb_isMoving = true; }
 
     /// <summary>
     /// Stops The Object
     /// </summary>
-    public void Stop() { pb_isMoving = false; }
+    public virtual void Stop() { pb_isMoving = false; }
 
     /// <summary>
     /// Starts the forward movement of the object
     /// </summary>
-    public void MoveForward()
+    public virtual void MoveForward()
     {
         p_direction = Direction.Forward;
         Move();
@@ -127,7 +127,7 @@ public class Movable : MonoBehaviour
     /// <summary>
     /// Starts the backward movement of the object
     /// </summary>
-    public void MoveBackwards()
+    public virtual void MoveBackwards()
     {
         p_direction = Direction.Backwards;
         Move();

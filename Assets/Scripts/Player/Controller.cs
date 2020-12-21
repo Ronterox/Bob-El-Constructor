@@ -22,7 +22,8 @@ public class Controller : MonoBehaviour
     [HideInInspector] public float directionInput;
     private Rigidbody2D p_rb;
 
-    private GroundDetector p_groundDetector;
+    [HideInInspector]
+    public GroundDetector p_groundDetector;
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class Controller : MonoBehaviour
         {
             p_rb.velocity = new Vector2(p_rb.velocity.x, jumpForce);
             pf_pressedJumpTimer = 0f; p_groundDetector.groundedTimer = 0f;
+            SoundManager.instance.Play("Jump");
         }
 
         if (Input.GetButtonUp("Jump")) p_rb.velocity = new Vector2(p_rb.velocity.x, p_rb.velocity.y * jumpDamping);
