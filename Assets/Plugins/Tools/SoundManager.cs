@@ -204,17 +204,6 @@ public class SoundManager : PersistentSingleton<SoundManager>
     public void UnPauseBackgroundMusic() { p_Songs[p_CurrentBackgroundMusic].source.UnPause(); }
 
     /// <summary>
-    /// Apply sound/music modification values
-    /// </summary>
-    /// <param name="musicValue"></param>
-    /// <param name="sfxValue"></param>
-    public void ApplySoundValues(float musicValue, float sfxValue)
-    {
-        SetMusicVolume(musicValue);
-        SetSFXVolume(sfxValue);
-    }
-
-    /// <summary>
     /// Returns a decibel value as a volume value between 0 and 1
     /// </summary>
     /// <param name="dB"></param>
