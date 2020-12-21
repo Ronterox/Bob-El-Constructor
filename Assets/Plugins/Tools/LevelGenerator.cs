@@ -52,7 +52,7 @@ public class LevelGenerator : MonoBehaviour
         foreach (ColorLevelTile tile in tiles)
         {
             if (tile.color.Equals(pixelColor)) 
-                InstantiatePrefab(tile.gameObject, new Vector2(x, y), Quaternion.identity, p_TempParent.transform)
+                InstantiatePrefab(tile.gameObject, new Vector2(x, y), tile.gameObject.transform.rotation, p_TempParent.transform)
                     .transform.parent = p_TempGroups
                     .Find(g => g.transform.name.Contains(tile.gameObject.transform.name)).transform;
         }

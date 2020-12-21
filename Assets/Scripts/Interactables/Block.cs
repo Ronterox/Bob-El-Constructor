@@ -19,14 +19,13 @@ public enum BlockEffect
 }
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpriteRenderer))]
 public class Block : Draggable
 {
     [Header("Hammer Options")]
     [SerializeField] private Vector3 rotation = new Vector3(0, 0, 90);
     private Rigidbody2D p_rigidbody;
 
-    private SpriteRenderer p_spriteRenderer;
+    private SpriteRenderer[] p_spriteRenderer;
 
     [Header("Brush Options")]
     [SerializeField] private PaintedBlock[] paintedVariations;
@@ -45,7 +44,7 @@ public class Block : Draggable
     protected override void Awake()
     {
         base.Awake();
-        p_spriteRenderer = GetComponent<SpriteRenderer>();
+        p_spriteRenderer = GetComponentsInChildren<SpriteRenderer>();
         p_rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -79,12 +78,18 @@ public class Block : Draggable
     }
 
     /// <summary>
+    /// Sets the color to all sprite renderer childs
+    /// </summary>
+    /// <param name="color">the color to be set to</param>
+    private void SetBlockColor(Color color) { foreach (SpriteRenderer sprite in p_spriteRenderer) sprite.color = color; }
+
+    /// <summary>
     /// Paints the sprite renderer of the block and adds a material to its collider
     /// </summary>
     private void PaintBlock()
     {
         PaintedBlock thisPaintedBlock = paintedVariations[(pi_pointer = (pi_pointer + 1) % paintedVariations.Length)];
-        p_spriteRenderer.color = thisPaintedBlock.color;
+        SetBlockColor(thisPaintedBlock.color);
         p_collider.sharedMaterial = thisPaintedBlock.material2D;
     }
 
