@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Plugins.Tools;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour 
+namespace Tools
 {
-    //TODO: Have them as childs to detect how many are on the scene right now.
+    public class Spawner : MonoBehaviour 
+    {
+        //TODO: Have them as children to detect how many are on the scene right now.
 
-    [SerializeField] private GameObject toSpawnObject;
+        [SerializeField] private GameObject toSpawnObject;
 
-    [Header("Limit Options")]
-    [SerializeField] private int spawnLimit;
-    [SerializeField] private bool limitSpawns;
+        [Header("Limit Options")]
+        [SerializeField] private int spawnLimit;
+        [SerializeField] private bool limitSpawns;
 
-    /*
+        /*
     [Header("For Other Methods")]
     [SerializeField] readonly int spawnedObjects
     {
@@ -22,32 +23,33 @@ public class Spawner : MonoBehaviour
         }
     }*/
 
-    private int totalObjectsSpawned;
+        private int p_totalObjectsSpawned;
 
-    /// <summary>
-    /// Spawns the object
-    /// </summary>
-    public void SpawnObject()
-    {
-        SoundManager.instance.Play("Spawn", true);
-        if (limitSpawns && totalObjectsSpawned >= spawnLimit) return;
-        Instantiate(toSpawnObject, transform.position, Quaternion.identity);
-        totalObjectsSpawned++;
-    }
+        /// <summary>
+        /// Spawns the object
+        /// </summary>
+        public void SpawnObject()
+        {
+            SoundManager.Instance.Play("Spawn", true);
+            if (limitSpawns && p_totalObjectsSpawned >= spawnLimit) return;
+            Instantiate(toSpawnObject, transform.position, Quaternion.identity);
+            p_totalObjectsSpawned++;
+        }
 
-    /// <summary>
-    /// Deletes all the instantiated objects
-    /// </summary>
-    public void DeleteAllSpawnedObjects()
-    {
+        /// <summary>
+        /// Deletes all the instantiated objects
+        /// </summary>
+        public void DeleteAllSpawnedObjects()
+        {
 
-    }
+        }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public void SpawnObjectAt()
-    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SpawnObjectAt()
+        {
 
+        }
     }
 }

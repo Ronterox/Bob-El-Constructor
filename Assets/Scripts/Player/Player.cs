@@ -1,34 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Plugins.Tools;
 using UnityEngine;
 
-public class Player : MonoBehaviour 
+namespace Player
 {
-    [SerializeField] private Controller playerController;
-
-    [Header("Animations")]
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    private Animator p_animator;
-
-    [Header("Sounds")]
-    [SerializeField] private float footstepSoundDelay;
-    private float pf_footstepTime = 0;
-
-    private void Awake() { p_animator = GetComponent<Animator>(); }
-
-    private void FixedUpdate()
+    [RequireComponent(typeof(Animator))]
+    public class Player : MonoBehaviour 
     {
-        if (playerController == null) return;
+        [SerializeField] private Controller playerController;
 
-        p_animator.SetBool("moving", playerController.directionInput != 0);
-        if (playerController.directionInput != 0) spriteRenderer.flipX = playerController.directionInput > 0 ? false : true;
+        [Header("Animations")]
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        private Animator p_animator;
 
-        if (playerController.directionInput != 0 
-            && playerController.p_groundDetector.isGrounded 
-            && (Time.time - pf_footstepTime) >= footstepSoundDelay)
+        [Header("Sounds")]
+        [SerializeField] private float footstepSoundDelay;
+        private float p_footstepTime;
+        private readonly int p_moving = Animator.StringToHash("Moving");
+
+        private void Awake() => p_animator = GetComponent<Animator>();
+
+        private void FixedUpdate()
         {
-            pf_footstepTime = Time.time;
-            SoundManager.instance.Play("Footstep", true);
+            p_animator.SetBool(p_moving, playerController.directionInput != 0);
+            if (playerController.directionInput != 0) spriteRenderer.flipX = !(playerController.directionInput > 0);
+
+            if (playerController.directionInput == 0 || !playerController.groundDetector.isGrounded || !(Time.time - p_footstepTime >= footstepSoundDelay)) return;
+            p_footstepTime = Time.time;
+            SoundManager.Instance.Play("Footstep", true);
         }
     }
 }

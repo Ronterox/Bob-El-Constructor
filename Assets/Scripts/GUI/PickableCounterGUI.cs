@@ -1,21 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Managers;
 using TMPro;
+using UnityEngine;
 
-public class PickableCounterGUI : MonoBehaviour 
+namespace GUI
 {
-    [SerializeField] private TextMeshProUGUI countText;
-
-    private void Awake()
+    public class PickableCounterGUI : MonoBehaviour
     {
-        GameManager.instance.pickableCounterGUI = this;
-        SetScore(GameManager.instance.gemsCount);
-    }
+        [SerializeField] private TextMeshProUGUI countText;
 
-    public void SetScore(int s)
-    {
-        if (countText != null) countText.text = s.ToString() + "x";
-        else Debug.LogWarning("Count Text is null so it can't be update graphically");
+        private void Awake()
+        {
+            GameManager.Instance.pickableCounterGUI = this;
+            SetScore(GameManager.Instance.gemsCount);
+        }
+
+        public void SetScore(int s)
+        {
+            if (countText != null) countText.text = s + "x";
+            else Debug.LogWarning("Count Text is null so it can't be update graphically");
+        }
     }
 }

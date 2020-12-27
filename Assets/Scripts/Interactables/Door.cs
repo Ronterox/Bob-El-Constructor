@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Plugins.Tools;
 
-public class Door : Movable 
+namespace Interactables
 {
-    public override void MoveForward()
+    public class Door : Movable
     {
-        base.MoveForward();
-        SoundManager.instance.Play("Door Open");
-    }
+        public override void MoveForward()
+        {
+            base.MoveForward();
+            SoundManager.Instance.Play("Door Open");
+        }
 
-    public override void MoveBackwards()
-    {
-        base.MoveBackwards();
-        SoundManager.instance.Play("Door Close");
+        public override void MoveBackwards()
+        {
+            base.MoveBackwards();
+            SoundManager.Instance.Play("Door Close");
+        }
     }
 }

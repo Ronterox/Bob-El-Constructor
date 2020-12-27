@@ -1,20 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Managers;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class onCollision : UnityEvent { }
-
-public class Checkpoint : MonoBehaviour
+namespace Interactables
 {
-    [SerializeField] private onCollision enterCheckpoint;
+    [System.Serializable]
+    public class ONCollision : UnityEvent { }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class Checkpoint : MonoBehaviour
     {
-        if (collision.CompareTag("Player"))
+        [SerializeField] private ONCollision enterCheckpoint;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            GameManager.instance.checkpoint = transform;
+            if (!collision.CompareTag("Player")) return;
+            GameManager.Instance.checkpoint = transform;
             gameObject.SetActive(false);
             enterCheckpoint.Invoke();
         }

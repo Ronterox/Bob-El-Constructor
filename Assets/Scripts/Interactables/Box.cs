@@ -1,19 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Plugins.Tools;
 using UnityEngine;
 
-public class Box : MonoBehaviour
+namespace Interactables
 {
-    [Header("Sounds")]
-    [SerializeField] private float hitSoundDelay;
-    private float pf_lastHitTime;
-
-    private void OnCollisionEnter2D(Collision2D collision) 
+    public class Box : MonoBehaviour
     {
-        if ((Time.time - pf_lastHitTime) >= hitSoundDelay)
+        [Header("Sounds")]
+        [SerializeField] private float hitSoundDelay;
+        private float p_lastHitTime;
+
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            pf_lastHitTime = Time.time;
-            SoundManager.instance.Play("Box Hit");
-        } 
+            if (!(Time.time - p_lastHitTime >= hitSoundDelay)) return;
+            p_lastHitTime = Time.time;
+            SoundManager.Instance.Play("Box Hit");
+        }
     }
 }

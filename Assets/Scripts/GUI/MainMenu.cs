@@ -1,42 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MainMenu : MonoBehaviour 
+namespace GUI
 {
-    public GameObject startgame, quitgame, loadscene;
-    /// <summary>
-    /// Loads the game last saved Scene
-    /// </summary>
-    public void StartGame()
+    public class MainMenu : MonoBehaviour 
     {
-        //Need To later depend on save file
-        LevelLoadManager.instance.LoadScene("Level 1");
-        LevelLoadManager.instance.LoadAdditiveAsyncScenes();
+        public GameObject startGame, quitGame, loadScene;
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(startgame);
-    }
+        /// <summary>
+        /// Loads the game last saved Scene
+        /// </summary>
+        public void StartGame()
+        {
+            //Need To later depend on save file
+            LevelLoadManager.Instance.LoadScene("Level 1");
+            LevelLoadManager.Instance.LoadAdditiveAsyncScenes();
 
-    /// <summary>
-    /// Loads a specific scene
-    /// </summary>
-    /// <param name="scene"></param>
-    public void LoadScene(string scene)
-    {
-        LevelLoadManager.instance.LoadScene(scene);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(loadscene);
-    }
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(startGame);
+        }
 
-    /// <summary>
-    /// Closes or stops the game
-    /// </summary>
-    public void QuitApplication()
-    {
-        LevelLoadManager.instance.QuitGame();
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(quitgame);
+        /// <summary>
+        /// Loads a specific scene
+        /// </summary>
+        /// <param name="scene"></param>
+        public void LoadScene(string scene)
+        {
+            LevelLoadManager.Instance.LoadScene(scene);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(loadScene);
+        }
+
+        /// <summary>
+        /// Closes or stops the game
+        /// </summary>
+        public void QuitApplication()
+        {
+            LevelLoadManager.Instance.QuitGame();
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(quitGame);
+        }
     }
 }

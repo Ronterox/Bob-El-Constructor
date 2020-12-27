@@ -1,60 +1,61 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
-public class SceneAttribute : PropertyAttribute { }
+using Object = UnityEngine.Object;
+
+namespace Plugins.Tools
+{
+    public class SceneAttribute : PropertyAttribute { }
 
 #if UNITY_EDITOR
-public class SceneProperty : MonoBehaviour {
-
-    [CustomPropertyDrawer(typeof(SceneAttribute))]
-    public class SceneDrawer : PropertyDrawer
+    public class SceneProperty : MonoBehaviour
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        [CustomPropertyDrawer(typeof(SceneAttribute))]
+        public class SceneDrawer : PropertyDrawer
         {
-            if (property.propertyType == SerializedPropertyType.String)
+            public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
             {
-                var sceneObject = GetSceneObject(property.stringValue);
-                var scene = EditorGUI.ObjectField(position, label, sceneObject, typeof(SceneAsset), true);
-                if (scene == null)
+                if (property.propertyType == SerializedPropertyType.String)
                 {
-                    property.stringValue = "";
-                }
-                else if (scene.name != property.stringValue)
-                {
-                    var sceneObj = GetSceneObject(scene.name);
-                    if (sceneObj == null)
+                    SceneAsset sceneObject = GetSceneObject(property.stringValue);
+                    Object scene = EditorGUI.ObjectField(position, label, sceneObject, typeof(SceneAsset), true);
+                    if (scene == null)
                     {
-                        Debug.LogWarning("The scene " + scene.name + " cannot be used. To use this scene add it to the build settings for the project");
+                        property.stringValue = "";
                     }
-                    else
+                    else if (scene.name != property.stringValue)
                     {
-                        property.stringValue = scene.name;
+                        SceneAsset sceneObj = GetSceneObject(scene.name);
+                        if (sceneObj == null)
+                        {
+                            Debug.LogWarning("The scene " + scene.name + " cannot be used. To use this scene add it to the build settings for the project");
+                        }
+                        else
+                        {
+                            property.stringValue = scene.name;
+                        }
                     }
                 }
+                else
+                    EditorGUI.LabelField(position, label.text, "Use [Scene] with strings.");
             }
-            else
-                EditorGUI.LabelField(position, label.text, "Use [Scene] with strings.");
-        }
-        protected SceneAsset GetSceneObject(string sceneObjectName)
-        {
-            if (string.IsNullOrEmpty(sceneObjectName))
+
+            private static SceneAsset GetSceneObject(string sceneObjectName)
             {
+                if (string.IsNullOrEmpty(sceneObjectName)) return null;
+
+                foreach (EditorBuildSettingsScene editorScene in EditorBuildSettings.scenes)
+                {
+                    if (editorScene.path.IndexOf(sceneObjectName, StringComparison.Ordinal) != -1)
+                        return AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
+                }
+
+                Debug.LogWarning("Scene [" + sceneObjectName + "] cannot be used. Add this scene to the 'Scenes in the Build' in build settings.");
                 return null;
             }
-
-            foreach (var editorScene in EditorBuildSettings.scenes)
-            {
-                if (editorScene.path.IndexOf(sceneObjectName) != -1)
-                {
-                    return AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
-                }
-            }
-            Debug.LogWarning("Scene [" + sceneObjectName + "] cannot be used. Add this scene to the 'Scenes in the Build' in build settings.");
-            return null;
         }
     }
-}
 #endif
+}

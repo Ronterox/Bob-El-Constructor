@@ -1,53 +1,58 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Plugins.Tools;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public class Draggable : MonoBehaviour
+namespace Interactables
 {
-    [Tooltip("Select whether you want the object to collide while being drag")]
-    [SerializeField] private bool isTriggerWhileDrag = false;
-    [SerializeField] private bool blockRotationWhileDrag = false;
-
-    private Camera p_camera;
-    protected Collider2D p_collider;
-
-    protected bool pb_isBeingDrag = false;
-
-    protected virtual void Awake()
+    [RequireComponent(typeof(Collider2D))]
+    public class Draggable : MonoBehaviour
     {
-        p_camera = Camera.main;
-        p_collider = GetComponent<Collider2D>();
-    }
+        [Tooltip("Select whether you want the object to collide while being drag")]
+        [SerializeField] private bool isTriggerWhileDrag;
+        [SerializeField] private bool blockRotationWhileDrag;
 
-    /// <summary>
-    /// To initialize the called of being drag, and add the gameobject alterations
-    /// </summary>
-    void OnMouseDown()
-    {
-        SoundManager.instance.Play("Block Pick");
-        pb_isBeingDrag = true;
-        if (isTriggerWhileDrag && !p_collider.isTrigger) p_collider.isTrigger = true;
-        if (blockRotationWhileDrag) p_collider.attachedRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-    }
+        private Camera p_camera;
+        protected Collider2D pr_collider;
 
-    /// <summary>
-    /// Can drag the gameobject in mouse range
-    /// </summary>
-    void OnMouseDrag()
-    {
-        Vector2 mousePos = p_camera.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector3(mousePos.x, mousePos.y, transform.position.z);
-    }
+        protected bool pr_isBeingDrag;
 
-    /// <summary>
-    /// Changes the object collision if it was set to trigger
-    /// </summary>
-    private void OnMouseUp()
-    {
-        SoundManager.instance.Play("Block Place");
-        pb_isBeingDrag = false;
-        if (isTriggerWhileDrag && p_collider.isTrigger) p_collider.isTrigger = false;
-        if (blockRotationWhileDrag) p_collider.attachedRigidbody.constraints &= ~RigidbodyConstraints2D.FreezeRotation;
+        private Transform p_transform;
+
+        protected virtual void Awake()
+        {
+            p_transform = transform;
+            p_camera = Camera.main;
+            pr_collider = GetComponent<Collider2D>();
+        }
+
+        /// <summary>
+        /// To initialize the called of being drag, and add the GameObject alterations
+        /// </summary>
+        private void OnMouseDown()
+        {
+            SoundManager.Instance.Play("Block Pick");
+            pr_isBeingDrag = true;
+            if (isTriggerWhileDrag && !pr_collider.isTrigger) pr_collider.isTrigger = true;
+            if (blockRotationWhileDrag) pr_collider.attachedRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        /// <summary>
+        /// Can drag the GameObject in mouse range
+        /// </summary>
+        private void OnMouseDrag()
+        {
+            Vector2 mousePos = p_camera.ScreenToWorldPoint(Input.mousePosition);
+            p_transform.position = new Vector3(mousePos.x, mousePos.y, transform.position.z);
+        }
+
+        /// <summary>
+        /// Changes the object collision if it was set to trigger
+        /// </summary>
+        private void OnMouseUp()
+        {
+            SoundManager.Instance.Play("Block Place");
+            pr_isBeingDrag = false;
+            if (isTriggerWhileDrag && pr_collider.isTrigger) pr_collider.isTrigger = false;
+            if (blockRotationWhileDrag) pr_collider.attachedRigidbody.constraints &= ~RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 }

@@ -1,47 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Plugins.Tools;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-
-[System.Serializable]
-public class OnLoadEvent : UnityEvent { }
-public class LevelLoadManager : Singleton<LevelLoadManager>
+namespace Managers
 {
-    [Header("Scenes")]
-    [SerializeField] [Scene] private string[] additiveScenes;
-
-    public void LoadScene(string scene)
+    [System.Serializable]
+    public class OnLoadEvent : UnityEvent { }
+    public class LevelLoadManager : Singleton<LevelLoadManager>
     {
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
-        GameManager.instance.onLoadEvent.Invoke();
-    }
+        [Header("Scenes")]
+        [SerializeField] [Scene] private string[] additiveScenes;
 
-    /// <summary>
-    /// Loads the next scene on the list of scenes
-    /// </summary>
-    public void LoadNextScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
-        GameManager.instance.onLoadEvent.Invoke();
-    }
+        public void LoadScene(string scene)
+        {
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            GameManager.Instance.onLoadEvent.Invoke();
+        }
 
-    /// <summary>
-    /// Loads all the additive scenes of the LevelLoadManager
-    /// </summary>
-    public void LoadAdditiveAsyncScenes() { foreach (string scene in additiveScenes) SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive); }
+        /// <summary>
+        /// Loads the next scene on the list of scenes
+        /// </summary>
+        public void LoadNextScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+            GameManager.Instance.onLoadEvent.Invoke();
+        }
 
-    /// <summary>
-    /// Closes the Game or Stops the Inspector Game Window
-    /// </summary>
-    public void QuitGame()
-    {
-        Application.Quit();
+        /// <summary>
+        /// Loads all the additive scenes of the LevelLoadManager
+        /// </summary>
+        public void LoadAdditiveAsyncScenes()
+        {
+            foreach (string scene in additiveScenes) SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+        }
+
+        /// <summary>
+        /// Closes the Game or Stops the Inspector Game Window
+        /// </summary>
+        public void QuitGame()
+        {
+            Application.Quit();
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #endif
+        }
     }
 }
-
-
