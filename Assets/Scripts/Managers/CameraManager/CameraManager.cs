@@ -16,17 +16,25 @@ namespace Managers.CameraManager
     {
 
         [SerializeField] private CinemachineBrain cinemachineBrain;
+        [Tooltip("The ID of the camera to be set as the manager awakes")]
+        [SerializeField] private string awakeCamera;
 
         private Coroutine p_currentShakeCoroutine;
         private CinemachineBasicMultiChannelPerlin p_currentNoise;
 
-        [SerializeField] private CmCamera[] cinemachineVirtualCamera;
+        [SerializeField] private CmCamera[] cinemachineVirtualCameras;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            SetPriority(awakeCamera);
+        }
 
         public string CurrentCameraID
         {
             get 
             {
-                foreach (CmCamera cam in cinemachineVirtualCamera) if (cam.virtualCamera.Priority >= 20) return cam.id;
+                foreach (CmCamera cam in cinemachineVirtualCameras) if (cam.virtualCamera.Priority >= 20) return cam.id;
                 return "";
             }
         }
@@ -37,7 +45,7 @@ namespace Managers.CameraManager
         /// <param name="id">Id of the camera to set priority to</param>
         public void SetPriority(string id)
         {
-            foreach (CmCamera cam in cinemachineVirtualCamera) { cam.virtualCamera.Priority = cam.id.Equals(id) ? 20 : 0; }
+            foreach (CmCamera cam in cinemachineVirtualCameras) { cam.virtualCamera.Priority = cam.id.Equals(id) ? 20 : 0; }
         }
 
         /// <summary>
