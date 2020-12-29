@@ -19,7 +19,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            isGrounded = Physics2D.OverlapCircle(groundPoint.position, feetRadius, ground);
+            isGrounded = Physics2D.OverlapCircle(groundPoint.position, feetRadius, ground.value);
             if (isGrounded) groundedTimer = wasGroundedTime;
         }
 

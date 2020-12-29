@@ -11,8 +11,6 @@ namespace Player
         [SerializeField] private float jumpForce;
         [Range(0, 1f)] [SerializeField] private float jumpDamping;
 
-        [SerializeField] private float pressedJumpTime = 0.3f;
-        private float p_pressedJumpTimer;
         private bool p_pressedJump;
 
         [Header("Horizontal Movement Config")]
@@ -47,13 +45,11 @@ namespace Player
 
             velocity.x = p_inputHorizontalVelocity;
 
-            if (groundDetector.isGrounded) p_pressedJump = false;
-
-            if (p_pressedJumpTimer > 0 && groundDetector.groundedTimer > 0 && !p_pressedJump)
+            if (groundDetector.groundedTimer > 0 && p_pressedJump)
             {
                 velocity.y = jumpForce;
-                p_pressedJumpTimer = 0f;
                 groundDetector.groundedTimer = 0f;
+                p_pressedJump = false;
                 SoundManager.Instance.Play("Jump");
             }
 
@@ -64,13 +60,7 @@ namespace Player
 
         private void Update()
         {
-            if (p_pressedJumpTimer > 0) p_pressedJumpTimer -= Time.deltaTime;
-
-            if (Input.GetButtonDown("Jump") && groundDetector.groundedTimer > 0)
-            {
-                p_pressedJumpTimer = pressedJumpTime;
-                p_pressedJump = true;
-            }
+            if (Input.GetButtonDown("Jump") && groundDetector.groundedTimer > 0) p_pressedJump = true;
         }
     }
 }

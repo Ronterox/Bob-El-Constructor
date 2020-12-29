@@ -1,4 +1,5 @@
-﻿using Plugins.Tools;
+﻿using Plugins.Properties;
+using Plugins.Tools;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;

@@ -1,4 +1,5 @@
-﻿using Plugins.Tools;
+﻿using Plugins.Properties;
+using Plugins.Tools;
 using UnityEngine;
 
 namespace Interactables
@@ -6,9 +7,15 @@ namespace Interactables
     [RequireComponent(typeof(Collider2D))]
     public class Draggable : MonoBehaviour
     {
-        [Tooltip("Select whether you want the object to collide while being drag")]
-        [SerializeField] private bool isTriggerWhileDrag;
-        [SerializeField] private bool blockRotationWhileDrag;
+        [Header("While Being Drag...")]
+        [Tooltip("Select whether you want the object to be in another layer while being drag")]
+        public bool changeLayer;
+        
+        [Tooltip("Select to which layer the object will be passed to while being drag")]
+        [SerializeField] private SingleUnityLayer whileDragLayer;
+        private LayerMask defaultLayer;
+
+        [SerializeField] private bool freezeRotation;
 
         private Camera p_camera;
         protected Collider2D pr_collider;
@@ -16,9 +23,11 @@ namespace Interactables
         protected bool pr_isBeingDrag;
 
         private Transform p_transform;
+        private Vector3 mousePos;
 
         protected virtual void Awake()
         {
+            defaultLayer = gameObject.layer;
             p_transform = transform;
             p_camera = Camera.main;
             pr_collider = GetComponent<Collider2D>();
@@ -31,8 +40,8 @@ namespace Interactables
         {
             SoundManager.Instance.Play("Block Pick");
             pr_isBeingDrag = true;
-            if (isTriggerWhileDrag && !pr_collider.isTrigger) pr_collider.isTrigger = true;
-            if (blockRotationWhileDrag) pr_collider.attachedRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            if (changeLayer) gameObject.layer = whileDragLayer.LayerIndex;
+            if (freezeRotation) pr_collider.attachedRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
         /// <summary>
@@ -40,8 +49,9 @@ namespace Interactables
         /// </summary>
         private void OnMouseDrag()
         {
-            Vector2 mousePos = p_camera.ScreenToWorldPoint(Input.mousePosition);
-            p_transform.position = new Vector3(mousePos.x, mousePos.y, transform.position.z);
+            mousePos = p_camera.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = transform.position.z;
+            p_transform.position = mousePos;
         }
 
         /// <summary>
@@ -51,8 +61,8 @@ namespace Interactables
         {
             SoundManager.Instance.Play("Block Place");
             pr_isBeingDrag = false;
-            if (isTriggerWhileDrag && pr_collider.isTrigger) pr_collider.isTrigger = false;
-            if (blockRotationWhileDrag) pr_collider.attachedRigidbody.constraints &= ~RigidbodyConstraints2D.FreezeRotation;
+            if (changeLayer) gameObject.layer = defaultLayer.value; 
+            if (freezeRotation) pr_collider.attachedRigidbody.constraints &= ~RigidbodyConstraints2D.FreezeRotation;
         }
     }
 }
