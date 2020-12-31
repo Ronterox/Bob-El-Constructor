@@ -2,6 +2,7 @@
 
 namespace Managers.CameraManager
 {
+    [RequireComponent(typeof(BoxCollider2D))]
     public class ChangeCameraPriority : MonoBehaviour 
     {
         [SerializeField] private string cameraId;
