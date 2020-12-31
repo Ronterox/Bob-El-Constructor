@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Interactables
+namespace Tools
 {
     [System.Serializable]
     public class ONCollision : UnityEvent { }

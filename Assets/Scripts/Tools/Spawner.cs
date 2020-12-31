@@ -13,6 +13,8 @@ namespace Tools
         [SerializeField] private int spawnLimit;
         [SerializeField] private bool limitSpawns;
 
+        private GameObject p_spawnedObj;
+
         /*
     [Header("For Other Methods")]
     [SerializeField] readonly int spawnedObjects
@@ -25,6 +27,15 @@ namespace Tools
 
         private int p_totalObjectsSpawned;
 
+        private void Awake() => CreateSpawnedObjectParent();
+
+        private void CreateSpawnedObjectParent()
+        {
+            if(p_spawnedObj != null) Destroy(p_spawnedObj);
+            p_spawnedObj = new GameObject();
+            p_spawnedObj.transform.name = "Objects Spawned";
+        }
+
         /// <summary>
         /// Spawns the object
         /// </summary>
@@ -32,7 +43,7 @@ namespace Tools
         {
             SoundManager.Instance.Play("Spawn", true);
             if (limitSpawns && p_totalObjectsSpawned >= spawnLimit) return;
-            Instantiate(toSpawnObject, transform.position, Quaternion.identity);
+            Instantiate(toSpawnObject, transform.position, Quaternion.identity, p_spawnedObj.transform);
             p_totalObjectsSpawned++;
         }
 
@@ -41,7 +52,8 @@ namespace Tools
         /// </summary>
         public void DeleteAllSpawnedObjects()
         {
-
+            p_totalObjectsSpawned = 0;
+            CreateSpawnedObjectParent();
         }
 
         /// <summary>
