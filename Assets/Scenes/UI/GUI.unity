@@ -530,9 +530,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bcd41c437cb5845915514272277437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resumeGame: {fileID: 0}
-  quitGame: {fileID: 0}
-  mainMenu: {fileID: 0}
+  resumeGame: {fileID: 2113213611830991684}
+  quitGame: {fileID: 2113213612159329363}
+  mainMenu: {fileID: 2113213610656204986}
   gameIsPaused: 0
   pauseMenuUI: {fileID: 2113213612025707986}
 --- !u!1 &2113213610725361662
