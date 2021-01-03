@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using System;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,6 +8,8 @@ namespace GUI
     public class MainMenu : MonoBehaviour 
     {
         public GameObject startGame, quitGame, loadScene;
+
+        private void Start() => LevelLoadManager.Instance.UnloadAdditiveAsyncScenes();
 
         /// <summary>
         /// Loads the game last saved Scene
@@ -28,6 +31,8 @@ namespace GUI
         public void LoadScene(string scene)
         {
             LevelLoadManager.Instance.LoadScene(scene);
+            LevelLoadManager.Instance.LoadAdditiveAsyncScenes();
+            
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(loadScene);
         }

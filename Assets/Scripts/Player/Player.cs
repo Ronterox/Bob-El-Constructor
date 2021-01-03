@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Player
 {
     [RequireComponent(typeof(Animator))]
-    public class Player : MonoBehaviour 
+    public class Player : PersistentSingleton<Player>
     {
         [SerializeField] private Controller playerController;
 
@@ -17,7 +17,11 @@ namespace Player
         private float p_footstepTime;
         private readonly int p_moving = Animator.StringToHash("Moving");
 
-        private void Awake() => p_animator = GetComponent<Animator>();
+        protected override void Awake()
+        {
+            base.Awake();
+            p_animator = GetComponent<Animator>();
+        }
 
         private void FixedUpdate()
         {
