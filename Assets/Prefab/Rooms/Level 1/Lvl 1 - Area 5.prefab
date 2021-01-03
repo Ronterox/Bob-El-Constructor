@@ -6288,6 +6288,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 3327960045676712223, guid: 6a91b10f9df8e4bc196ddad85cf55306,
+        type: 3}
+      propertyPath: spawnLimit
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4316560403380777403, guid: 6a91b10f9df8e4bc196ddad85cf55306,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10938,12 +10943,12 @@ PrefabInstance:
     - target: {fileID: 9189966614314947661, guid: 7deb72f8cc51f2c4c88fcaf67875875b,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 16
+      value: 203.8
       objectReference: {fileID: 0}
     - target: {fileID: 9189966614314947661, guid: 7deb72f8cc51f2c4c88fcaf67875875b,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 3
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9191360253862295282, guid: 7deb72f8cc51f2c4c88fcaf67875875b,
         type: 3}
