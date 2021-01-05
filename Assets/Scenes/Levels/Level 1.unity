@@ -1203,6 +1203,11 @@ PrefabInstance:
       propertyPath: onButtonEventExit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Interactables.Door, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 9071126773116992872, guid: 6693ba48f8428c143b1a998a08f0d1bc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6693ba48f8428c143b1a998a08f0d1bc, type: 3}
 --- !u!114 &418273176 stripped
@@ -1820,6 +1825,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lvl 1 - Area 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4019026507463077331, guid: d684365ee60392b4f95a3f8fdfced142,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3878557786174838139, guid: f646ad3152434904a82452dabd2cb4e5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d684365ee60392b4f95a3f8fdfced142, type: 3}
 --- !u!114 &877073690 stripped
