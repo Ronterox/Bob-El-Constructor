@@ -33,8 +33,8 @@ namespace Tools
             p_animator.SetBool(p_loadingProperty, true);
             */
             
-            LevelLoadManager.Instance.LoadSceneAsync("TEST");
-            
+            LevelLoadManager.Instance.LoadNextSceneAsync();
+
             yield return new WaitUntil(() => !p_isLoading);
 
             while (Time.time - startTime < minimumWaitTime) yield return null;
