@@ -1,64 +1,50 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Laser : MonoBehaviour
-
+namespace Interactables
 {
-    public Camera cam;
-    public LineRenderer line;
-    public Transform firepoint;
-    private Quaternion p_rotation;
+    public class Laser : MonoBehaviour
 
-    void Start()
     {
-        DisableLaser();
-    }
+        [SerializeField] private Camera cam;
+        [SerializeField] private LineRenderer line;
+        [SerializeField] private Transform firepoint;
+        
+        private Quaternion p_rotation;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetButtonDown("Fire2"))
+        private void Awake()
         {
-            EnableLaser();
-
-        }
-        if(Input.GetButton("Fire2"))
-        {
-            UpdateLaser();
-        }
-        if(Input.GetButtonUp("Fire2"))
-        {
+            if (cam == null) cam = Camera.main;
             DisableLaser();
         }
 
-        RotateToMouse();
-   
-    }
+        private void Update()
+        {
+            if (Input.GetButtonDown("Fire2")) EnableLaser();
+            
+            if (Input.GetButton("Fire2")) UpdateLaser();
+            
+            if (Input.GetButtonUp("Fire2")) DisableLaser();
+            
+            RotateToMouse();
+        }
 
-    void DisableLaser()
-    {
-        line.enabled = false;
-    }
+        private void DisableLaser() => line.enabled = false;
 
-     void UpdateLaser()
-    {
-        var mousepos = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
-        line.SetPosition(0, firepoint.position);
-        line.SetPosition(1, mousepos);
-    }
+        private void UpdateLaser()
+        {
+            var mousepos = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
+            line.SetPosition(0, firepoint.position);
+            line.SetPosition(1, mousepos);
+        }
 
-    void EnableLaser()
-    {
-        line.enabled = true;
-    }
+        private void EnableLaser() => line.enabled = true;
 
-    void RotateToMouse()
-    {
-        Vector2 direction= cam.ScreenToWorldPoint(Input.mousePosition)-transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x)*Mathf.Rad2Deg;
-        p_rotation.eulerAngles = new Vector3(0, 0, angle);
-        transform.rotation = p_rotation;
+        private void RotateToMouse()
+        {
+            Vector2 direction = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            p_rotation.eulerAngles = new Vector3(0, 0, angle);
+            transform.rotation = p_rotation;
+        }
     }
 }
