@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 
-namespace Interactables
+namespace Player
 {
     public class Laser : MonoBehaviour
 
     {
         [SerializeField] private Camera cam;
         [SerializeField] private LineRenderer line;
-        [SerializeField] private Transform firepoint;
-        
+
+        [SerializeField] private Transform firePoint;
+        [SerializeField] private Transform target;
+
         private Quaternion p_rotation;
 
         private void Awake()
         {
+            if (target == null) target = transform;
             if (cam == null) cam = Camera.main;
             DisableLaser();
         }
@@ -20,11 +23,11 @@ namespace Interactables
         private void Update()
         {
             if (Input.GetButtonDown("Fire2")) EnableLaser();
-            
+
             if (Input.GetButton("Fire2")) UpdateLaser();
-            
+
             if (Input.GetButtonUp("Fire2")) DisableLaser();
-            
+
             RotateToMouse();
         }
 
@@ -32,19 +35,20 @@ namespace Interactables
 
         private void UpdateLaser()
         {
-            var mousepos = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
-            line.SetPosition(0, firepoint.position);
-            line.SetPosition(1, mousepos);
+            var mousePos = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
+            line.SetPosition(0, firePoint.position);
+            line.SetPosition(1, mousePos);
         }
 
         private void EnableLaser() => line.enabled = true;
 
         private void RotateToMouse()
         {
-            Vector2 direction = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            p_rotation.eulerAngles = new Vector3(0, 0, angle);
-            transform.rotation = p_rotation;
+            Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 targetPos = transform.position;
+
+            var direction = new Vector2(mousePos.x - targetPos.x, mousePos.y - targetPos.y);
+            target.up = direction;
         }
     }
 }
