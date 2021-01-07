@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Interactables;
 using Managers;
 using Plugins.Tools;
 using UnityEngine;
@@ -19,33 +20,40 @@ namespace Tools
             DontDestroyOnLoad(gameObject);
         }
 
-        private void OnTriggerEnter2D(Collider2D other) => StartCoroutine(GoToNextFloor());
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            other.transform.parent = transform;
+            StartCoroutine(GoToNextFloor());
+        }
+
+        private void OnTriggerExit2D(Collider2D other) => other.transform.parent = null;
 
         private IEnumerator GoToNextFloor()
         {
             p_isLoading = true;
             float startTime = Time.time;
-            
+
             /*
             SoundManager.Instance.Play("Elevator");
             SoundManager.Instance.StopBackgroundMusic();
             
             p_animator.SetBool(p_loadingProperty, true);
             */
-            
             LevelLoadManager.Instance.LoadNextSceneAsync();
 
             yield return new WaitUntil(() => !p_isLoading);
 
+            Vector3 elevatorPos = transform.position;
+            transform.position = (FindObjectOfType(typeof(ElevatorPoint)) as GameObject)?.transform.position ?? elevatorPos;
+
             while (Time.time - startTime < minimumWaitTime) yield return null;
-            
+
             /*
             p_animator.SetBool(p_loadingProperty, false);
             
             SoundManager.Instance.Stop("Elevator");
             SoundManager.Instance.ResumeBackgroundMusic();
             */
-            Destroy(gameObject);
         }
 
         private void OnEnable() => this.MMEventStartListening();

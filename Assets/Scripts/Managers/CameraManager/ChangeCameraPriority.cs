@@ -8,13 +8,15 @@ namespace Managers.CameraManager
         [SerializeField] private string cameraId;
         [Tooltip("If checked, once it exist the collider it will change back to the camera before hitting the collider")]
         [SerializeField] private bool onExitChangeBack;
+        [SerializeField] private int priority = 20;
+        
         private string p_oldCameraId;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (!collision.CompareTag("Player")) return;
             p_oldCameraId = CameraManager.Instance.CurrentCameraID;
-            CameraManager.Instance.SetPriority(cameraId);
+            CameraManager.Instance.SetPriority(cameraId, priority);
         }
 
         private void OnTriggerExit2D(Collider2D collision)

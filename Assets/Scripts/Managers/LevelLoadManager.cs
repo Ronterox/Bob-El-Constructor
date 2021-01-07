@@ -11,7 +11,7 @@ namespace Managers
 
     [System.Serializable]
     public class OnLoadEvent : UnityEvent { }
-    public class LevelLoadManager : Singleton<LevelLoadManager>
+    public class LevelLoadManager : PersistentSingleton<LevelLoadManager>
     {
         [Header("Scenes")]
         [SerializeField] [Scene] private string[] additiveScenes;

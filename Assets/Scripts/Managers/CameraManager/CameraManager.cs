@@ -43,9 +43,9 @@ namespace Managers.CameraManager
         /// Sets the priority of a camera to 'maximum'. So it changes to that camera
         /// </summary>
         /// <param name="id">Id of the camera to set priority to</param>
-        public void SetPriority(string id)
+        public void SetPriority(string id, int priority = 20)
         {
-            foreach (CmCamera cam in cinemachineVirtualCameras) { cam.virtualCamera.Priority = cam.id.Equals(id) ? 20 : 0; }
+            foreach (CmCamera cam in cinemachineVirtualCameras) { cam.virtualCamera.Priority = cam.id.Equals(id) ? priority : 0; }
         }
 
         /// <summary>

@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Plugins.Tools
-{
-    //#define EVENTROUTER_THROWEXCEPTIONS 
+#define EVENTROUTER_THROWEXCEPTIONS 
 #if EVENTROUTER_THROWEXCEPTIONS
 //#define EVENTROUTER_REQUIRELISTENER // Uncomment this if you want listeners to be required for sending events.
 #endif
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+namespace Plugins.Tools
+{
     /// <summary>
     /// MMGameEvents are used throughout the game for general match events
     /// </summary>
@@ -64,16 +65,13 @@ namespace Plugins.Tools
     ///		}
     /// } 
     /// will catch all events of type MMGameEvent emitted from anywhere in the game, and do something if it's named GameOver
-    /// </summary>
+    ///</summary>
     [ExecuteInEditMode]
     public static class MMEventManager
     {
-        private static Dictionary<Type, List<MMEventListenerBase>> m_SubscribersList;
+        private static readonly Dictionary<Type, List<MMEventListenerBase>> m_SubscribersList;
 
-        static MMEventManager()
-        {
-            m_SubscribersList = new Dictionary<Type, List<MMEventListenerBase>>();
-        }
+        static MMEventManager() => m_SubscribersList = new Dictionary<Type, List<MMEventListenerBase>>();
 
         /// <summary>
         /// Adds a new subscriber to a certain event.
@@ -103,7 +101,7 @@ namespace Plugins.Tools
             if (!m_SubscribersList.ContainsKey(eventType))
             {
 #if EVENTROUTER_THROWEXCEPTIONS
-					throw new ArgumentException( string.Format( "Removing listener \"{0}\", but the event type \"{1}\" isn't registered.", listener, eventType.ToString() ) );
+					throw new ArgumentException($"Removing listener \"{listener}\", but the event type \"{eventType}\" isn't registered.");
 #else
                 return;
 #endif
@@ -129,7 +127,7 @@ namespace Plugins.Tools
 #if EVENTROUTER_THROWEXCEPTIONS
 		        if( !listenerFound )
 		        {
-					throw new ArgumentException( string.Format( "Removing listener, but the supplied receiver isn't subscribed to event type \"{0}\".", eventType.ToString() ) );
+					throw new ArgumentException($"Removing listener, but the supplied receiver isn't subscribed to event type \"{eventType}\".");
 		        }
 #endif
         }
@@ -141,8 +139,7 @@ namespace Plugins.Tools
         /// <typeparam name="MMEvent">The 1st type parameter.</typeparam>
         public static void TriggerEvent<MMEvent>(MMEvent newEvent) where MMEvent : struct
         {
-            List<MMEventListenerBase> list;
-            if (!m_SubscribersList.TryGetValue(typeof(MMEvent), out list))
+            if (!m_SubscribersList.TryGetValue(typeof(MMEvent), out List<MMEventListenerBase> list))
 #if EVENTROUTER_REQUIRELISTENER
 			            throw new ArgumentException( string.Format( "Attempting to send event of type \"{0}\", but no listener for this type has been found. Make sure this.Subscribe<{0}>(EventRouter) has been called, or that all listeners to this event haven't been unsubscribed.", typeof( MMEvent ).ToString() ) );
 #else
@@ -158,23 +155,7 @@ namespace Plugins.Tools
         /// <returns><c>true</c>, if exists was suscriptioned, <c>false</c> otherwise.</returns>
         /// <param name="type">Type.</param>
         /// <param name="receiver">Receiver.</param>
-        private static bool SubscriptionExists(Type type, MMEventListenerBase receiver)
-        {
-            List<MMEventListenerBase> receivers;
-
-            if (!m_SubscribersList.TryGetValue(type, out receivers)) return false;
-
-            var exists = false;
-
-            foreach (MMEventListenerBase t in receivers)
-            {
-                if (t != receiver) continue;
-                exists = true;
-                break;
-            }
-
-            return exists;
-        }
+        private static bool SubscriptionExists(Type type, MMEventListenerBase receiver) => m_SubscribersList.TryGetValue(type, out List<MMEventListenerBase> receivers) && receivers.Any(t => t == receiver);
     }
 
     /// <summary>
