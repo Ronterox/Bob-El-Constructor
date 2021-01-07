@@ -11,7 +11,7 @@ namespace Managers
 
     [System.Serializable]
     public class OnLoadEvent : UnityEvent { }
-    public class LevelLoadManager : Singleton<LevelLoadManager>
+    public class LevelLoadManager : PersistentSingleton<LevelLoadManager>
     {
         [Header("Scenes")]
         [SerializeField] [Scene] private string[] additiveScenes;
@@ -30,9 +30,9 @@ namespace Managers
 
         private IEnumerator LoadSceneAsyncCoroutine(string scene = null)
         {
-            Scene nextScene = scene == null ? SceneManager.GetSceneByBuildIndex(SceneManager.GetActiveScene().buildIndex + 1) : SceneManager.GetSceneByName(scene);
-            SceneManager.LoadSceneAsync(nextScene.buildIndex);
-            yield return new WaitUntil(() => nextScene.isLoaded);
+            AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(
+                string.IsNullOrEmpty(scene) ? SceneManager.GetActiveScene().buildIndex + 1 : SceneManager.GetSceneByName(scene).buildIndex);
+            yield return new WaitUntil(() => loadingOperation.isDone);
             MMEventManager.TriggerEvent(new LoadedEvent());
         }
 

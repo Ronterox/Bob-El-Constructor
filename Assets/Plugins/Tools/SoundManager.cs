@@ -75,7 +75,7 @@ namespace Plugins.Tools
         /// <summary>
         /// Initializes the sound manager by instantiating AudioSource Components
         /// </summary>
-        private void Initialize(Dictionary<string, SoundItem> sfxDict, SoundItem[] soundItems)
+        private void Initialize(Dictionary<string, SoundItem> sfxDict, IEnumerable<SoundItem> soundItems)
         {
             foreach (SoundItem item in soundItems) sfxDict.Add(item.id, item);
 
