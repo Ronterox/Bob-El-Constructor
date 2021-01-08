@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using Managers;
+using Plugins.Tools;
+using UnityEngine;
 
 namespace Player
 {
-    public class Laser : MonoBehaviour
+    public class Laser : MonoBehaviour, MMEventListener<LoadedEvent>
 
     {
         [SerializeField] private Camera cam;
@@ -49,6 +51,15 @@ namespace Player
 
             var direction = new Vector2(mousePos.x - targetPos.x, mousePos.y - targetPos.y);
             target.up = direction;
+        }
+
+        private void OnEnable() => this.MMEventStartListening();
+
+        private void OnDisable() => this.MMEventStopListening();
+
+        public void OnMMEvent(LoadedEvent eventType)
+        {
+            if (cam == null) cam = Camera.main;
         }
     }
 }

@@ -1,4 +1,4 @@
-#define EVENTROUTER_THROWEXCEPTIONS 
+#define EVENTROUTER_THROWEXCEPTIONS
 #if EVENTROUTER_THROWEXCEPTIONS
 //#define EVENTROUTER_REQUIRELISTENER // Uncomment this if you want listeners to be required for sending events.
 #endif
@@ -20,6 +20,7 @@ namespace Plugins.Tools
         public const string LOAD = "Load";
 
         private string eventName;
+
         public MMGameEvent(string newName) => eventName = newName;
     }
 
@@ -29,6 +30,7 @@ namespace Plugins.Tools
     public struct MMSfxEvent
     {
         private AudioClip clipToPlay;
+
         public MMSfxEvent(AudioClip clipToPlay) => this.clipToPlay = clipToPlay;
     }
 
@@ -101,7 +103,7 @@ namespace Plugins.Tools
             if (!m_SubscribersList.ContainsKey(eventType))
             {
 #if EVENTROUTER_THROWEXCEPTIONS
-					throw new ArgumentException($"Removing listener \"{listener}\", but the event type \"{eventType}\" isn't registered.");
+                throw new ArgumentException($"Removing listener \"{listener}\", but the event type \"{eventType}\" isn't registered.");
 #else
                 return;
 #endif
@@ -125,10 +127,10 @@ namespace Plugins.Tools
             }
 
 #if EVENTROUTER_THROWEXCEPTIONS
-		        if( !listenerFound )
-		        {
-					throw new ArgumentException($"Removing listener, but the supplied receiver isn't subscribed to event type \"{eventType}\".");
-		        }
+            if (!listenerFound)
+            {
+                throw new ArgumentException($"Removing listener, but the supplied receiver isn't subscribed to event type \"{eventType}\".");
+            }
 #endif
         }
 

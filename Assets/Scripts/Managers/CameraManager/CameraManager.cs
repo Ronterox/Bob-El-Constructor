@@ -45,7 +45,7 @@ namespace Managers.CameraManager
         /// <param name="id">Id of the camera to set priority to</param>
         public void SetPriority(string id)
         {
-            foreach (CmCamera cam in cinemachineVirtualCameras) { cam.virtualCamera.Priority = cam.id.Equals(id) ? 20 : 0; }
+            foreach (CmCamera cam in cinemachineVirtualCameras) { if(cam.virtualCamera != null) cam.virtualCamera.Priority = cam.id.Equals(id) ? 20 : 0; }
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Managers.CameraManager
         /// <param name="priority">The priority to be set to</param>
         public void SetPriority(string id, int priority)
         {
-            foreach (CmCamera cam in cinemachineVirtualCameras) { cam.virtualCamera.Priority = cam.id.Equals(id) ? priority : 0; }
+            foreach (CmCamera cam in cinemachineVirtualCameras) { if(cam.virtualCamera != null) cam.virtualCamera.Priority = cam.id.Equals(id) ? priority : 0; }
         }
 
         /// <summary>
