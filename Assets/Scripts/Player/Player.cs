@@ -16,6 +16,7 @@ namespace Player
         [SerializeField] private float footstepSoundDelay;
         private float p_footstepTime;
         private readonly int p_moving = Animator.StringToHash("Moving");
+        private readonly int p_onAir = Animator.StringToHash("onAir");
 
         protected override void Awake()
         {
@@ -27,7 +28,9 @@ namespace Player
         {
             p_animator.SetBool(p_moving, playerController.directionInput != 0);
             if (playerController.directionInput != 0) spriteRenderer.flipX = !(playerController.directionInput > 0);
-
+            
+            p_animator.SetBool(p_onAir, !playerController.groundDetector.isGrounded);
+            
             if (playerController.directionInput == 0 || !playerController.groundDetector.isGrounded || !(Time.time - p_footstepTime >= footstepSoundDelay)) return;
             p_footstepTime = Time.time;
             SoundManager.Instance.Play("Footstep", true);
