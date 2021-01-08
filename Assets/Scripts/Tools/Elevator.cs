@@ -13,7 +13,7 @@ namespace Tools
         private bool p_isLoading;
         private Animator p_animator;
 
-        private readonly int p_loadingProperty = Animator.StringToHash("Loading");
+        private readonly int p_loadingProperty = Animator.StringToHash("isMoving");
         private void Awake()
         {
             p_animator = GetComponent<Animator>();
@@ -36,9 +36,10 @@ namespace Tools
             /*
             SoundManager.Instance.Play("Elevator");
             SoundManager.Instance.StopBackgroundMusic();
+            */
             
             p_animator.SetBool(p_loadingProperty, true);
-            */
+            
             LevelLoadManager.Instance.LoadNextSceneAsync();
 
             yield return new WaitUntil(() => !p_isLoading);
@@ -47,10 +48,10 @@ namespace Tools
             transform.position = (FindObjectOfType(typeof(ElevatorPoint)) as GameObject)?.transform.position ?? elevatorPos;
 
             while (Time.time - startTime < minimumWaitTime) yield return null;
-
-            /*
+            
             p_animator.SetBool(p_loadingProperty, false);
             
+            /*
             SoundManager.Instance.Stop("Elevator");
             SoundManager.Instance.ResumeBackgroundMusic();
             */

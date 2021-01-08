@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 7055311113713155158}
   - component: {fileID: 7055311113713155159}
   - component: {fileID: 1980206405618623630}
+  - component: {fileID: 4507718321653415236}
   m_Layer: 0
   m_Name: Elevator
   m_TagString: Untagged
@@ -277,6 +278,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumWaitTime: 0
+--- !u!95 &4507718321653415236
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7055311113713155156}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 15096c6483f6a47ad864fe1a965b2b78, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8152322429132302643
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +389,8 @@ PrefabInstance:
       propertyPath: startOnAwake
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 37986684474102372, guid: 7e8bc6497a47bdd468631a4ada51c10b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7e8bc6497a47bdd468631a4ada51c10b, type: 3}
 --- !u!4 &200709582439006352 stripped
 Transform:
@@ -1288,7 +1309,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 37986684474102372, guid: 7e8bc6497a47bdd468631a4ada51c10b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7e8bc6497a47bdd468631a4ada51c10b, type: 3}
 --- !u!4 &8988992376982882802 stripped
 Transform:
