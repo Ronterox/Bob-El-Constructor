@@ -406,7 +406,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
-  feetRadius: 0.25
+  feetRadius: 0.3
   wasGroundedTime: 0.1
   groundedTimer: 0
   isGrounded: 0
@@ -549,8 +549,8 @@ MonoBehaviour:
   - {fileID: 11988568}
   - {fileID: 1559870777}
   m_Bounds:
-    m_Center: {x: 0.032139122, y: -0.019747436, z: 0}
-    m_Extent: {x: 0.8625851, y: 0.9956215, z: 0}
+    m_Center: {x: 0.032138884, y: -0.019747376, z: 0}
+    m_Extent: {x: 0.8625851, y: 0.9956213, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!1001 &194383175

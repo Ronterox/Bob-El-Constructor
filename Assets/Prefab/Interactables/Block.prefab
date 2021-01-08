@@ -95,10 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585d585f6119c2048b2568e813022525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeLayer: 0
+  changeLayer: 1
   whileDragLayer:
-    layerIndex: 0
-  freezeRotation: 0
+    layerIndex: 5
+  freezeRotation: 1
   rotation: {x: 0, y: 0, z: 90}
   paintedVariations:
   - material2D: {fileID: 6200000, guid: 424dd1049c8e4b346b29c9cd7f4fb09d, type: 2}

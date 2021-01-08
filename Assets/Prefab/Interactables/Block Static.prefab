@@ -60,6 +60,16 @@ PrefabInstance:
       propertyPath: m_BodyType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114170812083075240, guid: 791c4c45191b6884aba82cd3655952fe,
+        type: 3}
+      propertyPath: changeLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114170812083075240, guid: 791c4c45191b6884aba82cd3655952fe,
+        type: 3}
+      propertyPath: whileDragLayer.layerIndex
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 212173042280642618, guid: 791c4c45191b6884aba82cd3655952fe,
         type: 3}
       propertyPath: m_Color.r
