@@ -6883,7 +6883,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631323493275637021, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
 --- !u!4 &4589622890053957221 stripped
 Transform:
@@ -7840,7 +7841,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631323493275637021, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
 --- !u!4 &4589622890103605371 stripped
 Transform:
@@ -7920,7 +7922,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1.35
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631323493275637021, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
 --- !u!4 &4589622890122006565 stripped
 Transform:
@@ -9643,7 +9646,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631323493275637021, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
 --- !u!4 &4589622890521296020 stripped
 Transform:
@@ -11986,7 +11990,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631323493275637021, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
 --- !u!4 &4589622891173477319 stripped
 Transform:

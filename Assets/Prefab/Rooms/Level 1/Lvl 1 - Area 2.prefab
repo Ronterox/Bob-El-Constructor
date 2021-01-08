@@ -40,6 +40,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraId: 
   onExitChangeBack: 1
+  priority: 20
 --- !u!1 &7681609837794811807
 GameObject:
   m_ObjectHideFlags: 0
@@ -33955,7 +33956,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631323493275637021, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
 --- !u!4 &6599278078632352722 stripped
 Transform:
@@ -35227,7 +35229,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631323493275637021, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
 --- !u!4 &6599278079225683600 stripped
 Transform:
@@ -35554,7 +35557,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631323493275637021, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
 --- !u!4 &6599278079387314011 stripped
 Transform:
@@ -37141,7 +37145,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2631323493275637021, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f3d21515a7687aa4ab8171782a1e858f, type: 3}
 --- !u!4 &6599278079895221364 stripped
 Transform:
