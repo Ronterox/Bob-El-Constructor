@@ -464,15 +464,20 @@ PrefabInstance:
       propertyPath: cinemachineVirtualCameras.Array.data[7].virtualCamera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114838802907499890, guid: 73285addf2e44c34d803abd51283c5f3,
+        type: 3}
+      propertyPath: awakeCamera
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3908610772497162129, guid: 73285addf2e44c34d803abd51283c5f3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.53
+      value: -11.16
       objectReference: {fileID: 0}
     - target: {fileID: 3908610772497162129, guid: 73285addf2e44c34d803abd51283c5f3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.04
+      value: 6.74
       objectReference: {fileID: 0}
     - target: {fileID: 4016027455117048499, guid: 73285addf2e44c34d803abd51283c5f3,
         type: 3}
@@ -1130,11 +1135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4249642862872432, guid: 403708418ed57bb4ea8f2e6f5b38e256, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.53
+      value: -11.1
       objectReference: {fileID: 0}
     - target: {fileID: 4249642862872432, guid: 403708418ed57bb4ea8f2e6f5b38e256, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.04
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 4637800878747688, guid: 403708418ed57bb4ea8f2e6f5b38e256, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1704,10 +1709,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6084422904832439417, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099384768979006769, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 2.527628
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099384768979006769, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 6.055256
+      objectReference: {fileID: 0}
     - target: {fileID: 6190398830573411321, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
         type: 3}
       propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6190398830573411321, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
         type: 3}
@@ -1748,6 +1768,11 @@ PrefabInstance:
         type: 3}
       propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190398830573411321, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Follow
       objectReference: {fileID: 0}
     - target: {fileID: 6820675387614834214, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
         type: 3}

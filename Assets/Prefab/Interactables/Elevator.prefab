@@ -264,7 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraId: Elevator
   onExitChangeBack: 1
-  priority: 40
+  priority: 19
 --- !u!114 &1980206405618623630
 MonoBehaviour:
   m_ObjectHideFlags: 0

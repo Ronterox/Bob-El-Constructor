@@ -57,7 +57,11 @@ namespace Player
             target.up = direction;
         }
 
-        private void OnEnable() => this.MMEventStartListening();
+        private void OnEnable()
+        {
+            this.MMEventStartListening();
+            cam = Camera.main;
+        } 
 
         private void OnDisable() => this.MMEventStopListening();
 

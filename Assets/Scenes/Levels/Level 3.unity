@@ -130,10 +130,55 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 326915019751695343, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 326915019751695343, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1408684882}
+    - target: {fileID: 326915019751695343, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetPriority
+      objectReference: {fileID: 0}
+    - target: {fileID: 326915019751695343, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Managers.CameraManager.CameraManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 326915019751695343, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 326915019751695343, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Follow
+      objectReference: {fileID: 0}
+    - target: {fileID: 365336856643095663, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.65
+      objectReference: {fileID: 0}
     - target: {fileID: 367628916887573377, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 415606238113664295, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 2.7152815
+      objectReference: {fileID: 0}
+    - target: {fileID: 415606238113664295, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 6.430563
       objectReference: {fileID: 0}
     - target: {fileID: 5371975447196544940, guid: bf33b0d3d2e31f820a7137f3c2bc836a,
         type: 3}
@@ -471,11 +516,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4350293672229230, guid: 73285addf2e44c34d803abd51283c5f3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.53
+      value: 12.35
       objectReference: {fileID: 0}
     - target: {fileID: 4350293672229230, guid: 73285addf2e44c34d803abd51283c5f3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.04
+      value: 5.9
       objectReference: {fileID: 0}
     - target: {fileID: 4350293672229230, guid: 73285addf2e44c34d803abd51283c5f3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -500,7 +545,7 @@ PrefabInstance:
     - target: {fileID: 20649146358628022, guid: 73285addf2e44c34d803abd51283c5f3,
         type: 3}
       propertyPath: orthographic size
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 20649146358628022, guid: 73285addf2e44c34d803abd51283c5f3,
         type: 3}
@@ -610,6 +655,11 @@ PrefabInstance:
     - target: {fileID: 114838802907499890, guid: 73285addf2e44c34d803abd51283c5f3,
         type: 3}
       propertyPath: cinemachineVirtualCameras.Array.data[7].virtualCamera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114838802907499890, guid: 73285addf2e44c34d803abd51283c5f3,
+        type: 3}
+      propertyPath: awakeCamera
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3908610772497162129, guid: 73285addf2e44c34d803abd51283c5f3,
