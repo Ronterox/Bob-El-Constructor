@@ -34,7 +34,7 @@ namespace Tools
             float startTime = Time.time;
 
             SoundManager.Instance.Play("Elevator");
-            SoundManager.Instance.StopBackgroundMusic();
+            //SoundManager.Instance.StopBackgroundMusic();
             
             p_animator.SetBool(p_loadingProperty, true);
             
@@ -49,7 +49,7 @@ namespace Tools
             p_animator.SetBool(p_loadingProperty, false);
             
             SoundManager.Instance.Stop("Elevator");
-            SoundManager.Instance.ResumeBackgroundMusic();
+            //SoundManager.Instance.ResumeBackgroundMusic();
         }
 
         private void OnEnable() => this.MMEventStartListening();
