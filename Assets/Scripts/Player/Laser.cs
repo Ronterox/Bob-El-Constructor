@@ -42,7 +42,11 @@ namespace Player
             line.SetPosition(1, mousePos);
         }
 
-        private void EnableLaser() => line.enabled = true;
+        private void EnableLaser()
+        {
+            line.enabled = true;
+            SoundManager.Instance.Play("Laser", true);
+        }
 
         private void RotateToMouse()
         {

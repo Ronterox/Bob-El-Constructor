@@ -145,6 +145,30 @@ MonoBehaviour:
     loop: 0
     pitch: 1
     source: {fileID: 0}
+  - id: Elevator
+    clip: {fileID: 8300000, guid: 5cbac99f51372b62eb00b8c5d2b4f236, type: 3}
+    audioMixerGroup: {fileID: -7603722713378326528, guid: 6fe562bf193432e4aaf274f81383c1ca,
+      type: 2}
+    volume: 1
+    loop: 1
+    pitch: 1
+    source: {fileID: 0}
+  - id: Laser
+    clip: {fileID: 8300000, guid: e0601ff7e38fe6acdbf94eecfe3db87d, type: 3}
+    audioMixerGroup: {fileID: -7603722713378326528, guid: 6fe562bf193432e4aaf274f81383c1ca,
+      type: 2}
+    volume: 1
+    loop: 0
+    pitch: 1
+    source: {fileID: 0}
+  - id: Player Hit
+    clip: {fileID: 8300000, guid: 2ef0bfb7cc3522a4d8ac851a5ab69833, type: 3}
+    audioMixerGroup: {fileID: -7603722713378326528, guid: 6fe562bf193432e4aaf274f81383c1ca,
+      type: 2}
+    volume: 0.3
+    loop: 0
+    pitch: 1
+    source: {fileID: 0}
   songs:
   - id: Drums Suspense
     clip: {fileID: 8300000, guid: 0521e0d1e14719c4ea590eb6457064d9, type: 3}
