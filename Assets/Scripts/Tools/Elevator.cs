@@ -44,8 +44,7 @@ namespace Tools
 
             yield return new WaitUntil(() => !p_isLoading);
 
-            Vector3 elevatorPos = transform.position;
-            transform.position = (FindObjectOfType(typeof(ElevatorPoint)) as GameObject)?.transform.position ?? elevatorPos;
+            transform.position = FindObjectOfType<ElevatorPoint>().transform.position;
 
             while (Time.time - startTime < minimumWaitTime) yield return null;
             
