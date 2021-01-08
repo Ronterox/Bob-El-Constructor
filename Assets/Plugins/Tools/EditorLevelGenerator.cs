@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 
 namespace Plugins.Tools
@@ -18,3 +19,4 @@ namespace Plugins.Tools
         }
     }
 }
+#endif
