@@ -6,24 +6,29 @@ using UnityEngine;
 
 namespace Tools
 {
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public class Elevator : MonoBehaviour, MMEventListener<LoadedEvent>
     {
         [SerializeField] private float minimumWaitTime;
         private bool p_isLoading;
+        
         private Animator p_animator;
+        private BoxCollider2D p_collider;
 
         private readonly int p_loadingProperty = Animator.StringToHash("isMoving");
         private void Awake()
         {
             p_animator = GetComponent<Animator>();
             DontDestroyOnLoad(gameObject);
+            p_collider = GetComponent<BoxCollider2D>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if(!other.CompareTag("Player")) return;
             other.transform.parent = transform;
             StartCoroutine(GoToNextFloor());
+            p_collider.enabled = false;
         }
 
         private void OnTriggerExit2D(Collider2D other) => other.transform.parent = null;
