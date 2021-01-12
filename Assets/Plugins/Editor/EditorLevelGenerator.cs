@@ -1,11 +1,10 @@
-﻿#if UNITY_EDITOR
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.Tools
+namespace Plugins.Editor
 {
     [CustomEditor(typeof(LevelGenerator))]
-    public class EditorLevelGenerator : Editor
+    public class EditorLevelGenerator : UnityEditor.Editor
     {
         private LevelGenerator p_script;
 
@@ -19,4 +18,3 @@ namespace Plugins.Tools
         }
     }
 }
-#endif

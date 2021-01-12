@@ -1,9 +1,8 @@
-﻿#if UNITY_EDITOR
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Plugins.Tools
+namespace Plugins.Editor
 {
     [System.Serializable]
     public struct ColorLevelTile
@@ -84,4 +83,3 @@ namespace Plugins.Tools
         }
     }
 }
-#endif
