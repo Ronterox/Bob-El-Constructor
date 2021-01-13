@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace Plugins.Tools
@@ -15,6 +16,23 @@ namespace Plugins.Tools
         public static void SetActiveChildren(this GameObject parent, bool active = true)
         {
             foreach (Transform child in parent.GetComponentsInChildren<Transform>(active)) child.gameObject.SetActive(active);
+        }
+        
+        /// <summary>
+        /// Instantiates an actual prefab instead of a gameObject
+        /// </summary>
+        /// <param name="prefab"></param>
+        /// <param name="position"></param>
+        /// <param name="rotation"></param>
+        /// <param name="parent"></param>
+        public static GameObject InstantiatePrefab(GameObject prefab, Vector2 position, Quaternion rotation,
+            Transform parent = null)
+        {
+            if (!(PrefabUtility.InstantiatePrefab(prefab) is GameObject result)) return null;
+            result.transform.position = position;
+            result.transform.parent = parent;
+            result.transform.rotation = rotation;
+            return result;
         }
     }
 }

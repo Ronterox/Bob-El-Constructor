@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
+using Plugins.Tools;
 using UnityEngine;
 
 namespace Plugins.Editor
@@ -59,27 +59,10 @@ namespace Plugins.Editor
             foreach (ColorLevelTile tile in tiles)
             {
                 if (tile.color.Equals(pixelColor))
-                    InstantiatePrefab(tile.gameObject, new Vector2(x, y), tile.gameObject.transform.rotation)
+                    UtilityMethods.InstantiatePrefab(tile.gameObject, new Vector2(x, y), tile.gameObject.transform.rotation)
                         .transform.parent = p_tempGroups
                         .Find(g => g.transform.name.Contains(tile.gameObject.transform.name)).transform;
             }
-        }
-
-        /// <summary>
-        /// Instantiates an actual prefab instead of a gameObject
-        /// </summary>
-        /// <param name="prefab"></param>
-        /// <param name="position"></param>
-        /// <param name="rotation"></param>
-        /// <param name="parent"></param>
-        public static GameObject InstantiatePrefab(GameObject prefab, Vector2 position, Quaternion rotation,
-            Transform parent = null)
-        {
-            if (!(PrefabUtility.InstantiatePrefab(prefab) is GameObject result)) return null;
-            result.transform.position = position;
-            result.transform.parent = parent;
-            result.transform.rotation = rotation;
-            return result;
         }
     }
 }
