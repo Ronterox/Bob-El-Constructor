@@ -28,10 +28,13 @@ namespace Tools
             if(!other.CompareTag("Player")) return;
             other.transform.parent = transform;
             StartCoroutine(GoToNextFloor());
-            p_collider.enabled = false;
         }
 
-        private void OnTriggerExit2D(Collider2D other) => other.transform.parent = null;
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            other.transform.parent = null;
+            p_collider.enabled = false;
+        }
 
         private IEnumerator GoToNextFloor()
         {

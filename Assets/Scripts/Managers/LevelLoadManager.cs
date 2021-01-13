@@ -36,7 +36,11 @@ namespace Managers
             MMEventManager.TriggerEvent(new LoadedEvent());
         }
 
-        public void LoadNextSceneAsync() => StartCoroutine(LoadSceneAsyncCoroutine());
+        public void LoadNextSceneAsync()
+        {
+            StartCoroutine(LoadSceneAsyncCoroutine());
+            Instance.LoadAdditiveAsyncScenes();
+        }
 
         /// <summary>
         /// Loads the next scene on the list of scenes
@@ -44,6 +48,7 @@ namespace Managers
         public void LoadNextScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+            Instance.LoadAdditiveAsyncScenes();
             GameManager.Instance.onLoadEvent.Invoke();
         }
 
