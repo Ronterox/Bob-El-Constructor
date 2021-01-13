@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace GUI
 {
-    public class PauseMenu : PersistentSingleton<PauseMenu>
+    public class PauseMenu : Singleton<PauseMenu>
     {
         public GameObject resumeGame, quitGame, mainMenu;
         [HideInInspector]
@@ -47,6 +47,7 @@ namespace GUI
         /// </summary>
         public void MainMenu()
         {
+            Resume();
             LevelLoadManager.Instance.LoadScene("MAIN MENU");
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(mainMenu);
