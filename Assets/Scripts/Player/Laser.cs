@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using GUI;
+using Managers;
 using Plugins.Tools;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ namespace Player
 
         private void Update()
         {
+            if(GameManager.Instance.gameIsPaused) return;
+            
             if (Input.GetButtonDown("Fire2")) EnableLaser();
 
             if (Input.GetButton("Fire2")) UpdateLaser();
