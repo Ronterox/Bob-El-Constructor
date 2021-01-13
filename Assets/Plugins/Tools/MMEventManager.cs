@@ -109,7 +109,7 @@ namespace Plugins.Tools
 #endif
             }
 
-            List<MMEventListenerBase> subscriberList = m_SubscribersList[eventType];
+            List<MMEventListenerBase> subscriberList = m_SubscribersList[eventType].ToList();
             var listenerFound = false;
 
             if (listenerFound) { }

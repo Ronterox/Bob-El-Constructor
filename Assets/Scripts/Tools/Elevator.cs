@@ -64,6 +64,10 @@ namespace Tools
 
         private void OnDisable() => this.MMEventStopListening();
 
-        public void OnMMEvent(LoadedEvent eventType) => p_isLoading = false;
+        public void OnMMEvent(LoadedEvent eventType)
+        {
+            if (!string.IsNullOrEmpty(eventType.sceneName) && eventType.sceneName.Equals("MAIN MENU")) Destroy(gameObject);
+            p_isLoading = false;
+        }
     }
 }

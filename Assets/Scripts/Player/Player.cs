@@ -1,10 +1,11 @@
-﻿using Plugins.Tools;
+﻿using Managers;
+using Plugins.Tools;
 using UnityEngine;
 
 namespace Player
 {
     [RequireComponent(typeof(Animator))]
-    public class Player : PersistentSingleton<Player>
+    public class Player : PersistentSingleton<Player>, MMEventListener<LoadedEvent>
     {
         [SerializeField] private Controller playerController;
 
@@ -39,6 +40,15 @@ namespace Player
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (!playerController.groundDetector.isGrounded) SoundManager.Instance.Play("Player Hit", true);
+        }
+
+        private void OnEnable() => Instance.MMEventStartListening();
+
+        private void OnDisable() => Instance.MMEventStopListening();
+
+        public void OnMMEvent(LoadedEvent eventType)
+        {
+            if (!string.IsNullOrEmpty(eventType.sceneName) && eventType.sceneName.Equals("MAIN MENU")) Destroy(Instance.gameObject);
         }
     }
 }
