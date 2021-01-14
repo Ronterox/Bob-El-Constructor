@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 
 namespace Managers
 {
-    public struct LoadedEvent
+    public readonly struct LoadedEvent
     {
-        public string sceneName;
+        public readonly string sceneName;
         public LoadedEvent(string sceneName) => this.sceneName = sceneName;
     }
 
@@ -19,6 +19,43 @@ namespace Managers
     {
         [Header("Scenes")]
         [SerializeField] [Scene] private string[] additiveScenes;
+
+        /// <summary>
+        /// Checks if the scene by the name is loaded
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <returns></returns>
+        public bool IsSceneLoaded(string scene) => SceneManager.GetSceneByName(scene).isLoaded;
+
+        /// <summary>
+        /// Starts the Coroutine to resume the game
+        /// </summary>
+        public void ResumeGame() => StartCoroutine(ResumeCoroutine());
+        
+        /// <summary>
+        /// Loads the last checkpoint state
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator ResumeCoroutine()
+        {
+            var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SaveStates");
+
+            Instance.LoadScene(savedData.lastLevel);
+            Instance.LoadAdditiveAsyncScenes();
+
+            yield return new WaitUntil(() => Instance.IsSceneLoaded(savedData.lastLevel));
+            
+            Player.Player.Instance.transform.position = new Vector3(savedData.checkpoint.x, savedData.checkpoint.y, savedData.checkpoint.z);
+            CameraManager.CameraManager.Instance.SetPriority(savedData.lastCameraID);
+
+            GameManager.Instance.IncrementPickableGUI(savedData.gemsObtained);
+        }
+
+        /// <summary>
+        /// Returns the current Scene name
+        /// </summary>
+        /// <returns></returns>
+        public string GetSceneName() => SceneManager.GetActiveScene().name;
 
         /// <summary>
         /// Loads the selected scene by name

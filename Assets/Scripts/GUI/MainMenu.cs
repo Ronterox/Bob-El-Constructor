@@ -1,4 +1,7 @@
-﻿using Managers;
+﻿using System.Collections;
+using Managers;
+using Managers.CameraManager;
+using Plugins.Tools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -21,12 +24,22 @@ namespace GUI
         /// </summary>
         public void StartGame()
         {
-            //Need To later depend on save file
-            LevelLoadManager.Instance.LoadScene("Level 1");
-            LevelLoadManager.Instance.LoadAdditiveAsyncScenes();
-
+            CheckForSaveState();
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(startGame);
+        }
+
+        /// <summary>
+        /// Resumes the game if there is a SaveState else, just loads the first Scene
+        /// </summary>
+        private void CheckForSaveState()
+        {
+            if (SaveLoadManager.SaveExists($"saved_state_v{Application.version}", "SaveStates")) LevelLoadManager.Instance.ResumeGame();
+            else
+            {
+                LevelLoadManager.Instance.LoadScene("Level 1");
+                LevelLoadManager.Instance.LoadAdditiveAsyncScenes();
+            }
         }
 
         /// <summary>
