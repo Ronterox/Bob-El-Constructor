@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Rotable : MonoBehaviour 
+namespace Interactables
 {
-    [SerializeField] Vector3 rotation;
-
-    /// <summary>
-    /// Rotates the object to the vector3 Rotation
-    /// </summary>
-    public void Rotate()
+    public class Rotable : MonoBehaviour 
     {
-        transform.Rotate(rotation);
+        [SerializeField] private Vector3 rotation;
+
+        /// <summary>
+        /// Rotates the object to the vector3 Rotation
+        /// </summary>
+        public void Rotate() => transform.Rotate(rotation);
     }
 }

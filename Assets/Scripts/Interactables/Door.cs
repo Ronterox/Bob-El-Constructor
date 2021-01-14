@@ -1,11 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Plugins.Tools;
 
-public class Door : MonoBehaviour 
+namespace Interactables
 {
-    private Animator p_animator;
-    private void Awake() { p_animator = GetComponent<Animator>(); }
-    public void OpenDoor() { p_animator.SetBool("open", true); }
-    public void CloseDoor() { p_animator.SetBool("open", false); }
+    public class Door : Movable
+    {
+        public override void MoveForward()
+        {
+            base.MoveForward();
+            SoundManager.Instance.Play("Door Open");
+        }
+
+        public override void MoveBackwards()
+        {
+            base.MoveBackwards();
+            SoundManager.Instance.Play("Door Close");
+        }
+    }
 }

@@ -1,28 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ChangeCameraPriority : MonoBehaviour 
+namespace Managers.CameraManager
 {
-    [SerializeField] private string cameraId;
-    [Tooltip("If checked, once it exist the collider it will change back to the camera before hitting the collider")]
-    [SerializeField] private bool onExitChangeBack;
-    private string oldCameraId;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    [RequireComponent(typeof(BoxCollider2D))]
+    public class ChangeCameraPriority : MonoBehaviour 
     {
-        if(collision.CompareTag("Player"))
+        [SerializeField] private string cameraId;
+        [Tooltip("If checked, once it exist the collider it will change back to the camera before hitting the collider")]
+        [SerializeField] private bool onExitChangeBack;
+        [SerializeField] private int priority = 20;
+        
+        private string p_oldCameraId;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            oldCameraId = CameraManager.instance.currentCameraID;
-            CameraManager.instance.SetPriority(cameraId);
+            if (!collision.CompareTag("Player")) return;
+            p_oldCameraId = CameraManager.Instance.CurrentCameraID;
+            CameraManager.Instance.SetPriority(cameraId, priority);
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (onExitChangeBack && collision.CompareTag("Player"))
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            CameraManager.instance.SetPriority(oldCameraId);
+            if (onExitChangeBack && collision.CompareTag("Player")) CameraManager.Instance.SetPriority(p_oldCameraId);
         }
     }
 }

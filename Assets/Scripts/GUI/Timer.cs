@@ -1,23 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
-public class Timer : MonoBehaviour
+
+namespace GUI
 {
-    public TextMeshProUGUI timerText;
-
-    [SerializeField] private float timerTime;
-    private float pf_timer = 0f;
-    void Update()
+    public class Timer : MonoBehaviour
     {
-        if (pf_timer < 0) return;
-        pf_timer -= Time.deltaTime;
-        if (pf_timer < 0) pf_timer = 0;
-        timerText.text = string.Format("{0:00}:{1:00}", pf_timer / 60 % 60, pf_timer % 60);
-    }
+        public TextMeshProUGUI timerText;
 
-    public void StartTimer()
-    {
-        pf_timer = timerTime;
+        [SerializeField] private float timerTime;
+        private float p_timer;
+        private void Update()
+        {
+            if (p_timer < 0) return;
+            p_timer -= Time.deltaTime;
+            if (p_timer < 0) p_timer = 0;
+            timerText.text = $"{p_timer / 60 % 60:00}:{p_timer % 60:00}";
+        }
+
+        public void StartTimer() => p_timer = timerTime;
     }
 }

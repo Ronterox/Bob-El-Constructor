@@ -1,85 +1,77 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Singleton pattern.
-/// </summary>
-public class Singleton<T> : MonoBehaviour where T : Component
+namespace Plugins.Tools
 {
-    protected static T _instance;
-
     /// <summary>
-    /// Singleton design pattern
+    /// Singleton pattern.
     /// </summary>
-    /// <value>The instance.</value>
-    public static T instance
+    public class Singleton<T> : MonoBehaviour where T : Component
     {
-        get
+        protected static T pr_instance;
+
+        /// <summary>
+        /// Singleton design pattern
+        /// </summary>
+        /// <value>The Instance.</value>
+        public static T Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = FindObjectOfType<T>();
+                if (pr_instance == null) pr_instance = FindObjectOfType<T>();
+                
+                return pr_instance;
             }
-            return _instance;
+        }
+
+        /// <summary>
+        /// On awake, we initialize our Instance. Make sure to call base.Awake() in override if you need awake.
+        /// </summary>
+        protected virtual void Awake()
+        {
+            if (!Application.isPlaying) return;
+
+            pr_instance = this as T;
         }
     }
 
-    /// <summary>
-    /// On awake, we initialize our instance. Make sure to call base.Awake() in override if you need awake.
-    /// </summary>
-    protected virtual void Awake()
+    public class PersistentSingleton<T> : MonoBehaviour where T : Component
     {
-        if (!Application.isPlaying) return;
+        protected static T pr_instance;
 
-        _instance = this as T;
-    }
-}
-
-public class PersistentSingleton<T> : MonoBehaviour where T : Component
-{
-    protected static T _instance;
-    protected bool _enabled;
-
-    /// <summary>
-    /// Singleton design pattern
-    /// </summary>
-    /// <value>The instance.</value>
-    public static T instance
-    {
-        get
+        /// <summary>
+        /// Singleton design pattern
+        /// </summary>
+        /// <value>The Instance.</value>
+        public static T Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = FindObjectOfType<T>();
-                if (_instance == null)
-                {
-                    GameObject obj = new GameObject();
-                    _instance = obj.AddComponent<T>();
-                }
+                if (pr_instance != null) return pr_instance;
+                pr_instance = FindObjectOfType<T>();
+                if (pr_instance != null) return pr_instance;
+                var obj = new GameObject();
+                pr_instance = obj.AddComponent<T>();
+
+                return pr_instance;
             }
-            return _instance;
         }
-    }
 
-    /// <summary>
-    /// On awake, we check if there's already a copy of the object in the scene. If there's one, we destroy it.
-    /// </summary>
-    protected virtual void Awake()
-    {
-
-        if (_instance == null)
+        /// <summary>
+        /// On awake, we check if there's already a copy of the object in the scene. If there's one, we destroy it.
+        /// </summary>
+        protected virtual void Awake()
         {
-            //If I am the first instance, make me the Singleton
-            _instance = this as T;
-            DontDestroyOnLoad(transform.gameObject);
-            _enabled = true;
-        }
-        else
-        {
-            //If a Singleton already exists and you find
-            //another reference in scene, destroy it!
-            if (this != _instance)
+            if (pr_instance == null)
             {
-                Destroy(this.gameObject);
+                //If I am the first Instance, make me the Singleton
+                pr_instance = this as T;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                //If a Singleton already exists and you find
+                //another reference in scene, destroy it!
+                if (this != pr_instance) Destroy(gameObject);
             }
         }
     }
