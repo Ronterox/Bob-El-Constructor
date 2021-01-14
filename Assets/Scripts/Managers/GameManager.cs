@@ -11,8 +11,6 @@ namespace Managers
     {
         public PlayerTool currentPlayerTool = PlayerTool.None;
         
-        public Transform checkpoint;
-        
         public bool gameIsPaused;
 
         public int gemsCount;
@@ -26,6 +24,35 @@ namespace Managers
         {
             gemsCount += score;
             if (pickableCounterGUI != null) pickableCounterGUI.SetScore(gemsCount);
+        }
+    }
+
+    [System.Serializable]
+    public class PlayerData
+    {
+        public Vector3Serializable checkpoint;
+        public int gemsObtained;
+        public string lastCameraID, lastLevel;
+
+        public PlayerData(Vector3Serializable checkpoint, int gemsObtained, string lastCameraID, string lastLevel)
+        {
+            this.checkpoint = checkpoint;
+            this.gemsObtained = gemsObtained;
+            this.lastCameraID = lastCameraID;
+            this.lastLevel = lastLevel;
+        }
+    }
+
+    [System.Serializable]
+    public struct Vector3Serializable
+    {
+        public float x, y, z;
+
+        public Vector3Serializable(float x, float y, float z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
     }
 }
