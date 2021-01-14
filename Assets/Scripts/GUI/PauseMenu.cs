@@ -5,18 +5,16 @@ using UnityEngine.EventSystems;
 
 namespace GUI
 {
-    public class PauseMenu : PersistentSingleton<PauseMenu>
+    public class PauseMenu : Singleton<PauseMenu>
     {
         public GameObject resumeGame, quitGame, mainMenu;
-        [HideInInspector]
-        public bool gameIsPaused;
         [SerializeField]
         private GameObject pauseMenuUI;
 
         private void Update()
         {
             if (!Input.GetKeyDown(KeyCode.Escape)) return;
-            if (gameIsPaused) Resume();
+            if (GameManager.Instance.gameIsPaused) Resume();
             else Pause();
         }
 
@@ -25,9 +23,9 @@ namespace GUI
         /// </summary>
         public void Resume()
         {
-            pauseMenuUI.SetActive(false);
             Time.timeScale = 1f;
-            gameIsPaused = false;
+            pauseMenuUI.SetActive(false);
+            GameManager.Instance.gameIsPaused = false;
         }
 
         /// <summary>
@@ -35,9 +33,9 @@ namespace GUI
         /// </summary>
         public void Pause()
         {
-            pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
-            gameIsPaused = true;
+            pauseMenuUI.SetActive(true);
+            GameManager.Instance.gameIsPaused = true;
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(resumeGame);
         }
@@ -47,6 +45,7 @@ namespace GUI
         /// </summary>
         public void MainMenu()
         {
+            Resume();
             LevelLoadManager.Instance.LoadScene("MAIN MENU");
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(mainMenu);

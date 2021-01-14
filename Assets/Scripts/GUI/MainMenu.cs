@@ -1,5 +1,5 @@
-﻿using System;
-using Managers;
+﻿using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,9 +7,14 @@ namespace GUI
 {
     public class MainMenu : MonoBehaviour 
     {
-        public GameObject startGame, quitGame, loadScene;
-
-        private void Start() => LevelLoadManager.Instance.UnloadAdditiveAsyncScenes();
+        public GameObject startGame, loadScene, quitGame;
+        public TextMeshProUGUI buildVersionTMP;
+        
+        private void Start()
+        {
+            LevelLoadManager.Instance.UnloadAdditiveAsyncScenes();
+            buildVersionTMP.text = "Build v"+Application.version;
+        }
 
         /// <summary>
         /// Loads the game last saved Scene

@@ -1,4 +1,6 @@
-﻿using Plugins.Tools;
+﻿using GUI;
+using Managers;
+using Plugins.Tools;
 using UnityEngine;
 
 namespace Player
@@ -31,6 +33,7 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (GameManager.Instance.gameIsPaused) return;
             directionInput = Input.GetAxisRaw("Horizontal");
 
             Vector2 velocity = p_rigidbody.velocity;
@@ -60,6 +63,7 @@ namespace Player
 
         private void Update()
         {
+            if (GameManager.Instance.gameIsPaused) return;
             if (Input.GetButtonDown("Jump") && groundDetector.groundedTimer > 0) p_pressedJump = true;
         }
     }

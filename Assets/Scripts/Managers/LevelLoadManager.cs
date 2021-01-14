@@ -7,7 +7,11 @@ using UnityEngine.SceneManagement;
 
 namespace Managers
 {
-    public struct LoadedEvent { }
+    public struct LoadedEvent
+    {
+        public string sceneName;
+        public LoadedEvent(string sceneName) => this.sceneName = sceneName;
+    }
 
     [System.Serializable]
     public class OnLoadEvent : UnityEvent { }
@@ -24,6 +28,7 @@ namespace Managers
         {
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
             GameManager.Instance.onLoadEvent.Invoke();
+            MMEventManager.TriggerEvent(new LoadedEvent(scene));
         }
 
         public void LoadSceneAsync(string scene) => StartCoroutine(LoadSceneAsyncCoroutine(scene));
@@ -33,10 +38,14 @@ namespace Managers
             AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(
                 string.IsNullOrEmpty(scene) ? SceneManager.GetActiveScene().buildIndex + 1 : SceneManager.GetSceneByName(scene).buildIndex);
             yield return new WaitUntil(() => loadingOperation.isDone);
-            MMEventManager.TriggerEvent(new LoadedEvent());
+            MMEventManager.TriggerEvent(new LoadedEvent(scene));
         }
 
-        public void LoadNextSceneAsync() => StartCoroutine(LoadSceneAsyncCoroutine());
+        public void LoadNextSceneAsync()
+        {
+            StartCoroutine(LoadSceneAsyncCoroutine());
+            Instance.LoadAdditiveAsyncScenes();
+        }
 
         /// <summary>
         /// Loads the next scene on the list of scenes
@@ -44,6 +53,7 @@ namespace Managers
         public void LoadNextScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+            Instance.LoadAdditiveAsyncScenes();
             GameManager.Instance.onLoadEvent.Invoke();
         }
 

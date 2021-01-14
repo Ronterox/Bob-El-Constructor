@@ -20,7 +20,7 @@ namespace Managers.CameraManager
 
         public void OnMMEvent(LoadedEvent eventType)
         {
-            if (followCamera.Follow == null) followCamera.Follow = GameObject.FindWithTag("Player").transform;
+            if (followCamera.Follow == null) followCamera.Follow = GameObject.FindWithTag("Player")?.transform;
         }
     }
 }

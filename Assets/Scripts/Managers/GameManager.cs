@@ -10,8 +10,10 @@ namespace Managers
     public class GameManager : PersistentSingleton<GameManager>
     {
         public PlayerTool currentPlayerTool = PlayerTool.None;
-
+        
         public Transform checkpoint;
+        
+        public bool gameIsPaused;
 
         public int gemsCount;
         [SerializeField] public PickableCounterGUI pickableCounterGUI;
