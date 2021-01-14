@@ -11,21 +11,23 @@ namespace Tools
     {
         [SerializeField] private float minimumWaitTime;
         private bool p_isLoading;
-        
+
         private Animator p_animator;
         private BoxCollider2D p_collider;
+
+        private bool p_wasUsed;
 
         private readonly int p_loadingProperty = Animator.StringToHash("isMoving");
         private void Awake()
         {
             p_animator = GetComponent<Animator>();
-            DontDestroyOnLoad(gameObject);
             p_collider = GetComponent<BoxCollider2D>();
+            DontDestroyOnLoad(gameObject);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(!other.CompareTag("Player")) return;
+            if (!other.CompareTag("Player")) return;
             other.transform.parent = transform;
             StartCoroutine(GoToNextFloor());
         }
@@ -43,9 +45,9 @@ namespace Tools
 
             SoundManager.Instance.Play("Elevator");
             //SoundManager.Instance.StopBackgroundMusic();
-            
+
             p_animator.SetBool(p_loadingProperty, true);
-            
+
             LevelLoadManager.Instance.LoadNextSceneAsync();
 
             yield return new WaitUntil(() => !p_isLoading);
@@ -53,9 +55,9 @@ namespace Tools
             transform.position = FindObjectOfType<ElevatorPoint>().transform.position;
 
             while (Time.time - startTime < minimumWaitTime) yield return null;
-            
+
             p_animator.SetBool(p_loadingProperty, false);
-            
+
             SoundManager.Instance.Stop("Elevator");
             //SoundManager.Instance.ResumeBackgroundMusic();
         }
@@ -66,8 +68,10 @@ namespace Tools
 
         public void OnMMEvent(LoadedEvent eventType)
         {
+            if (p_wasUsed) return;
             if (!string.IsNullOrEmpty(eventType.sceneName) && eventType.sceneName.Equals("MAIN MENU")) Destroy(gameObject);
-            p_isLoading = false;
+            else p_isLoading = false;
+            p_wasUsed = true;
         }
     }
 }
