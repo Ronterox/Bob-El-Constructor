@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Managers;
-using Managers.CameraManager;
+﻿using Managers;
 using Plugins.Tools;
 using TMPro;
 using UnityEngine;
@@ -8,39 +6,43 @@ using UnityEngine.EventSystems;
 
 namespace GUI
 {
-    public class MainMenu : MonoBehaviour 
+    public class MainMenu : MonoBehaviour
     {
-        public GameObject startGame, loadScene, quitGame;
+        public GameObject startGame, loadScene, quitGame, continueButton;
         public TextMeshProUGUI buildVersionTMP;
-        
+
         private void Start()
         {
+            buildVersionTMP.text = "Build v" + Application.version;
+            continueButton.SetActive(HasSavedFile());
             LevelLoadManager.Instance.UnloadAdditiveAsyncScenes();
-            buildVersionTMP.text = "Build v"+Application.version;
+            
+            EventSystem.current.SetSelectedGameObject(continueButton.activeSelf? continueButton : startGame);
         }
 
         /// <summary>
         /// Loads the game last saved Scene
         /// </summary>
-        public void StartGame()
+        public void StartNewGame()
         {
-            CheckForSaveState();
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(startGame);
+            LevelLoadManager.Instance.LoadScene("Level 1");
+            LevelLoadManager.Instance.LoadAdditiveAsyncScenes();
+        }
+
+        private void LateUpdate()
+        {
+            if (!continueButton.activeSelf && HasSavedFile()) continueButton.SetActive(true);
         }
 
         /// <summary>
-        /// Resumes the game if there is a SaveState else, just loads the first Scene
+        /// Resumes an old save file
         /// </summary>
-        private void CheckForSaveState()
-        {
-            if (SaveLoadManager.SaveExists($"saved_state_v{Application.version}", "SaveStates")) LevelLoadManager.Instance.ResumeGame();
-            else
-            {
-                LevelLoadManager.Instance.LoadScene("Level 1");
-                LevelLoadManager.Instance.LoadAdditiveAsyncScenes();
-            }
-        }
+        public void ResumeGame() => LevelLoadManager.Instance.ResumeGame();
+
+        /// <summary>
+        /// Checks if there is a saved file
+        /// </summary>
+        private bool HasSavedFile() => SaveLoadManager.SaveExists($"saved_state_v{Application.version}", "SaveStates");
 
         /// <summary>
         /// Loads a specific scene
@@ -50,19 +52,11 @@ namespace GUI
         {
             LevelLoadManager.Instance.LoadScene(scene);
             LevelLoadManager.Instance.LoadAdditiveAsyncScenes();
-            
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(loadScene);
         }
 
         /// <summary>
         /// Closes or stops the game
         /// </summary>
-        public void QuitApplication()
-        {
-            LevelLoadManager.Instance.QuitGame();
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(quitGame);
-        }
+        public void QuitApplication() => LevelLoadManager.Instance.QuitGame();
     }
 }

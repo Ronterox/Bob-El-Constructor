@@ -1129,7 +1129,7 @@ PrefabInstance:
     - target: {fileID: 6506033884020499407, guid: 7469a4c6264273445b1c9eb34c5ac682,
         type: 3}
       propertyPath: onGunPicked.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6506033884020499407, guid: 7469a4c6264273445b1c9eb34c5ac682,
         type: 3}
@@ -1201,6 +1201,46 @@ PrefabInstance:
       propertyPath: onGunPicked.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6506033884020499407, guid: 7469a4c6264273445b1c9eb34c5ac682,
+        type: 3}
+      propertyPath: onGunPicked.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.Rigidbody2D, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506033884020499407, guid: 7469a4c6264273445b1c9eb34c5ac682,
+        type: 3}
+      propertyPath: onGunPicked.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506033884020499407, guid: 7469a4c6264273445b1c9eb34c5ac682,
+        type: 3}
+      propertyPath: onGunPicked.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506033884020499407, guid: 7469a4c6264273445b1c9eb34c5ac682,
+        type: 3}
+      propertyPath: onGunPicked.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1757936709}
+    - target: {fileID: 6506033884020499407, guid: 7469a4c6264273445b1c9eb34c5ac682,
+        type: 3}
+      propertyPath: onGunPicked.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: WakeUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506033884020499407, guid: 7469a4c6264273445b1c9eb34c5ac682,
+        type: 3}
+      propertyPath: onGunPicked.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506033884020499407, guid: 7469a4c6264273445b1c9eb34c5ac682,
+        type: 3}
+      propertyPath: onGunPicked.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7826571702109607257, guid: 7469a4c6264273445b1c9eb34c5ac682,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8129548471914687066, guid: 7469a4c6264273445b1c9eb34c5ac682,
         type: 3}
       propertyPath: m_Sprite
@@ -1211,6 +1251,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129548471914687066, guid: 7469a4c6264273445b1c9eb34c5ac682,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7469a4c6264273445b1c9eb34c5ac682, type: 3}
