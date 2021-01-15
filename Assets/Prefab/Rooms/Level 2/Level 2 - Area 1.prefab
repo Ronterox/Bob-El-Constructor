@@ -701,8 +701,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1050162659
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 6879118450950661895, guid: 02497964ce1e5f64c8e8e3477be3105a,
     type: 3}
@@ -15292,6 +15292,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sub Ground Tile (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1092564825958160, guid: 594e0800a6df5154aa2a6b234343286e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4174206913873562, guid: 594e0800a6df5154aa2a6b234343286e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19
@@ -18396,6 +18400,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sub Ground Tile (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 1092564825958160, guid: 594e0800a6df5154aa2a6b234343286e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4174206913873562, guid: 594e0800a6df5154aa2a6b234343286e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.97
@@ -19556,6 +19564,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e8bc6497a47bdd468631a4ada51c10b, type: 3}
+--- !u!4 &5285067532294687054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4279411776199028, guid: 7e8bc6497a47bdd468631a4ada51c10b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5284799278070665274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5319195643084964446 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 37986684474102372, guid: 7e8bc6497a47bdd468631a4ada51c10b,
@@ -19568,12 +19582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8a6af43a2f45a4b9ab380c13cd586c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5285067532294687054 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4279411776199028, guid: 7e8bc6497a47bdd468631a4ada51c10b,
-    type: 3}
-  m_PrefabInstance: {fileID: 5284799278070665274}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5284799278092218385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26655,7 +26663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4445759812789466, guid: ff0fb2c9e61767d4d939a0b2585f00ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.11
+      value: 11.17
       objectReference: {fileID: 0}
     - target: {fileID: 4445759812789466, guid: ff0fb2c9e61767d4d939a0b2585f00ca, type: 3}
       propertyPath: m_LocalPosition.z
