@@ -19,6 +19,10 @@ namespace Plugins.Tools
         [Range(-3f, 3f)]
         public float pitch = 1f;
 
+        public bool useRandomPitch;
+        [Range(0, 1f)]
+        public float pitchRandomRange = 0.1f;
+
         [HideInInspector]
         public AudioSource source;
     }
@@ -217,7 +221,11 @@ namespace Plugins.Tools
         /// </summary>
         /// <param name="volume"></param>
         /// <returns></returns>
-        public float VolumeToDecibels(float volume) { if (volume > 0) return Mathf.Log10(volume) * 20; else return -80f; }
+        public float VolumeToDecibels(float volume)
+        {
+            if (volume > 0) return Mathf.Log10(volume) * 20;
+            else return -80f;
+        }
 
         /// <summary>
         /// Stops all current sfx
@@ -232,7 +240,10 @@ namespace Plugins.Tools
         /// Stops a dictionary of list
         /// </summary>
         /// <param name="sfxDict"></param>
-        private void StopDictionarySounds(Dictionary<string, SoundItem> sfxDict) { foreach (SoundItem sound in sfxDict.Values) sound.source.Stop(); }
+        private void StopDictionarySounds(Dictionary<string, SoundItem> sfxDict)
+        {
+            foreach (SoundItem sound in sfxDict.Values) sound.source.Stop();
+        }
 
         /// <summary>
         /// Plays the sound by the same id
@@ -243,14 +254,15 @@ namespace Plugins.Tools
         {
             if (p_soundEffects.ContainsKey(id))
             {
-                if (oneShot) p_soundEffects[id].source.Play();
-                else p_soundEffects[id].source.PlayOneShot(p_soundEffects[id].clip);
+                SoundItem soundEffect = p_soundEffects[id]; 
+                soundEffect.source.pitch = p_soundEffects[id].useRandomPitch ? 
+                    Random.Range(soundEffect.pitch - soundEffect.pitchRandomRange, soundEffect.pitch + soundEffect.pitchRandomRange) : soundEffect.pitch;
+                
+                if (oneShot) soundEffect.source.Play();
+                else soundEffect.source.PlayOneShot(p_soundEffects[id].clip);
             }
-            else
-            {
-                if (oneShot) p_songs[id].source.Play();
-                else p_songs[id].source.PlayOneShot(p_songs[id].clip);
-            }
+            else if (oneShot) p_songs[id].source.Play();
+            else p_songs[id].source.PlayOneShot(p_songs[id].clip);
         }
 
         /// <summary>

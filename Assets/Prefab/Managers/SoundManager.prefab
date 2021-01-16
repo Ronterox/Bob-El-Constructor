@@ -56,6 +56,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Door Close
     clip: {fileID: 8300000, guid: 2c58a4175cb8c38468c2f58c4e36d048, type: 3}
@@ -64,6 +66,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Door Open
     clip: {fileID: 8300000, guid: e87e40ccb0012c04bb79bd1ef05c897c, type: 3}
@@ -72,6 +76,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Footstep
     clip: {fileID: 8300000, guid: 6ff7f1921fbe5f744aa719d1ad7ff95a, type: 3}
@@ -80,6 +86,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 1
+    pitchRandomRange: 0.05
     source: {fileID: 0}
   - id: Block Pick
     clip: {fileID: 8300000, guid: 19cfaf1734f9f82448cf72ef1897baad, type: 3}
@@ -88,6 +96,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 1
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Block Place
     clip: {fileID: 8300000, guid: ec5edd34dfcbe0e4fa5a9b68ced2f089, type: 3}
@@ -96,6 +106,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 1
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Spawn
     clip: {fileID: 8300000, guid: b655a03c0d75bb64b9f1afdb5ec4239d, type: 3}
@@ -104,6 +116,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Suspense
     clip: {fileID: 8300000, guid: c876dabb2702b5047a3c917c66ccd4e7, type: 3}
@@ -112,6 +126,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Suspense Start
     clip: {fileID: 8300000, guid: 25c8fa46196a1f940a056490c1da7513, type: 3}
@@ -120,6 +136,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Box Hit
     clip: {fileID: 8300000, guid: 2ef0bfb7cc3522a4d8ac851a5ab69833, type: 3}
@@ -128,6 +146,8 @@ MonoBehaviour:
     volume: 0.3
     loop: 0
     pitch: 0.5
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Jump
     clip: {fileID: 8300000, guid: 8eb84694ed34e1042be20fd4e12ab69f, type: 3}
@@ -136,6 +156,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 1
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Squeak
     clip: {fileID: 8300000, guid: 53698dc1780308a47bbe3c8e5b3c61e2, type: 3}
@@ -144,6 +166,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Elevator
     clip: {fileID: 8300000, guid: 5cbac99f51372b62eb00b8c5d2b4f236, type: 3}
@@ -152,6 +176,8 @@ MonoBehaviour:
     volume: 1
     loop: 1
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Laser
     clip: {fileID: 8300000, guid: e0601ff7e38fe6acdbf94eecfe3db87d, type: 3}
@@ -160,6 +186,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 1
+    pitchRandomRange: 0.2
     source: {fileID: 0}
   - id: Player Hit
     clip: {fileID: 8300000, guid: 2ef0bfb7cc3522a4d8ac851a5ab69833, type: 3}
@@ -168,6 +196,8 @@ MonoBehaviour:
     volume: 0.3
     loop: 0
     pitch: 1
+    useRandomPitch: 1
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   songs:
   - id: Drums Suspense
@@ -177,6 +207,8 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
   - id: Mudos
     clip: {fileID: 8300000, guid: 17fcb183e0ffa944ebc31dfee47ee446, type: 3}
@@ -185,4 +217,6 @@ MonoBehaviour:
     volume: 1
     loop: 0
     pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
     source: {fileID: 0}
