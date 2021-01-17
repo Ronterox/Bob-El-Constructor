@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using System;
+using Managers;
 using Plugins.Tools;
 using TMPro;
 using UnityEngine;
@@ -16,8 +17,8 @@ namespace GUI
             buildVersionTMP.text = "Build v" + Application.version;
             continueButton.SetActive(HasSavedFile());
             LevelLoadManager.Instance.UnloadAdditiveAsyncScenes();
-            
-            EventSystem.current.SetSelectedGameObject(continueButton.activeSelf? continueButton : startGame);
+
+            EventSystem.current.SetSelectedGameObject(continueButton.activeSelf ? continueButton : startGame);
         }
 
         /// <summary>
@@ -58,5 +59,10 @@ namespace GUI
         /// Closes or stops the game
         /// </summary>
         public void QuitApplication() => LevelLoadManager.Instance.QuitGame();
+
+        /// <summary>
+        /// Plays the submit sfx
+        /// </summary>
+        public void PlaySubmitSound() => SoundManager.Instance.Play("Submit");
     }
 }

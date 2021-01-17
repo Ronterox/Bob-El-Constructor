@@ -3752,7 +3752,7 @@ PrefabInstance:
     - target: {fileID: 114324444181153738, guid: d30ce17a530db0243ba4e444d298309b,
         type: 3}
       propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114324444181153738, guid: d30ce17a530db0243ba4e444d298309b,
         type: 3}
@@ -3767,7 +3767,7 @@ PrefabInstance:
     - target: {fileID: 114324444181153738, guid: d30ce17a530db0243ba4e444d298309b,
         type: 3}
       propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114324444181153738, guid: d30ce17a530db0243ba4e444d298309b,
         type: 3}
@@ -3798,16 +3798,16 @@ PrefabInstance:
         type: 3}
       propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 665547364}
+      objectReference: {fileID: 143968825}
     - target: {fileID: 114324444181153738, guid: d30ce17a530db0243ba4e444d298309b,
         type: 3}
       propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Managers.CameraManager.CameraManager, Assembly-CSharp
+      value: Interactables.Door, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 114324444181153738, guid: d30ce17a530db0243ba4e444d298309b,
         type: 3}
       propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetPriority
+      value: MoveForward
       objectReference: {fileID: 0}
     - target: {fileID: 114324444181153738, guid: d30ce17a530db0243ba4e444d298309b,
         type: 3}
@@ -3817,7 +3817,7 @@ PrefabInstance:
     - target: {fileID: 114324444181153738, guid: d30ce17a530db0243ba4e444d298309b,
         type: 3}
       propertyPath: enterCheckpoint.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: 3
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114324444181153738, guid: d30ce17a530db0243ba4e444d298309b,
         type: 3}
