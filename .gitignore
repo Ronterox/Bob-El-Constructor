@@ -5,7 +5,6 @@
 
 # Data saved file for BOB save system
 /[Aa]ssets/SavedData/
-/Assets/SavedData.meta
 
 /[Ll]ibrary/
 /[Tt]emp/
@@ -64,3 +63,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 .idea/
+
+/Assets/SavedData.meta
