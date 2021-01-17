@@ -63,7 +63,7 @@ MonoBehaviour:
   - color: {r: 0.4117647, g: 0.4117647, b: 0.4117647, a: 1}
     gameObject: {fileID: 1426542791632440, guid: ff0fb2c9e61767d4d939a0b2585f00ca,
       type: 3}
-  - color: {r: 0.44313726, g: 0, b: 0, a: 1}
+  - color: {r: 1, g: 0.6431373, b: 0.007843138, a: 1}
     gameObject: {fileID: 1992873591147176, guid: 791c4c45191b6884aba82cd3655952fe,
       type: 3}
   - color: {r: 0.8352941, g: 0.3254902, b: 0, a: 1}
