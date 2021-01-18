@@ -15,7 +15,7 @@ namespace Managers.CameraManager
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (!collision.CompareTag("Player")) return;
-            p_oldCameraId = CameraManager.Instance.CurrentCameraID;
+            p_oldCameraId = CameraManager.Instance.currentCameraID;
             CameraManager.Instance.SetPriority(cameraId, priority);
         }
 

@@ -30,7 +30,7 @@ namespace Managers.CameraManager
             SetPriority(awakeCamera);
         }
 
-        public string CurrentCameraID
+        public string currentCameraID
         {
             get 
             {
