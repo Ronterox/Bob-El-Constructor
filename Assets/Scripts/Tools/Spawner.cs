@@ -1,4 +1,5 @@
 ﻿using Plugins.Tools;
+using System.Collections;
 using UnityEngine;
 
 namespace Tools
@@ -14,16 +15,10 @@ namespace Tools
         [SerializeField] private bool limitSpawns;
 
         private GameObject p_spawnedObj;
+        [SerializeField] private bool infiniteSpawn;
+        [SerializeField] private int SpawnWaitTime;
 
-        /*
-    [Header("For Other Methods")]
-    [SerializeField] readonly int spawnedObjects
-    {
-        get
-        {
-            return totalObjectsSpawned;
-        }
-    }*/
+
 
         private int p_totalObjectsSpawned;
 
@@ -63,5 +58,32 @@ namespace Tools
         {
 
         }
+        private void Update()
+        {
+            if (infiniteSpawn==true)
+            {
+                StartCoroutine(SpawnObjectEveryXtime());
+            }
+        }
+
+        public IEnumerator SpawnObjectEveryXtime()
+        {
+            infiniteSpawn = false;
+            yield return new WaitForSeconds(SpawnWaitTime);
+            SpawnObject();
+            infiniteSpawn = true;
+
+        }
+
+        public void Start()
+        {
+            if (infiniteSpawn == true)
+            {
+                SpawnObject();
+               
+            }
+        }
+
+
     }
 }
