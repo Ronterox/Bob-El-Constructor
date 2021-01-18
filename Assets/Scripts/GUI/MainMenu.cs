@@ -1,5 +1,4 @@
-﻿using System;
-using Managers;
+﻿using Managers;
 using Plugins.Tools;
 using TMPro;
 using UnityEngine;

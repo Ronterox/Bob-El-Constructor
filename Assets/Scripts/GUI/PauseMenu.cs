@@ -17,11 +17,6 @@ namespace GUI
             if (GameManager.Instance.gameIsPaused) Resume();
             else Pause();
         }
-        
-        /// <summary>
-        /// Plays the submit sound
-        /// </summary>
-        public void PlaySubmitSound() => SoundManager.Instance.Play("Submit");
 
         /// <summary>
         /// Resumes the game
