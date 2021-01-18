@@ -27,7 +27,7 @@ namespace Interactables
         //Only for loop
         private Direction p_pDirection = Direction.Forward;
 
-        private bool PbReachedDestination =>
+        private bool pbReachedDestination =>
             p_pDirection == Direction.Forward ?
                 (Vector2)transform.localPosition == targetPosition : (Vector2)transform.localPosition == p_initialPosition;
 
@@ -41,7 +41,7 @@ namespace Interactables
         {
             if (!p_isMoving) return;
             if (loop) CheckDirection();
-            else if (PbReachedDestination) { Stop(); return; }
+            else if (pbReachedDestination) { Stop(); return; }
             transform.localPosition = GetNextMovement();
         }
 
@@ -68,7 +68,7 @@ namespace Interactables
         /// </summary>
         private void CheckDirection()
         {
-            if (PbReachedDestination)
+            if (pbReachedDestination)
                 p_pDirection = p_pDirection == Direction.Forward ? Direction.Backwards : Direction.Forward;
         }
 
