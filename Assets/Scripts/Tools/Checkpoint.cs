@@ -26,8 +26,13 @@ namespace Tools
         /// </summary>
         private void SaveCheckpointState() =>
             SaveLoadManager.Save(
-                new PlayerData(SerializeVector3(transform.position), GameManager.Instance.gemsCount, CameraManager.Instance.currentCameraID, LevelLoadManager.Instance.GetSceneName())
-                , $"saved_state_v{Application.version}","SaveStates");
+                new PlayerData(SerializeVector3(transform.position), 
+                               GameManager.Instance.gemsCount, 
+                               CameraManager.Instance.currentCameraID, 
+                               LevelLoadManager.Instance.GetSceneName(), 
+                               GameManager.Instance.GetSettings())
+                
+                , $"saved_state_v{Application.version}","SavedStates");
 
         private Vector3Serializable SerializeVector3(Vector3 toSerialize) => new Vector3Serializable(toSerialize.x, toSerialize.y, toSerialize.z);
     }

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalVolume: 1
-  musicVolume: 0.5
+  musicVolume: 1
   sfxVolume: 1
   uiVolume: 1
   audioMixer: {fileID: 24100000, guid: 6fe562bf193432e4aaf274f81383c1ca, type: 2}

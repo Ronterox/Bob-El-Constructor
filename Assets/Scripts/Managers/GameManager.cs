@@ -25,6 +25,11 @@ namespace Managers
             gemsCount += score;
             if (pickableCounterGUI != null) pickableCounterGUI.SetScore(gemsCount);
         }
+
+        public Settings GetSettings()
+        {
+            return new Settings();
+        }
     }
 
     [System.Serializable]
@@ -33,13 +38,15 @@ namespace Managers
         public Vector3Serializable checkpoint;
         public int gemsObtained;
         public string lastCameraID, lastLevel;
+        public Settings settings;
 
-        public PlayerData(Vector3Serializable checkpoint, int gemsObtained, string lastCameraID, string lastLevel)
+        public PlayerData(Vector3Serializable checkpoint, int gemsObtained, string lastCameraID, string lastLevel, Settings settings)
         {
             this.checkpoint = checkpoint;
             this.gemsObtained = gemsObtained;
             this.lastCameraID = lastCameraID;
             this.lastLevel = lastLevel;
+            this.settings = settings;
         }
     }
 
@@ -54,5 +61,16 @@ namespace Managers
             this.y = y;
             this.z = z;
         }
+    }
+
+    [System.Serializable]
+    public struct Settings
+    {
+        public float generalVolume;
+        public float uiVolume;
+        public float sfxVolume;
+        public float musicVolume;
+
+        public bool fullScreen;
     }
 }

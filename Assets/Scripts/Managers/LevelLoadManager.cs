@@ -38,7 +38,7 @@ namespace Managers
         /// <returns></returns>
         private IEnumerator ResumeCoroutine()
         {
-            var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SaveStates");
+            var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SavedStates");
 
             Instance.LoadScene(savedData.lastLevel);
             Instance.LoadAdditiveAsyncScenes();
@@ -75,6 +75,7 @@ namespace Managers
             AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(
                 string.IsNullOrEmpty(scene) ? SceneManager.GetActiveScene().buildIndex + 1 : SceneManager.GetSceneByName(scene).buildIndex);
             yield return new WaitUntil(() => loadingOperation.isDone);
+            GameManager.Instance.onLoadEvent.Invoke();
             MMEventManager.TriggerEvent(new LoadedEvent(scene));
         }
 

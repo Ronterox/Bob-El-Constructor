@@ -68,7 +68,7 @@ namespace Plugins.Tools
         /// <summary>
         /// Updates all volume values on the mixer
         /// </summary>
-        private void UpdateVolumeValues()
+        public void UpdateVolumeValues()
         {
             SetVolume(generalVolume);
             SetMusicVolume(musicVolume);
