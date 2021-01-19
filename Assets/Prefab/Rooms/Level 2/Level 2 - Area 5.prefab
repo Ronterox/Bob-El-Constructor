@@ -81415,7 +81415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1792116861726668503
 Transform:
   m_ObjectHideFlags: 0
@@ -81447,7 +81447,7 @@ MonoBehaviour:
   spawnLimit: 2
   limitSpawns: 0
   infiniteSpawn: 1
-  SpawnWaitTime: 4
+  spawnWaitTime: 4
 --- !u!1 &5415897670679098274
 GameObject:
   m_ObjectHideFlags: 0
