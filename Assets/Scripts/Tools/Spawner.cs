@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tools
 {
-    public class Spawner : MonoBehaviour 
+    public class Spawner : MonoBehaviour
     {
         //TODO: Have them as children to detect how many are on the scene right now.
 
@@ -16,9 +16,7 @@ namespace Tools
 
         private GameObject p_spawnedObj;
         [SerializeField] private bool infiniteSpawn;
-        [SerializeField] private int SpawnWaitTime;
-
-
+        [SerializeField] private int spawnWaitTime;
 
         private int p_totalObjectsSpawned;
 
@@ -26,7 +24,7 @@ namespace Tools
 
         private void CreateSpawnedObjectParent()
         {
-            if(p_spawnedObj != null) Destroy(p_spawnedObj);
+            if (p_spawnedObj != null) Destroy(p_spawnedObj);
             p_spawnedObj = new GameObject();
             p_spawnedObj.transform.name = "Objects Spawned";
         }
@@ -52,38 +50,25 @@ namespace Tools
         }
 
         /// <summary>
-        /// 
+        /// Spawns a gameObject at a certain position
         /// </summary>
-        public void SpawnObjectAt()
-        {
-
-        }
+        public void SpawnObjectAt() { }
         private void Update()
         {
-            if (infiniteSpawn==true)
-            {
-                StartCoroutine(SpawnObjectEveryXtime());
-            }
+            if (infiniteSpawn) StartCoroutine(SpawnObjectEveryXtime());
         }
 
-        public IEnumerator SpawnObjectEveryXtime()
+        private IEnumerator SpawnObjectEveryXtime()
         {
             infiniteSpawn = false;
-            yield return new WaitForSeconds(SpawnWaitTime);
+            yield return new WaitForSeconds(spawnWaitTime);
             SpawnObject();
             infiniteSpawn = true;
-
         }
 
-        public void Start()
+        public void OnEnable()
         {
-            if (infiniteSpawn == true)
-            {
-                SpawnObject();
-               
-            }
+            if (infiniteSpawn) SpawnObject();
         }
-
-
     }
 }
