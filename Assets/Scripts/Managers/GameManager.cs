@@ -9,6 +9,8 @@ namespace Managers
 
     public class GameManager : PersistentSingleton<GameManager>
     {
+        public Settings playerSettings;
+        
         public PlayerTool currentPlayerTool = PlayerTool.None;
         
         public bool gameIsPaused;
@@ -25,11 +27,6 @@ namespace Managers
             gemsCount += score;
             if (pickableCounterGUI != null) pickableCounterGUI.SetScore(gemsCount);
         }
-
-        public Settings GetSettings()
-        {
-            return new Settings();
-        }
     }
 
     [System.Serializable]
@@ -38,15 +35,13 @@ namespace Managers
         public Vector3Serializable checkpoint;
         public int gemsObtained;
         public string lastCameraID, lastLevel;
-        public Settings settings;
 
-        public PlayerData(Vector3Serializable checkpoint, int gemsObtained, string lastCameraID, string lastLevel, Settings settings)
+        public PlayerData(Vector3Serializable checkpoint, int gemsObtained, string lastCameraID, string lastLevel)
         {
             this.checkpoint = checkpoint;
             this.gemsObtained = gemsObtained;
             this.lastCameraID = lastCameraID;
             this.lastLevel = lastLevel;
-            this.settings = settings;
         }
     }
 
@@ -72,5 +67,6 @@ namespace Managers
         public float musicVolume;
 
         public bool fullScreen;
+        public int resolution;
     }
 }

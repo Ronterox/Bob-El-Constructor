@@ -29,8 +29,7 @@ namespace Tools
                 new PlayerData(SerializeVector3(transform.position), 
                                GameManager.Instance.gemsCount, 
                                CameraManager.Instance.currentCameraID, 
-                               LevelLoadManager.Instance.GetSceneName(), 
-                               GameManager.Instance.GetSettings())
+                               LevelLoadManager.Instance.GetSceneName())
                 
                 , $"saved_state_v{Application.version}","SavedStates");
 

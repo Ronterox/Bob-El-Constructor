@@ -222,24 +222,6 @@ namespace Plugins.Tools
         public void UnPauseBackgroundMusic() => p_songs[p_currentBackgroundMusic].source.UnPause();
 
         /// <summary>
-        /// Returns a decibel value as a volume value between 0 and 1
-        /// </summary>
-        /// <param name="dB"></param>
-        /// <returns></returns>
-        public float DecibelsToVolume(float dB) => Mathf.Pow(10, dB / 20);
-
-        /// <summary>
-        /// Returns the decibels value of a volume between 0 and 1
-        /// </summary>
-        /// <param name="volume"></param>
-        /// <returns></returns>
-        private float VolumeToDecibels(float volume)
-        {
-            if (volume > 0) return Mathf.Log10(volume) * 20;
-            return -80f;
-        }
-
-        /// <summary>
         /// Stops all current sfx
         /// </summary>
         public void StopAllSfx()
@@ -304,5 +286,20 @@ namespace Plugins.Tools
             audioMixer.SetFloat("BackgroundMusic_Volume", VolumeToDecibels(musicVolume));
             audioMixer.SetFloat("SFX_Volume", VolumeToDecibels(sfxVolume));
         }
+        
+        
+        /// <summary>
+        /// Returns a decibel value as a volume value between 0 and 1
+        /// </summary>
+        /// <param name="dB"></param>
+        /// <returns></returns>
+        public static float DecibelsToVolume(float dB) => Mathf.Pow(10, dB / 20);
+
+        /// <summary>
+        /// Returns the decibels value of a volume between 0 and 1
+        /// </summary>
+        /// <param name="volume"></param>
+        /// <returns></returns>
+        public static float VolumeToDecibels(float volume) => volume > 0? Mathf.Log10(volume) * 20 : -80f;
     }
 }
