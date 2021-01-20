@@ -38,12 +38,14 @@ namespace Managers
         /// <returns></returns>
         private IEnumerator ResumeCoroutine()
         {
-            var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SaveStates");
+            var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SavedStates");
 
             Instance.LoadScene(savedData.lastLevel);
             Instance.LoadAdditiveAsyncScenes();
 
             yield return new WaitUntil(() => Instance.IsSceneLoaded(savedData.lastLevel));
+            
+            GameManager.Instance.onLoadEvent.Invoke();
             
             Player.Player.Instance.transform.position = new Vector3(savedData.checkpoint.x, savedData.checkpoint.y, savedData.checkpoint.z);
             CameraManager.CameraManager.Instance.SetPriority(savedData.lastCameraID);
@@ -61,13 +63,15 @@ namespace Managers
         /// Loads the selected scene by name
         /// </summary>
         /// <param name="scene"></param>
-        public void LoadScene(string scene)
+        public void LoadScene(string scene) => StartCoroutine(LoadSceneCoroutine(scene));
+
+        private IEnumerator LoadSceneCoroutine(string scene)
         {
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            yield return new WaitUntil(() => Instance.IsSceneLoaded(scene));
             GameManager.Instance.onLoadEvent.Invoke();
             MMEventManager.TriggerEvent(new LoadedEvent(scene));
         }
-
         public void LoadSceneAsync(string scene) => StartCoroutine(LoadSceneAsyncCoroutine(scene));
 
         private IEnumerator LoadSceneAsyncCoroutine(string scene = null)
@@ -75,6 +79,7 @@ namespace Managers
             AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(
                 string.IsNullOrEmpty(scene) ? SceneManager.GetActiveScene().buildIndex + 1 : SceneManager.GetSceneByName(scene).buildIndex);
             yield return new WaitUntil(() => loadingOperation.isDone);
+            GameManager.Instance.onLoadEvent.Invoke();
             MMEventManager.TriggerEvent(new LoadedEvent(scene));
         }
 
