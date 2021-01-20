@@ -45,6 +45,8 @@ namespace Managers
 
             yield return new WaitUntil(() => Instance.IsSceneLoaded(savedData.lastLevel));
             
+            GameManager.Instance.onLoadEvent.Invoke();
+            
             Player.Player.Instance.transform.position = new Vector3(savedData.checkpoint.x, savedData.checkpoint.y, savedData.checkpoint.z);
             CameraManager.CameraManager.Instance.SetPriority(savedData.lastCameraID);
 
@@ -61,13 +63,15 @@ namespace Managers
         /// Loads the selected scene by name
         /// </summary>
         /// <param name="scene"></param>
-        public void LoadScene(string scene)
+        public void LoadScene(string scene) => StartCoroutine(LoadSceneCoroutine(scene));
+
+        private IEnumerator LoadSceneCoroutine(string scene)
         {
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            yield return new WaitUntil(() => Instance.IsSceneLoaded(scene));
             GameManager.Instance.onLoadEvent.Invoke();
             MMEventManager.TriggerEvent(new LoadedEvent(scene));
         }
-
         public void LoadSceneAsync(string scene) => StartCoroutine(LoadSceneAsyncCoroutine(scene));
 
         private IEnumerator LoadSceneAsyncCoroutine(string scene = null)

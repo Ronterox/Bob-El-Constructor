@@ -30,14 +30,14 @@ namespace Plugins.Tools
     public class SoundManager : PersistentSingleton<SoundManager>
     {
         [Header("Values")]
-        [Range(0, 1)]
-        public float generalVolume = 1f;
-        [Range(0, 1)]
-        public float musicVolume = 0.3f;
-        [Range(0, 1)]
-        public float sfxVolume = 1f;
-        [Range(0, 1)]
-        public float uiVolume = 1f;
+        [Range(-80, 0)]
+        public float generalVolume;
+        [Range(-80, 0)]
+        public float musicVolume;
+        [Range(-80, 0)]
+        public float sfxVolume;
+        [Range(-80, 0)]
+        public float uiVolume;
 
         [Header("Mixer")]
         public AudioMixer audioMixer;
@@ -100,10 +100,8 @@ namespace Plugins.Tools
         /// Sets the general volume of the game Sounds and Music
         /// </summary>
         /// <param name="volume"></param>
-        /// <param name="isDecibel"></param>
-        public void SetVolume(float volume, bool isDecibel = false)
+        public void SetVolume(float volume)
         {
-            volume = isDecibel ? volume : VolumeToDecibels(volume);
             generalVolume = volume;
             audioMixer.SetFloat("General", volume);
         }
@@ -163,10 +161,8 @@ namespace Plugins.Tools
         /// Set music volume
         /// </summary>
         /// <param name="volume"></param>
-        /// <param name="isDecibel"></param>
-        public void SetMusicVolume(float volume, bool isDecibel = false)
+        public void SetMusicVolume(float volume)
         {
-            volume = isDecibel ? volume : VolumeToDecibels(volume);
             musicVolume = volume;
             audioMixer.SetFloat("BackgroundMusic_Volume", volume);
         }
@@ -175,35 +171,23 @@ namespace Plugins.Tools
         /// Sets Sound Effects volume
         /// </summary>
         /// <param name="volume"></param>
-        /// <param name="isDecibel"></param>
-        public void SetSfxVolume(float volume, bool isDecibel = false)
-        {
-            volume = isDecibel ? volume : VolumeToDecibels(volume);
-            sfxVolume = volume;
-            audioMixer.SetFloat("SFX_Volume", volume);
-        }
+        public void SetSfxVolume(float volume) => audioMixer.SetFloat("SFX_Volume", sfxVolume = volume);
 
         /// <summary>
         /// Mute SFX
         /// </summary>
-        public void MuteSfx() => audioMixer.SetFloat("SFX_Volume", VolumeToDecibels(0f));
+        public void MuteSfx() => audioMixer.SetFloat("SFX_Volume", 0f);
 
         /// <summary>
         /// Unmute sfx
         /// </summary>
-        public void UnMuteSfx() => audioMixer.SetFloat("SFX_Volume", VolumeToDecibels(sfxVolume));
+        public void UnMuteSfx() => audioMixer.SetFloat("SFX_Volume", sfxVolume);
 
         /// <summary>
         /// Sets The volume of the ui
         /// </summary>
         /// <param name="volume"></param>
-        /// <param name="isDecibel"></param>
-        public void SetUIVolume(float volume, bool isDecibel = false)
-        {
-            volume = isDecibel ? volume : VolumeToDecibels(volume);
-            uiVolume = volume;
-            audioMixer.SetFloat("UI_SFX_Volume", volume);
-        }
+        public void SetUIVolume(float volume) => audioMixer.SetFloat("UI_SFX_Volume", uiVolume = volume);
 
         /// <summary>
         /// Stop a background music
@@ -252,10 +236,10 @@ namespace Plugins.Tools
         {
             if (p_soundEffects.ContainsKey(id))
             {
-                SoundItem soundEffect = p_soundEffects[id]; 
-                soundEffect.source.pitch = p_soundEffects[id].useRandomPitch ? 
+                SoundItem soundEffect = p_soundEffects[id];
+                soundEffect.source.pitch = p_soundEffects[id].useRandomPitch ?
                     Random.Range(soundEffect.pitch - soundEffect.pitchRandomRange, soundEffect.pitch + soundEffect.pitchRandomRange) : soundEffect.pitch;
-                
+
                 if (oneShot) soundEffect.source.Play();
                 else soundEffect.source.PlayOneShot(p_soundEffects[id].clip);
             }
@@ -278,8 +262,8 @@ namespace Plugins.Tools
         /// </summary>
         public void OpenMenuVolume()
         {
-            audioMixer.SetFloat("BackgroundMusic_Volume", VolumeToDecibels(musicVolume / 2));
-            audioMixer.SetFloat("SFX_Volume", VolumeToDecibels(sfxVolume / 2));
+            audioMixer.SetFloat("BackgroundMusic_Volume", musicVolume / 2);
+            audioMixer.SetFloat("SFX_Volume", sfxVolume / 2);
         }
 
         /// <summary>
@@ -287,23 +271,8 @@ namespace Plugins.Tools
         /// </summary>
         public void CloseMenuVolume()
         {
-            audioMixer.SetFloat("BackgroundMusic_Volume", VolumeToDecibels(musicVolume));
-            audioMixer.SetFloat("SFX_Volume", VolumeToDecibels(sfxVolume));
+            audioMixer.SetFloat("BackgroundMusic_Volume", musicVolume);
+            audioMixer.SetFloat("SFX_Volume", sfxVolume);
         }
-        
-        
-        /// <summary>
-        /// Returns a decibel value as a volume value between 0 and 1
-        /// </summary>
-        /// <param name="dB"></param>
-        /// <returns></returns>
-        public static float DecibelsToVolume(float dB) => Mathf.Pow(10, dB / 20);
-
-        /// <summary>
-        /// Returns the decibels value of a volume between 0 and 1
-        /// </summary>
-        /// <param name="volume"></param>
-        /// <returns></returns>
-        public static float VolumeToDecibels(float volume) => volume > 0? Mathf.Log10(volume) * 20 : -80f;
     }
 }
