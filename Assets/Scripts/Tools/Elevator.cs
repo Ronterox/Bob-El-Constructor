@@ -48,7 +48,7 @@ namespace Tools
 
             p_animator.SetBool(p_loadingProperty, true);
 
-            LevelLoadManager.Instance.LoadNextSceneAsync();
+            LevelLoadManager.Instance.LoadNextSceneAsync("Elevator");
 
             yield return new WaitUntil(() => !p_isLoading);
 
@@ -68,7 +68,7 @@ namespace Tools
 
         public void OnMMEvent(LoadedEvent eventType)
         {
-            if (p_wasUsed) return;
+            if(!eventType.caller.Equals("Elevator") || p_wasUsed) return;
             if (!string.IsNullOrEmpty(eventType.sceneName) && eventType.sceneName.Equals("MAIN MENU")) Destroy(gameObject);
             else p_isLoading = false;
             p_wasUsed = true;
