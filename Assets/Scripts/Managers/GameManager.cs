@@ -9,8 +9,6 @@ namespace Managers
 
     public class GameManager : PersistentSingleton<GameManager>
     {
-        public Settings playerSettings;
-        
         public PlayerTool currentPlayerTool = PlayerTool.None;
         
         public bool gameIsPaused;
@@ -56,17 +54,5 @@ namespace Managers
             this.y = y;
             this.z = z;
         }
-    }
-
-    [System.Serializable]
-    public struct Settings
-    {
-        public float generalVolume;
-        public float uiVolume;
-        public float sfxVolume;
-        public float musicVolume;
-
-        public bool fullScreen;
-        public int resolution;
     }
 }

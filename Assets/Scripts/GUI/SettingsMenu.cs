@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Managers;
 using Plugins.Tools;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +6,18 @@ using TMPro;
 
 namespace GUI
 {
+    [System.Serializable]
+    public struct Settings
+    {
+        public float generalVolume;
+        public float uiVolume;
+        public float sfxVolume;
+        public float musicVolume;
+
+        public bool fullScreen;
+        public int resolution;
+    }
+    
     public class SettingsMenu : MonoBehaviour
     {
         private Settings settings;
@@ -21,6 +32,9 @@ namespace GUI
         [SerializeField] private Toggle fullscreenToggle;
 
         [SerializeField] private TMP_Dropdown resolutionDropdown;
+
+        private const string SAVED_FILENAME = "settings.cfg";
+        private const string SAVED_FOLDERNAME = "SavedStates";
         private void Start()
         {
             SetSystemResolutions();
@@ -46,9 +60,9 @@ namespace GUI
 
         private void CheckForSavedSettings()
         {
-            if (SaveLoadManager.SaveExists("settings.cfg", "SavedStates"))
+            if (SaveLoadManager.SaveExists(SAVED_FILENAME, SAVED_FOLDERNAME))
             {
-                settings = SaveLoadManager.Load<Settings>("settings.cfg", "SavedStates");
+                settings = SaveLoadManager.Load<Settings>(SAVED_FILENAME, SAVED_FOLDERNAME);
                 UpdateGameObjects();
             }
             else
@@ -93,8 +107,10 @@ namespace GUI
             Screen.SetResolution(currentResolution.width, currentResolution.height, Screen.fullScreen);
         }
 
+        private void OnDisable() => SaveSettings();
+
         public void SetFullscreen(bool isFullscreen) => Screen.fullScreen = isFullscreen;
 
-        private void SaveSettings() => SaveLoadManager.Save(settings, "settings.cfg", "SavedStates");
+        private void SaveSettings() => SaveLoadManager.Save(settings, SAVED_FILENAME, SAVED_FOLDERNAME);
     }
 }
