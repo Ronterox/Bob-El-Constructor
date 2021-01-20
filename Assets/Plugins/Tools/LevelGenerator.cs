@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Plugins.Tools;
 using UnityEngine;
 
-namespace Plugins.Editor
+namespace Plugins.Tools
 {
     [System.Serializable]
     public struct ColorLevelTile
@@ -59,9 +58,15 @@ namespace Plugins.Editor
             foreach (ColorLevelTile tile in tiles)
             {
                 if (tile.color.Equals(pixelColor))
+#if UNITY_EDITOR
                     UtilityMethods.InstantiatePrefab(tile.gameObject, new Vector2(x, y), tile.gameObject.transform.rotation)
                         .transform.parent = p_tempGroups
                         .Find(g => g.transform.name.Contains(tile.gameObject.transform.name)).transform;
+#else
+                    Instantiate(tile.gameObject, new Vector2(x, y), tile.gameObject.transform.rotation)
+                        .transform.parent = p_tempGroups
+                        .Find(g => g.transform.name.Contains(tile.gameObject.transform.name)).transform;
+#endif
             }
         }
     }

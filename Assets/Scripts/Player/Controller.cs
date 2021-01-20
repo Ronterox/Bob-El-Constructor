@@ -1,5 +1,4 @@
-﻿using GUI;
-using Managers;
+﻿using Managers;
 using Plugins.Tools;
 using UnityEngine;
 
@@ -13,7 +12,8 @@ namespace Player
         [SerializeField] private float jumpForce;
         [Range(0, 1f)] [SerializeField] private float jumpDamping;
 
-        private bool p_pressedJump;
+        [SerializeField] private float jumpPressedTime = 3f;
+        private float jumpTimer;
 
         [Header("Horizontal Movement Config")]
         [Range(0, 1f)] [SerializeField] private float dampingHorizontal;
@@ -48,11 +48,11 @@ namespace Player
 
             velocity.x = p_inputHorizontalVelocity;
 
-            if (groundDetector.groundedTimer > 0 && p_pressedJump)
+            if (groundDetector.groundedTimer > 0 && jumpTimer > 0)
             {
                 velocity.y = jumpForce;
                 groundDetector.groundedTimer = 0f;
-                p_pressedJump = false;
+                jumpTimer = 0;
                 SoundManager.Instance.Play("Jump");
             }
 
@@ -64,7 +64,8 @@ namespace Player
         private void Update()
         {
             if (GameManager.Instance.gameIsPaused) return;
-            if (Input.GetButtonDown("Jump") && groundDetector.groundedTimer > 0) p_pressedJump = true;
+            if (jumpTimer > 0) jumpTimer -= Time.deltaTime;
+            if (Input.GetButtonDown("Jump")) jumpTimer = jumpPressedTime;
         }
     }
 }

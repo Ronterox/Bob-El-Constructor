@@ -17,7 +17,8 @@ namespace Plugins.Tools
         {
             foreach (Transform child in parent.GetComponentsInChildren<Transform>(active)) child.gameObject.SetActive(active);
         }
-        
+
+#if UNITY_EDITOR
         /// <summary>
         /// Instantiates an actual prefab instead of a gameObject
         /// </summary>
@@ -34,5 +35,6 @@ namespace Plugins.Tools
             result.transform.rotation = rotation;
             return result;
         }
+#endif
     }
 }

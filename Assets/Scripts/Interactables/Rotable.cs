@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Plugins.Tools;
+using UnityEngine;
 
 namespace Interactables
 {
@@ -9,6 +10,10 @@ namespace Interactables
         /// <summary>
         /// Rotates the object to the vector3 Rotation
         /// </summary>
-        public void Rotate() => transform.Rotate(rotation);
+        public void Rotate()
+        {
+            transform.Rotate(rotation);
+            SoundManager.Instance.Play("Squeak");
+        }
     }
 }

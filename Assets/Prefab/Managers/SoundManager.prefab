@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalVolume: 1
-  musicVolume: 0.3
+  musicVolume: 1
   sfxVolume: 1
   uiVolume: 1
   audioMixer: {fileID: 24100000, guid: 6fe562bf193432e4aaf274f81383c1ca, type: 2}
@@ -203,7 +203,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4fb65b22f8ac147b59d2cf810a03f7da, type: 3}
     audioMixerGroup: {fileID: 2272808000247894547, guid: 6fe562bf193432e4aaf274f81383c1ca,
       type: 2}
-    volume: 0.3
+    volume: 1
     loop: 0
     pitch: 1
     useRandomPitch: 1
@@ -213,7 +213,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 0340c142e87a0bd98a3abd4636565703, type: 3}
     audioMixerGroup: {fileID: 2272808000247894547, guid: 6fe562bf193432e4aaf274f81383c1ca,
       type: 2}
-    volume: 0.3
+    volume: 1
     loop: 0
     pitch: 1
     useRandomPitch: 1
@@ -232,6 +232,16 @@ MonoBehaviour:
     source: {fileID: 0}
   - id: Mudos
     clip: {fileID: 8300000, guid: 17fcb183e0ffa944ebc31dfee47ee446, type: 3}
+    audioMixerGroup: {fileID: 392012810374433735, guid: 6fe562bf193432e4aaf274f81383c1ca,
+      type: 2}
+    volume: 1
+    loop: 0
+    pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
+    source: {fileID: 0}
+  - id: Suspense Menu
+    clip: {fileID: 8300000, guid: 25c8fa46196a1f940a056490c1da7513, type: 3}
     audioMixerGroup: {fileID: 392012810374433735, guid: 6fe562bf193432e4aaf274f81383c1ca,
       type: 2}
     volume: 1

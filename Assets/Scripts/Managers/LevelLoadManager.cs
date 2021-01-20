@@ -9,8 +9,13 @@ namespace Managers
 {
     public readonly struct LoadedEvent
     {
+        public readonly string caller;
         public readonly string sceneName;
-        public LoadedEvent(string sceneName) => this.sceneName = sceneName;
+        public LoadedEvent(string sceneName, string caller)
+        {
+            this.sceneName = sceneName;
+            this.caller = caller;
+        } 
     }
 
     [System.Serializable]
@@ -25,7 +30,7 @@ namespace Managers
         /// </summary>
         /// <param name="scene"></param>
         /// <returns></returns>
-        public bool IsSceneLoaded(string scene) => SceneManager.GetSceneByName(scene).isLoaded;
+        public static bool IsSceneLoaded(string scene) => SceneManager.GetSceneByName(scene).isLoaded;
 
         /// <summary>
         /// Starts the Coroutine to resume the game
@@ -38,12 +43,14 @@ namespace Managers
         /// <returns></returns>
         private IEnumerator ResumeCoroutine()
         {
-            var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SaveStates");
+            var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SavedStates");
 
             Instance.LoadScene(savedData.lastLevel);
             Instance.LoadAdditiveAsyncScenes();
 
-            yield return new WaitUntil(() => Instance.IsSceneLoaded(savedData.lastLevel));
+            yield return new WaitUntil(() => IsSceneLoaded(savedData.lastLevel));
+            
+            GameManager.Instance.onLoadEvent.Invoke();
             
             Player.Player.Instance.transform.position = new Vector3(savedData.checkpoint.x, savedData.checkpoint.y, savedData.checkpoint.z);
             CameraManager.CameraManager.Instance.SetPriority(savedData.lastCameraID);
@@ -61,26 +68,29 @@ namespace Managers
         /// Loads the selected scene by name
         /// </summary>
         /// <param name="scene"></param>
-        public void LoadScene(string scene)
+        public void LoadScene(string scene) => StartCoroutine(LoadSceneCoroutine(scene));
+
+        private IEnumerator LoadSceneCoroutine(string scene, string caller = "")
         {
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            yield return new WaitUntil(() => IsSceneLoaded(scene));
             GameManager.Instance.onLoadEvent.Invoke();
-            MMEventManager.TriggerEvent(new LoadedEvent(scene));
+            MMEventManager.TriggerEvent(new LoadedEvent(scene, caller));
         }
-
         public void LoadSceneAsync(string scene) => StartCoroutine(LoadSceneAsyncCoroutine(scene));
 
-        private IEnumerator LoadSceneAsyncCoroutine(string scene = null)
+        private IEnumerator LoadSceneAsyncCoroutine(string scene = null, string caller = "")
         {
             AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(
                 string.IsNullOrEmpty(scene) ? SceneManager.GetActiveScene().buildIndex + 1 : SceneManager.GetSceneByName(scene).buildIndex);
             yield return new WaitUntil(() => loadingOperation.isDone);
-            MMEventManager.TriggerEvent(new LoadedEvent(scene));
+            GameManager.Instance.onLoadEvent.Invoke();
+            MMEventManager.TriggerEvent(new LoadedEvent(scene, caller));
         }
 
-        public void LoadNextSceneAsync()
+        public void LoadNextSceneAsync(string caller)
         {
-            StartCoroutine(LoadSceneAsyncCoroutine());
+            StartCoroutine(LoadSceneAsyncCoroutine("", caller));
             Instance.LoadAdditiveAsyncScenes();
         }
 

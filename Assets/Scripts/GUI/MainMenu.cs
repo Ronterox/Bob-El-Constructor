@@ -1,5 +1,4 @@
-﻿using System;
-using Managers;
+﻿using Managers;
 using Plugins.Tools;
 using TMPro;
 using UnityEngine;
@@ -11,6 +10,8 @@ namespace GUI
     {
         public GameObject startGame, loadScene, quitGame, continueButton;
         public TextMeshProUGUI buildVersionTMP;
+
+        private const string SAVED_FOLDERNAME = "SavedStates";
 
         private void Start()
         {
@@ -43,7 +44,7 @@ namespace GUI
         /// <summary>
         /// Checks if there is a saved file
         /// </summary>
-        private bool HasSavedFile() => SaveLoadManager.SaveExists($"saved_state_v{Application.version}", "SaveStates");
+        private bool HasSavedFile() => SaveLoadManager.SaveExists($"saved_state_v{Application.version}", SAVED_FOLDERNAME);
 
         /// <summary>
         /// Loads a specific scene
@@ -64,5 +65,11 @@ namespace GUI
         /// Plays the submit sfx
         /// </summary>
         public void PlaySubmitSound() => SoundManager.Instance.Play("Submit");
+
+        /// <summary>
+        /// Plays the selected sound
+        /// </summary>
+        /// <param name="sound"></param>
+        public void PlaySound(string sound) => SoundManager.Instance.Play(sound);
     }
 }
