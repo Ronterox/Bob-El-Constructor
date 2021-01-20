@@ -103,8 +103,9 @@ namespace Plugins.Tools
         /// <param name="isDecibel"></param>
         public void SetVolume(float volume, bool isDecibel = false)
         {
+            volume = isDecibel ? volume : VolumeToDecibels(volume);
             generalVolume = volume;
-            audioMixer.SetFloat("General", isDecibel? volume : VolumeToDecibels(volume));
+            audioMixer.SetFloat("General", volume);
         }
 
         /// <summary>
@@ -165,8 +166,9 @@ namespace Plugins.Tools
         /// <param name="isDecibel"></param>
         public void SetMusicVolume(float volume, bool isDecibel = false)
         {
+            volume = isDecibel ? volume : VolumeToDecibels(volume);
             musicVolume = volume;
-            audioMixer.SetFloat("BackgroundMusic_Volume", isDecibel? volume : VolumeToDecibels(volume));
+            audioMixer.SetFloat("BackgroundMusic_Volume", volume);
         }
 
         /// <summary>
@@ -176,8 +178,9 @@ namespace Plugins.Tools
         /// <param name="isDecibel"></param>
         public void SetSfxVolume(float volume, bool isDecibel = false)
         {
+            volume = isDecibel ? volume : VolumeToDecibels(volume);
             sfxVolume = volume;
-            audioMixer.SetFloat("SFX_Volume", isDecibel? volume : VolumeToDecibels(volume));
+            audioMixer.SetFloat("SFX_Volume", volume);
         }
 
         /// <summary>
@@ -197,8 +200,9 @@ namespace Plugins.Tools
         /// <param name="isDecibel"></param>
         public void SetUIVolume(float volume, bool isDecibel = false)
         {
+            volume = isDecibel ? volume : VolumeToDecibels(volume);
             uiVolume = volume;
-            audioMixer.SetFloat("UI_SFX_Volume", isDecibel? volume : VolumeToDecibels(volume));
+            audioMixer.SetFloat("UI_SFX_Volume", volume);
         }
 
         /// <summary>
