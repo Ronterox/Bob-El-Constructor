@@ -1,3 +1,4 @@
+using System;
 using Managers;
 
 namespace GUI
@@ -8,8 +9,9 @@ namespace GUI
         {
             base.Awake();
             StartTimer();
-            onTimerEnd.AddListener(GoBackMenu);
         }
+
+        private void Start() => onTimerEnd.AddListener(GoBackMenu);
 
         private void GoBackMenu() => LevelLoadManager.Instance.LoadScene("MAIN MENU");
     }
