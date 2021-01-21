@@ -15,7 +15,7 @@ namespace GUI
 
         private bool hasText;
 
-        protected virtual void Awake() => hasText = timerText.text != null;
+        protected virtual void Awake() => hasText = timerText != null;
         private void Update()
         {
             if (p_timer < 0) return;
