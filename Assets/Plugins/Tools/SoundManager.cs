@@ -240,10 +240,10 @@ namespace Plugins.Tools
                 soundEffect.source.pitch = p_soundEffects[id].useRandomPitch ?
                     Random.Range(soundEffect.pitch - soundEffect.pitchRandomRange, soundEffect.pitch + soundEffect.pitchRandomRange) : soundEffect.pitch;
 
-                if (oneShot) soundEffect.source.Play();
+                if (!oneShot) soundEffect.source.Play();
                 else soundEffect.source.PlayOneShot(p_soundEffects[id].clip);
             }
-            else if (oneShot) p_songs[id].source.Play();
+            else if (!oneShot) p_songs[id].source.Play();
             else p_songs[id].source.PlayOneShot(p_songs[id].clip);
         }
 

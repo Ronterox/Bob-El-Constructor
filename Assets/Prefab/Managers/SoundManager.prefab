@@ -225,7 +225,7 @@ MonoBehaviour:
     audioMixerGroup: {fileID: 392012810374433735, guid: 6fe562bf193432e4aaf274f81383c1ca,
       type: 2}
     volume: 1
-    loop: 0
+    loop: 1
     pitch: 1
     useRandomPitch: 0
     pitchRandomRange: 0.1
@@ -235,7 +235,7 @@ MonoBehaviour:
     audioMixerGroup: {fileID: 392012810374433735, guid: 6fe562bf193432e4aaf274f81383c1ca,
       type: 2}
     volume: 1
-    loop: 0
+    loop: 1
     pitch: 1
     useRandomPitch: 0
     pitchRandomRange: 0.1
