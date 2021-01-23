@@ -3835,7 +3835,7 @@ PrefabInstance:
     - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
         type: 3}
       propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
         type: 3}
@@ -3866,6 +3866,76 @@ PrefabInstance:
         type: 3}
       propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Plugins.Tools.SoundManager, Assembly-CSharp-firstpass
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 586850446}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Stop
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Drums Suspense
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Plugins.Tools.SoundManager, Assembly-CSharp-firstpass
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 586850446}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Stop
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
+        type: 3}
+      propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+      value: MUDOS
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c8898299f3d4f4b99f0d99e51e9df0, type: 3}

@@ -22,15 +22,22 @@ namespace Managers
     public class OnLoadEvent : UnityEvent { }
     public class LevelLoadManager : PersistentSingleton<LevelLoadManager>
     {
+        [Header("Transitions")]
+        [SerializeField] private Animator transitionAnimator;
         [Header("Scenes")]
         [SerializeField] [Scene] private string[] additiveScenes;
+
+        private readonly int p_startTransition = Animator.StringToHash("Start");
+        private readonly int p_endTransition = Animator.StringToHash("End");
+
+        private Scene p_loadingScene;
 
         /// <summary>
         /// Checks if the scene by the name is loaded
         /// </summary>
         /// <param name="scene"></param>
         /// <returns></returns>
-        public static bool IsSceneLoaded(string scene) => SceneManager.GetSceneByName(scene).isLoaded;
+        public bool IsSceneLoaded() => p_loadingScene.isLoaded;
 
         /// <summary>
         /// Starts the Coroutine to resume the game
@@ -44,11 +51,21 @@ namespace Managers
         private IEnumerator ResumeCoroutine()
         {
             var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SavedStates");
-
+            float startTime = Time.time;
+            
             Instance.LoadScene(savedData.lastLevel);
             Instance.LoadAdditiveAsyncScenes();
+            
+            p_loadingScene = SceneManager.GetSceneByName(savedData.lastLevel);
+            
+            transitionAnimator.SetTrigger(p_startTransition);
 
-            yield return new WaitUntil(() => IsSceneLoaded(savedData.lastLevel));
+            yield return new WaitUntil(IsSceneLoaded);
+
+            float timePassed = Time.time - startTime;
+            if (timePassed < 1f) yield return new WaitForSeconds(1f - timePassed);
+
+            transitionAnimator.SetTrigger(p_endTransition);
             
             GameManager.Instance.onLoadEvent.Invoke();
             
@@ -72,8 +89,19 @@ namespace Managers
 
         private IEnumerator LoadSceneCoroutine(string scene, string caller = "")
         {
+            float startTime = Time.time;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
-            yield return new WaitUntil(() => IsSceneLoaded(scene));
+            p_loadingScene = SceneManager.GetSceneByName(scene);
+
+            transitionAnimator.SetTrigger(p_startTransition);
+            
+            yield return new WaitUntil(IsSceneLoaded);
+            
+            float timePassed = Time.time - startTime;
+            if (timePassed < 1f) yield return new WaitForSeconds(1f - timePassed);
+
+            transitionAnimator.SetTrigger(p_endTransition);
+            
             GameManager.Instance.onLoadEvent.Invoke();
             MMEventManager.TriggerEvent(new LoadedEvent(scene, caller));
         }
