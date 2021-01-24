@@ -53,12 +53,12 @@ namespace Managers
             var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SavedStates");
             float startTime = Time.time;
             
+            transitionAnimator.SetTrigger(p_startTransition);
+
             Instance.LoadScene(savedData.lastLevel);
             Instance.LoadAdditiveAsyncScenes();
-            
+
             p_loadingScene = SceneManager.GetSceneByName(savedData.lastLevel);
-            
-            transitionAnimator.SetTrigger(p_startTransition);
 
             yield return new WaitUntil(IsSceneLoaded);
 
@@ -90,11 +90,12 @@ namespace Managers
         private IEnumerator LoadSceneCoroutine(string scene, string caller = "")
         {
             float startTime = Time.time;
+            
+            transitionAnimator.SetTrigger(p_startTransition);
+            
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
             p_loadingScene = SceneManager.GetSceneByName(scene);
 
-            transitionAnimator.SetTrigger(p_startTransition);
-            
             yield return new WaitUntil(IsSceneLoaded);
             
             float timePassed = Time.time - startTime;
