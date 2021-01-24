@@ -3935,7 +3935,7 @@ PrefabInstance:
     - target: {fileID: 114334160082691970, guid: e6c8898299f3d4f4b99f0d99e51e9df0,
         type: 3}
       propertyPath: onLoadEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
-      value: MUDOS
+      value: Mudos
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c8898299f3d4f4b99f0d99e51e9df0, type: 3}
