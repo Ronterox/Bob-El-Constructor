@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 2672569698998282013, guid: f3d21515a7687aa4ab8171782a1e858f,
         type: 3}
       propertyPath: m_Name
-      value: Block Static
+      value: Block Static Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2674900692805969321, guid: f3d21515a7687aa4ab8171782a1e858f,
         type: 3}
