@@ -148,7 +148,8 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 0}
+    customRenderPipeline: {fileID: 11400000, guid: 4802219df8fe1fab4b0067b4872d5e63,
+      type: 2}
     excludedTargetPlatforms: []
   - serializedVersion: 2
     name: Very High

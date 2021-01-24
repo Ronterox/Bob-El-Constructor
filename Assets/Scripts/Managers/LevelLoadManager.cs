@@ -30,14 +30,12 @@ namespace Managers
         private readonly int p_startTransition = Animator.StringToHash("Start");
         private readonly int p_endTransition = Animator.StringToHash("End");
 
-        private Scene p_loadingScene;
-
         /// <summary>
         /// Checks if the scene by the name is loaded
         /// </summary>
         /// <param name="scene"></param>
         /// <returns></returns>
-        public bool IsSceneLoaded() => p_loadingScene.isLoaded;
+        public bool IsSceneLoaded(string scene) => SceneManager.GetSceneByName(scene).isLoaded;
 
         /// <summary>
         /// Starts the Coroutine to resume the game
@@ -53,14 +51,12 @@ namespace Managers
             var savedData = SaveLoadManager.Load<PlayerData>($"saved_state_v{Application.version}", "SavedStates");
             float startTime = Time.time;
             
-            Instance.LoadScene(savedData.lastLevel);
-            Instance.LoadAdditiveAsyncScenes();
-            
-            p_loadingScene = SceneManager.GetSceneByName(savedData.lastLevel);
-            
             transitionAnimator.SetTrigger(p_startTransition);
 
-            yield return new WaitUntil(IsSceneLoaded);
+            Instance.LoadScene(savedData.lastLevel);
+            Instance.LoadAdditiveAsyncScenes();
+
+            yield return new WaitUntil(() => IsSceneLoaded(savedData.lastLevel));
 
             float timePassed = Time.time - startTime;
             if (timePassed < 1f) yield return new WaitForSeconds(1f - timePassed);
@@ -90,12 +86,12 @@ namespace Managers
         private IEnumerator LoadSceneCoroutine(string scene, string caller = "")
         {
             float startTime = Time.time;
-            SceneManager.LoadScene(scene, LoadSceneMode.Single);
-            p_loadingScene = SceneManager.GetSceneByName(scene);
 
             transitionAnimator.SetTrigger(p_startTransition);
             
-            yield return new WaitUntil(IsSceneLoaded);
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+
+            yield return new WaitUntil(() => IsSceneLoaded(scene));
             
             float timePassed = Time.time - startTime;
             if (timePassed < 1f) yield return new WaitForSeconds(1f - timePassed);

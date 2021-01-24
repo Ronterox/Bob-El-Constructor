@@ -163,7 +163,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 53698dc1780308a47bbe3c8e5b3c61e2, type: 3}
     audioMixerGroup: {fileID: -7603722713378326528, guid: 6fe562bf193432e4aaf274f81383c1ca,
       type: 2}
-    volume: 1
+    volume: 0.7
     loop: 0
     pitch: 1
     useRandomPitch: 0
@@ -217,6 +217,26 @@ MonoBehaviour:
     loop: 0
     pitch: 1
     useRandomPitch: 1
+    pitchRandomRange: 0.1
+    source: {fileID: 0}
+  - id: Lights
+    clip: {fileID: 8300000, guid: 4d860ce2b33125e49ae26ef3076375ea, type: 3}
+    audioMixerGroup: {fileID: -7603722713378326528, guid: 6fe562bf193432e4aaf274f81383c1ca,
+      type: 2}
+    volume: 1
+    loop: 0
+    pitch: 1.5
+    useRandomPitch: 1
+    pitchRandomRange: 0.1
+    source: {fileID: 0}
+  - id: JUMPSCARE
+    clip: {fileID: 8300000, guid: 68513e39e4343d11ba41cfa74a3facd5, type: 3}
+    audioMixerGroup: {fileID: -7603722713378326528, guid: 6fe562bf193432e4aaf274f81383c1ca,
+      type: 2}
+    volume: 1
+    loop: 0
+    pitch: 1
+    useRandomPitch: 0
     pitchRandomRange: 0.1
     source: {fileID: 0}
   songs:
