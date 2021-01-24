@@ -229,6 +229,16 @@ MonoBehaviour:
     useRandomPitch: 1
     pitchRandomRange: 0.1
     source: {fileID: 0}
+  - id: JUMPSCARE
+    clip: {fileID: 8300000, guid: 68513e39e4343d11ba41cfa74a3facd5, type: 3}
+    audioMixerGroup: {fileID: -7603722713378326528, guid: 6fe562bf193432e4aaf274f81383c1ca,
+      type: 2}
+    volume: 1
+    loop: 0
+    pitch: 1
+    useRandomPitch: 0
+    pitchRandomRange: 0.1
+    source: {fileID: 0}
   songs:
   - id: Drums Suspense
     clip: {fileID: 8300000, guid: 0521e0d1e14719c4ea590eb6457064d9, type: 3}
